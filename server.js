@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import methodOverride from 'method-override';
 import database from './config/db';
+import router from './app/routes';
 
 const app = express();
 
@@ -13,13 +14,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // connect to our mongoDB database
-mongoose.connect(database.url, (err) => {
-    if (err) {
-      console.log('Connect Error!');
-    } else {
-      console.log('Connect success!');
-    }
-  });
+
+mongoose.connect(database.url, { useMongoClient: true }, (err) => {
+  if (err) {
+    console.log('Connect Error!');
+  }
+  console.log('Connect success!');
+});
+
 
 // parse application/json
 app.use(bodyParser.json());
@@ -33,6 +35,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img with be /img for users
 app.use(express.static(__dirname + '/public'));
 
+app.use('/api', router);
 
 // start app ==================================
 //startup our app at http://localhost:8080
