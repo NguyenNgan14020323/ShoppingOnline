@@ -18,6 +18,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
 				controller: 'productCtrl',
 				templateUrl: 'views/product.html'
 			})
+			.state('signup', {
+				url: '/signup',
+				controller: 'signupCtrl',
+				templateUrl: 'views/signup.html'
+			})
 		$locationProvider.hashPrefix('');
 	}
 ]);

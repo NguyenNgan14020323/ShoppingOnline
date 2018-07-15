@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
 	<link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="components/font-awesome/web-fonts-with-css/css/fontawesome.min.css">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<link href="https://lh3.googleusercontent.com/FmiRtn-Obyls7kZg_WHNEwF_yAWWYfdRgAyurUS1eRdySonFLvHU6sav8sRLF3tN-E8" rel="shortcut icon"  type="image/x-icon"> 
 
 	<!-- JS -->
 	<script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
@@ -27,6 +30,8 @@
 	<script src="js/module.js"></script>
 	<script src="js/controllers/homeCtrl.js"></script>
 	<script src="js/controllers/productCtrl.js"></script>
+	<script src="js/controllers/loginCtrl.js"></script>
+	<script src="js/controllers/signupCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app/app.js"></script>
 	
@@ -40,7 +45,7 @@
 			<a class="navbar-brand" href="#">
 				<img style="width: 130px;" src="img/logo.png">
 			</a>   
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo03" ng-controller="loginCtrl">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item">
 						<form class="form-inline my-2 my-lg-0">
@@ -56,10 +61,10 @@
 					</li>
 				</ul>
 				<ul class="navbar-nav my-2" style="margin-left: -x;">
-					<li><a href="#/signup">    
+					<li><a ui-sref="signup">    
 						<span>Already have an account?</span>
 					</a></li>
-					<li class="dropdown" >
+					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b> <span> Login</span></b> <span class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu" style="margin-left: -200px;">
 							<li>
@@ -112,8 +117,8 @@
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item">
-						<div class="dropdown">
-							<a data-toggle="dropdown" class="nav-link" href="#"><b>Thiết bị điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+						<div class="dropdown1">
+							<a data-toggle="dropdown1" class="nav-link" href="#"><b>Thiết bị điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Điện thoại di động</a></li>
 								<li><a href="#">Máy tính bảng</a></li>
@@ -125,8 +130,8 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<div class="dropdown">
-							<a data-toggle="dropdown" class="nav-link" href="#"><b>Phụ kiện điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+						<div class="dropdown1">
+							<a data-toggle="dropdown1" class="nav-link" href="#"><b>Phụ kiện điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Phụ kiện di động</a></li>
 								<li><a href="#">Phụ kiện máy tính</a></li>
@@ -212,6 +217,7 @@
 	<div class="content">
 		<ui-view></ui-view>
 	</div>
-
+	<script>
+</script>
 </body>
 </html>
