@@ -1,0 +1,217 @@
+<!-- public/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>Shopping</title>
+	<link href="img/logo.png" rel="shortcut icon"  type="image/x-icon">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+	<link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="components/font-awesome/web-fonts-with-css/css/fontawesome.min.css">
+
+	<!-- JS -->
+	<script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="js/app/popper.min.js"></script>
+	<script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script type="text/javascript" src="components/angular-cookies/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="components/angular-md5/angular-md5.min.js"></script>
+	<!--ANGULAR CUSTOM -->
+	<script src="js/module.js"></script>
+	<script src="js/controllers/homeCtrl.js"></script>
+	<script src="js/controllers/productCtrl.js"></script>
+	<script src="js/appRoutes.js"></script>
+	<script src="js/app/app.js"></script>
+	
+</head>
+<body ng-app="ShopApp">
+	<div class="header">
+		<nav class="navbar navbar-expand-lg navbar-light"  style="padding-left: 0px; padding-right: 0px;">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="#">
+				<img style="width: 130px;" src="img/logo.png">
+			</a>   
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<form class="form-inline my-2 my-lg-0">
+							<input style="width: 500px;" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+						</form>
+					</li>
+					<li class="nav-item" style="padding-left: 25px; padding-right: 25px">
+						<a class="nav-link" href="#" style="position: relative;">
+							<img src="img/shoppingcart.png" style="width: 24px;">
+							<span class="badge" style="font-size: 14px; background-color: red; color: white; border-radius: 50%; position: absolute; top: 0px; right: 0;">2</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav my-2" style="margin-left: -x;">
+					<li><a href="#/signup">    
+						<span>Already have an account?</span>
+					</a></li>
+					<li class="dropdown" >
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b> <span> Login</span></b> <span class="caret"></span></a>
+						<ul id="login-dp" class="dropdown-menu" style="margin-left: -200px;">
+							<li>
+								<div class="row">
+									<div class="col-md-12">
+										<span><strong><b>Login via</b></strong></span>
+										<div class="social-buttons">
+											<a href="#" class="btn btn-fb" ng-click="LoginwithFb()"><i class="fa fa-facebook"></i> Facebook</a>
+											<a href="#" class="btn btn-danger" ng-click="LoginwithGG()"><i class="fa fa-google-plus"></i> Gmail</a>
+										</div>
+										<span><strong><b>or</b></strong></span>
+
+										<form class="form" role="form" accept-charset="UTF-8" id="login-nav" name="Loginform" novalidate>  
+											<div class="form-group">
+												<label class="sr-only" for="exampleInputEmail2">Email address</label>
+												<input type="email" class="form-control" name = "email" placeholder="Email address" ng-model="email" required my-email>
+												<span style="color: red;font-style: italic;">{{emailerror}}</span>
+											</div>
+
+											<div class="form-group">
+												<label class="sr-only" for="exampleInputPassword2">Password</label>
+												<input type="password" class="form-control" ng-model="password" name="password" placeholder="Password" required my-password>
+												<span style="color: red;font-style: italic;">{{passworderror}}</span>                 
+												<div class="help-block text-right"><a href="">Forget the password ?</a></div>
+											</div>
+
+											<div class="form-group">
+												<button type="submit" class="btn btn-primary btn-block" ng-click="Login()">Sign in</button>
+											</div>
+
+											<div class="checkbox">
+												<label>
+													<input type="checkbox" ng-model="keepme" name="keepme"> keep me logged-in
+												</label>
+											</div>
+										</form>
+
+									</div>
+									<div class="bottom text-center">
+										New here ? <a href="#"><b>Join Us</b></a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>       
+			</div>
+		</nav>
+		<nav class="navbar navbar-expand-lg navbar-light" style="padding-left: 0px; padding-right: 0px;">
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<div class="dropdown">
+							<a data-toggle="dropdown" class="nav-link" href="#"><b>Thiết bị điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Điện thoại di động</a></li>
+								<li><a href="#">Máy tính bảng</a></li>
+								<li><a href="#">Laptop</a></li>
+								<li><a href="#">Máy tính để bàn</a></li>
+								<li><a href="#">Âm thanh</a></li>
+								<li><a href="#">Máy chơi game</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="nav-item">
+						<div class="dropdown">
+							<a data-toggle="dropdown" class="nav-link" href="#"><b>Phụ kiện điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Phụ kiện di động</a></li>
+								<li><a href="#">Phụ kiện máy tính</a></li>
+								<li><a href="#">Thiết bị mạng</a></li>
+								<li><a href="#">Linh kiện máy tính</a></li>
+								<li><a href="#">Thiết bị đeo</a></li>
+								<li><a href="#">Âm thanh</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"><b>Thiết bị gia dụng </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"><b>Sức Khỏe & Làm đẹp </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"><b>Thời trang nữ </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"><b>Thời trang nam </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+					</li>
+					<li>
+						<div class="dropdown mega-dropdown">
+							<a data-toggle="dropdown" class="nav-link" href="#">
+								<b>More </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px">
+							</a>
+							<ul class="dropdown-menu mega-dropdown-menu">
+								<div class="row">
+									<li class="col-sm-3">
+										<ul>
+											<li class="dropdown-header">Men Collection</li>                           
+											<li><a href="#">Auto Carousel</a></li>
+											<li><a href="#">Carousel Control</a></li>
+											<li><a href="#">Left & Right Navigation</a></li>
+											<li><a href="#">Four Columns Grid</a></li>
+											<li class="divider"></li>
+											<li class="dropdown-header">Fonts</li>
+											<li><a href="#">Glyphicon</a></li>
+											<li><a href="#">Google Fonts</a></li>	
+										</ul>
+									</li>
+									<li class="col-sm-3">
+										<ul>
+											<li class="dropdown-header">Features</li>
+											<li><a href="#">Auto Carousel</a></li>
+											<li><a href="#">Carousel Control</a></li>
+											<li><a href="#">Left & Right Navigation</a></li>
+											<li><a href="#">Four Columns Grid</a></li>
+											<li class="divider"></li>
+											<li class="dropdown-header">Fonts</li>
+											<li><a href="#">Glyphicon</a></li>
+											<li><a href="#">Google Fonts</a></li>
+										</ul>
+									</li>
+									<li class="col-sm-3">
+										<ul>
+											<li class="dropdown-header">Plus</li>
+											<li><a href="#">Navbar Inverse</a></li>
+											<li><a href="#">Pull Right Elements</a></li>
+											<li><a href="#">Coloured Headers</a></li>                            
+											<li><a href="#">Primary Buttons & Default</a></li>						
+										</ul>
+									</li>
+									<li class="col-sm-3">
+										<ul>
+											<li class="dropdown-header">Much more</li>
+											<li><a href="#">Easy to Customize</a></li>
+											<li><a href="#">Calls to action</a></li>
+											<li><a href="#">Custom Fonts</a></li>
+											<li><a href="#">Slide down on Hover</a></li>                         
+										</ul>
+									</li>
+								</div>
+							</ul>
+						</div>
+					</li>
+				</ul>  
+			</div>
+		</nav>            
+	</div>
+	<a ui-sref="product">Hello</a>
+	<div class="content">
+		<ui-view></ui-view>
+	</div>
+
+</body>
+</html>
