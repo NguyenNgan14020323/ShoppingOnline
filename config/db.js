@@ -1,6 +1,6 @@
 const database = {
-	secrect : 'OnlineExam',
-	url : 'mongodb://localhost/OnlineExam'
+	secrect : 'ShopOnline',
+	url : 'mongodb://localhost:27017/ShopOnline'
 };
 
 export default database;

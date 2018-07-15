@@ -1,16 +1,6 @@
  // //controller
-   app.controller('loginCtrl', function($scope, $http, $location){
-
-      var req = {
-         method: 'POST',
-         url: 'https://app-chat-nodejs.herokuapp.com/user/logsg',
-         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-         },
-         data: { email: $scope.email,
-                  password: $scope.password, keepme: $scope.keepme }
-      }
-
+   app.controller('loginCtrl', function($scope, $cookies, $window, Data){
+       $scope.showLogin = true;
       //login general
       $scope.Login = function(){
 
@@ -26,17 +16,23 @@
 
          if($scope.email != "" && $scope.password != "" 
              && $scope.emailerror == "" && $scope.passworderror == ""){
-
-              //http request
-            // $http(req).then(function(response) {
-            //    //First function handles success
-            //    $scope.content = response.data;
-            //    //redirect
-            // }, function(response) {
-            //    //Second function handles error
-            //    $scope.content = "Something went wrong";
-            //    //check notvalidate
-            // });
+                var user = {
+                    email: $scope.email, 
+                    password: $scope.password
+                }
+                Data.post('login', user).then(function (result) {
+                    if(result.status == 'error'){
+                       
+                    }else{
+                        if (!result){
+                            alert('login faild');
+                        } else {
+                            $scope.showLogin = false;
+                            $cookies.put('email', $scope.email);
+                            $cookies.put('password', $scope.password);
+                        }  
+                    }
+                });            
          }
       }
 

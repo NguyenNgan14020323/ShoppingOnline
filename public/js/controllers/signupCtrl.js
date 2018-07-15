@@ -164,17 +164,7 @@ app.directive('myName', function() {
 
 
 
-	app.controller('signupCtrl', function($scope, $http, $location){
-
-		var req = {
-         method: 'POST',
-         url: 'https://app-chat-nodejs.herokuapp.com/user/logsg',
-         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-         },
-         data: { name: $scope.name, email: $scope.email, address: $scope.address, 
-         	     phone: $scope.phonenumber, password: $scope.password }
-      }
+	app.controller('signupCtrl', function($scope, $window, Data){
 
       $scope.Register = function(){
 
@@ -207,20 +197,27 @@ app.directive('myName', function() {
 
       	if($scope.name != "" && $scope.email != "" && $scope.address != "" && $scope.phonenumber != "" 
       		 && $scope.password != "" && $scope.repassword != ""
-             && $scope.nameerror == "" && $scope.emailerrore == "" && $scope.passworderror == "" && $scope.addresserror == "" 
+             && $scope.nameerror == "" && $scope.emailerror == "" && $scope.passworderror == "" && $scope.addresserror == "" 
              && $scope.passworderror == "" && $scope.repassworderror == ""){
-
-            //  //http request
-            // $http(req).then(function(response) {
-            //   //First function handles success
-            //   $scope.content = response.data;
-            //   //redirect
-            // }, function(response) {
-            //   //Second function handles error
-            //   $scope.content = "Something went wrong";
-            //   //check notvalidate
-            // });
+ 
+            var user = {
+                name: $scope.name, 
+                email: $scope.email, 
+                address: $scope.address, 
+                phone: $scope.phonenumber, 
+                password: $scope.password
+            }
+            Data.post('createUser', user).then(function (result) {
+                console.log('done');
+                 if(result.status == 'error'){
+                   
+                 }else{
+                    var host = $window.location.host;
+                    var landingUrl = "http://" + host + "/";
+                    $window.location.href = landingUrl;
+                 }
+            });
          }
       }
 
-	})
+	});

@@ -1,84 +1,55 @@
-    
-   <div class="container" ng-controller="signupCtrl" ng-init="passCol='black'">
-		<div class="row">
-		    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-left: 25%;">
-				<form role="form" novalidate="">
-					<h2>Please Sign Up <small>It's free and always will be.</small></h2>
-					<hr class="colorgraph">
-
-					<div class="form-group">
-						<input type="text" name="name" class="form-control input-lg" ng-model="name" placeholder="Enter Name" tabindex="4" required my-name>
-						<span style="color: blue;font-style: italic;">{{nameerror}}</span>
-					</div>
-
-					<div class="form-group">
-						<input type="email" name="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" ng-model="email" required my-email>
-						<span style="color: blue;font-style: italic;">{{emailerror}}</span>
-					</div>
-
-					<div class="form-group">
-						<input type="text" name="address" class="form-control input-lg" ng-model="address" placeholder="Your address" tabindex="3" required my-address>
-						<span style="color: blue;font-style: italic;">{{addresserror}}</span>
-					</div>
+<div class="container" ng-controller="signupCtrl" ng-init="passCol='black'" style="padding-bottom: 10rem">
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-left: 25%">
+			<form role="form" novalidate="">
+				<h2><small>Tạo tài khoản</small></h2>
+				<hr class="colorgraph">
 
 
-					<div class="form-group">
-						<input type="text" name="phonenumber" class="form-control input-lg" placeholder="Phone number" tabindex="3" ng-model="phonenumber" required my-phonenumber>
-						<span style="color: blue;font-style: italic;">{{phonenumbererror}}</span>
-					</div>
+				<div class="form-group">
+					<input type="text" name="name" class="form-control input-lg" ng-model="name" placeholder="Enter Name" tabindex="4" required my-name>
+					<span style="color: blue;font-style: italic;">{{nameerror}}</span>
+				</div>
 
-					<div class="row">
-						<div class="col-xs-12 col-sm-6 col-md-6">
-							<div class="form-group">
-								<input type="password" name="password" class="form-control input-lg" placeholder="Password" tabindex="5" ng-model="password" required my-password>
-								<span style="color: blue;font-style: italic;">{{passworderror}}</span>
-								<span style="color: {{passCol}};font-style: italic;" class="typepass">{{passwordtype}}</span>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6">
-							<div class="form-group">
-								<input type="password" name="repassword" class="form-control input-lg" placeholder="Confirm Password" tabindex="6" ng-model="repassword" required my-repassword>
-								<span style="color: blue;font-style: italic;">{{repassworderror}}</span>
-							</div>
+				<div class="form-group">
+					<input type="email" name="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" ng-model="email" required my-email>
+					<span style="color: blue;font-style: italic;">{{emailerror}}</span>
+				</div>
+
+				<div class="form-group">
+					<input type="text" name="address" class="form-control input-lg" ng-model="address" placeholder="Your address" tabindex="3" required my-address>
+					<span style="color: blue;font-style: italic;">{{addresserror}}</span>
+				</div>
+
+
+				<div class="form-group">
+					<input type="text" name="phonenumber" class="form-control input-lg" placeholder="Phone number" tabindex="3" ng-model="phonenumber" required my-phonenumber>
+					<span style="color: blue;font-style: italic;">{{phonenumbererror}}</span>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group">
+							<input type="password" name="password" class="form-control input-lg" placeholder="Password" tabindex="5" ng-model="password" required my-password>
+							<span style="color: blue;font-style: italic;">{{passworderror}}</span>
+							<span style="color: {{passCol}}; font-style: italic;" class="typepass">{{passwordtype}}</span>
 						</div>
 					</div>
-
-					<div class="row">
-						<div class="col-xs-4 col-sm-3 col-md-3">
-							<span class="button-checkbox">
-								<button type="button" class="btn" data-color="info" tabindex="7">I Agree</button>
-		                        <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
-							</span>
-						</div>
-						<div class="col-xs-8 col-sm-9 col-md-9">
-							 By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="#" data-toggle="modal" data-target="#t_and_c_m">Terms and Conditions</a> set out by this site, including our Cookie Use.
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group">
+							<input type="password" name="repassword" class="form-control input-lg" placeholder="Confirm Password" tabindex="6" ng-model="repassword" required my-repassword>
+							<span style="color: blue;font-style: italic;">{{repassworderror}}</span>
 						</div>
 					</div>
-					
-					<hr class="colorgraph">
-					<div class="row">
-						<div class="col-xs-12 col-md-6">
-							<input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7" ng-click="Register()"></div>
-						<div class="col-xs-12 col-md-6"><a href="#" class="btn btn-success btn-block btn-lg">Sign In</a></div>
-					</div>
-				</form>
-			</div>
+				</div>
+			
+				<hr class="colorgraph">
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7" ng-click="Register()"></div>
+					<div class="col-xs-12 col-md-6"><a href="#" class="btn btn-success btn-block btn-lg">Sign In</a></div>
+				</div>
+			</form>
 		</div>
-		<!-- Modal -->
-		<div class="modal fade" id="t_and_c_m" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
-					</div>
-					<div class="modal-body">
-						<p>Pham van linh dep trai</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
 	</div>
+</div>
