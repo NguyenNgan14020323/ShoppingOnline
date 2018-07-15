@@ -14,8 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="components/font-awesome/web-fonts-with-css/css/fontawesome.min.css">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<link href="https://lh3.googleusercontent.com/FmiRtn-Obyls7kZg_WHNEwF_yAWWYfdRgAyurUS1eRdySonFLvHU6sav8sRLF3tN-E8" rel="shortcut icon"  type="image/x-icon"> 
-
 	<!-- JS -->
 	<script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="js/app/popper.min.js"></script>
@@ -32,6 +30,7 @@
 	<script src="js/controllers/productCtrl.js"></script>
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/signupCtrl.js"></script>
+	<script src="js/controllers/bracketCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app/app.js"></script>
 	
@@ -45,26 +44,27 @@
 			<a class="navbar-brand" href="#">
 				<img style="width: 130px;" src="img/logo.png">
 			</a>   
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo03" ng-controller="loginCtrl">
-				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0" >
 					<li class="nav-item">
 						<form class="form-inline my-2 my-lg-0">
 							<input style="width: 500px;" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 						</form>
 					</li>
-					<li class="nav-item" style="padding-left: 25px; padding-right: 25px">
+					<li class="nav-item" style="padding-left: 25px; padding-right: 25px" ng-controller="bracketCtrl">
 						<a class="nav-link" href="#" style="position: relative;">
 							<img src="img/shoppingcart.png" style="width: 24px;">
-							<span class="badge" style="font-size: 14px; background-color: red; color: white; border-radius: 50%; position: absolute; top: 0px; right: 0;">2</span>
+							<span class="badge" style="font-size: 14px; background-color: red; color: white; border-radius: 50%; position: absolute; top: 0px; right: 0;" >{{bracket}}</span>
 						</a>
 					</li>
 				</ul>
+
 				<ul class="navbar-nav my-2" style="margin-left: -x;">
 					<li><a ui-sref="signup">    
 						<span>Already have an account?</span>
 					</a></li>
-					<li class="dropdown">
+					<li class="dropdown" ng-controller="loginCtrl">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b> <span> Login</span></b> <span class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu" style="margin-left: -200px;">
 							<li>
