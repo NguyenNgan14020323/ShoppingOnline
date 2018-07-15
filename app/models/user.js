@@ -4,30 +4,16 @@ const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: String,
-        required: true
-    },
-    address: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    create_at: Date,
-    update_at: Date
+    name: String,
+    email: String,
+    phone: String,
+    address: String,
+    password: String,
+    created_at: Date,
+    updated_at: Date
 });
-userSchema.pre('save', (next) => {
+
+userSchema.pre('save', function(next){
     const cur = new Date().toISOString();
     this.updated_at = cur;
     if (!this.created_at) {
@@ -37,3 +23,32 @@ userSchema.pre('save', (next) => {
 });
 
 const User = mongoose.model('User', userSchema);
+
+/**
+ * Create a new user
+ * @param {object} req
+ * @returns {object} user created
+ */
+export const createUser = (req) => {
+    const newUser = new User(req);
+  
+    return newUser.save((err, user) => {
+         if (err) { 
+             return Error(err); 
+        }
+  
+        return user;
+    });
+};
+
+export const checkUserLogin = req => User.find({ email: req.body.email})
+    .then((user) => {
+        if (user.length < 1) {
+            return false;
+        }
+        if (req.body.password === user[0].password) {
+            return user;
+        }     
+        return false;
+    })
+    .catch(err => Error(err));
