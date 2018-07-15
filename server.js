@@ -22,6 +22,16 @@ mongoose.connect(database.url, { useMongoClient: true }, (err) => {
   console.log('Connect success!');
 });
 
+//using session
+var session = require("express-session")({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 48*3600*1000 }
+});//if secure:true session can not intinital ???
+
+// Use express-session middleware for express
+app.use(session);
 
 // parse application/json
 app.use(bodyParser.json());
@@ -36,6 +46,25 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 
 app.use('/api', router);
+
+// app.get('', async (req, res)=>{
+// 	console.log('fsfsdfdsf')
+// 	if(res.session){
+
+// 		const data = await userModel.checkUserLogin({email: req.session.email, 
+// 			password: req.session.password});
+
+// 		 const dataRes = {
+//             id: data[0]._id,
+//             email: data[0].email,
+//             name: data[0].name,
+//             adress: data[0].adress,
+//         }
+
+//          res.render('/index.html');
+// 	}
+	
+// })
 
 // start app ==================================
 //startup our app at http://localhost:8080
