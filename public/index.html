@@ -30,6 +30,8 @@
 	<script src="js/controllers/productCtrl.js"></script>
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/signupCtrl.js"></script>
+	<script src="js/controllers/mainCtrl.js"></script>
+	<script src="js/controllers/bracketCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app/app.js"></script>
 	
@@ -59,7 +61,7 @@
 					</li>
 				</ul>
 
-				<ul class="navbar-nav my-2" style="margin-left: -x;">
+				<ul class="navbar-nav my-2" style="margin-left: -x;" ng-controller="loginCtrl">
 					<li ng-show="showLogin"><a ui-sref="signup">    
 						<span>Already have an account?</span>
 					</a></li>
@@ -109,9 +111,10 @@
 							</li>
 						</ul>
 					</li>
+
 					<li ng-show="!showLogin">
 						<div class="dropdown">
-							<a href="" class="dropdown-toggle" data-toggle="dropdown"><b> <span> {{}}</span></b></a>
+							<a href="" class="dropdown-toggle" data-toggle="dropdown"><b><span> {{username}}</span></b></a>
 							<div class="dropdown-menu" style="margin-left: -50px">
 							  <a class="dropdown-item" href="#">Link 1</a>
 							  <a class="dropdown-item" href="#">Link 2</a>
@@ -119,6 +122,7 @@
 							</div>
 						  </div>
 					</li>
+
 				</ul>       
 			</div>
 		</nav>

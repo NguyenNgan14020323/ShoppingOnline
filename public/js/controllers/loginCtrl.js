@@ -1,6 +1,5 @@
  // //controller
-   app.controller('loginCtrl', function($scope, $cookies, $window, Data){
-       $scope.showLogin = true;
+   app.controller('loginCtrl', function($scope, $rootScope, $cookies, $window, Data){
       //login general
       $scope.Login = function(){
 
@@ -16,10 +15,12 @@
 
          if($scope.email != "" && $scope.password != "" 
              && $scope.emailerror == "" && $scope.passworderror == ""){
-                var user = {
+
+               var user = {
                     email: $scope.email, 
                     password: $scope.password
                 }
+
                 Data.post('login', user).then(function (result) {
                     if(result.status == 'error'){
                        
@@ -27,9 +28,14 @@
                         if (!result){
                             alert('login faild');
                         } else {
-                            $scope.showLogin = false;
-                            $cookies.put('email', $scope.email);
-                            $cookies.put('password', $scope.password);
+                           console.log(result.name)
+                           $scope.showLogin = false;
+                           $rootScope.username = result.name; 
+                           if($scope.keepme != undefined){
+                              $cookies.put('email', $scope.email);
+                              $cookies.put('password', $scope.password);
+                              $cookies.put('keepme', true);
+                           }
                         }  
                     }
                 });            
