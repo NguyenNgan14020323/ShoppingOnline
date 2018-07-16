@@ -164,7 +164,7 @@ app.directive('myName', function() {
 
 
 
-	app.controller('signupCtrl', function($scope, $window,$cookies, Data){
+	app.controller('signupCtrl', function($scope, $rootScope, $window, $cookies, Data){
 
       $scope.Register = function(){
 
@@ -215,10 +215,10 @@ app.directive('myName', function() {
                      'secure ': true})
                      $cookies.put('keepme', true, {'expires' :  (new Date().getTime()+24*3600*1000*7).toString(),
                      'secure ': true});
-
-                    var host = $window.location.host;
-                    var landingUrl = "http://" + host + "/";
-                    $window.location.href = landingUrl;
+                     $window.sessionStorage.setItem("token", result.token);
+                     var host = $window.location.host;
+                     var landingUrl = "http://" + host + "/";
+                     $window.location.href = landingUrl;
                  }
             });
          }

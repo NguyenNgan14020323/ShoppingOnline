@@ -42,12 +42,16 @@
                            temp = temp.substr(0,1);
                            temp = temp.toUpperCase();
                            $rootScope.avatar = temp
+
+                           $window.sessionStorage.setItem("token", result.token);
+
                            if($scope.keepme != undefined){
                               //let cookie alive 7 days
                               $cookies.put('id', result.id, {'expires': (new Date().getTime()+24*3600*1000*7).toString(),
                                                             'secure ': true})
                               $cookies.put('keepme', true, {'expires' :  (new Date().getTime()+24*3600*1000*7).toString(),
                                                             'secure ': true});
+
                            }
                         }  
                     }
