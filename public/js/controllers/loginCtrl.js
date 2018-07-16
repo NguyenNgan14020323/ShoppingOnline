@@ -29,7 +29,7 @@
                     password: $scope.password
                 }
 
-                Data.post('login', user).then(function (result) {
+                Data.post('login', 1, user).then(function (result) {
                     if(result.status == 'error'){
                        alert(result.message)
                     }else{
@@ -73,7 +73,7 @@
       //log out
       $scope.logout = function(){
         
-        Data.post('logout', {logout: true}).then(function (result) {
+        Data.post('logout', 1, {logout: true}).then(function (result) {
             $cookies.remove('id')
             $cookies.remove('keepme')
             $window.location.reload();

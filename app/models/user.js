@@ -43,9 +43,7 @@ export const createUser = (req) => {
 
 export const checkUserLogin = req => User.find({ email: req.body.email})
     .then((user) => {
-
-        console.log(user)
-        if (user.length < 1) {
+        if (user.length < 1 || user == "") {
             return false;
         }
 

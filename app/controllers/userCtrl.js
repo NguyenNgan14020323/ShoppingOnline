@@ -12,18 +12,18 @@ export const createUserCtrl = async (req, res) => {
 
     req.body.password = CryptoJS.SHA256(req.body.password).toString();
     try {
-
+       
         const data = await userModel.createUser(req.body);
-        
+        console.log(data)
          var hash = {
-            id: data[0]._id,
-            name: data[0].name,
-            email:  data[0].email,
-            addres: data[0].address,
-            phone: data[0].phone
+            id: data._id,
+            name: data.name,
+            email:  data.email,
+            addres: data.address,
+            phone: data.phone
         }
              
-        var token = jwt.sign( hash, data[0]._id, {algorithm: 'HS256', expiresIn: TOKEN_TIME});
+        var token = jwt.sign( hash, data._id.toString(), {algorithm: 'HS256', expiresIn: TOKEN_TIME});
 
         const dataRes = {
             id: CryptoJS.AES.encrypt(data._id.toString(), KEY_HASH).toString(),
@@ -59,8 +59,7 @@ export const checkUserLoginCtrl = async (req, res) => {
                 data = await userModel.checkUserLoginbyId(deid);
             }
 
-            if(typeof(data) !== 'boolean'){
-
+            if(typeof data != 'boolean'){
                 var hash = {
                     id: data[0]._id,
                     name: data[0].name,
@@ -68,7 +67,7 @@ export const checkUserLoginCtrl = async (req, res) => {
                     addres: data[0].address,
                     phone: data[0].phone
                 }
-             
+                
                 var token = jwt.sign(hash, data[0]._id.toString(), {algorithm: 'HS256', expiresIn: TOKEN_TIME});
 
                 const dataRes = {
