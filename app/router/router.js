@@ -8,11 +8,5 @@ const Router = express.Router();
 Router.post('/createUser', userCtrl.createUserCtrl);
 Router.post('/login', userCtrl.checkUserLoginCtrl);
 Router.post('/logout', userCtrl.checkUserLogoutCtrl);
-//Catalog
-Router.post('/createCatalog', catalogCtrl.createCatalogCtrl);
-Router.get('/getAllCatalog', catalogCtrl.getAllCatalogCtrl);
-
-//Product
-Router.post('/createProduct', productCtrl.createProductCtrl);
 
 export default Router;
