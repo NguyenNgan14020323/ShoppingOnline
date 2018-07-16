@@ -18,3 +18,12 @@ const catalogSchema = new Schema({
 });
 
 const Catalog = mongoose.model('Catalog', catalogSchema);
+
+export const createCatalog = (req) => {
+    const newCatalog = new Catalog(req);
+    return newCatalog.save((err, catalog) => {
+        if (err) return Error(err);
+
+        return catalog;
+    })
+};

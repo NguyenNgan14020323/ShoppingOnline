@@ -1,7 +1,15 @@
  // //controller
    app.controller('loginCtrl', function($scope, $rootScope, $cookies, $window, Data){
       //login general
-      $scope.Login = function(){
+    $scope.logout = function(){
+        $rootScope.showLogin = true;
+        var host = $window.location.host;
+        var landingUrl = "http://" + host + "/";
+        $window.location.href = landingUrl;
+        window.location.reload();
+    }
+    
+    $scope.Login = function(){
 
          if($scope.email == undefined || $scope.email==""){
             if($scope.emailerror == undefined || $scope.emailerror == "")
@@ -23,18 +31,23 @@
 
                 Data.post('login', user).then(function (result) {
                     if(result.status == 'error'){
-                       
+                       alert(result.message)
                     }else{
                         if (!result){
                             alert('login faild');
                         } else {
-                           console.log(result.name)
                            $scope.showLogin = false;
-                           $rootScope.username = result.name; 
+                           $rootScope.username = result.name;
+                           var temp = result.name;
+                           temp = temp.substr(0,1);
+                           temp = temp.toUpperCase();
+                           $rootScope.avatar = temp
                            if($scope.keepme != undefined){
-                              $cookies.put('email', $scope.email);
-                              $cookies.put('password', $scope.password);
-                              $cookies.put('keepme', true);
+                              //let cookie alive 7 days
+                              $cookies.put('id', result.id, {'expires': (new Date().getTime()+24*3600*1000*7).toString(),
+                                                            'secure ': true})
+                              $cookies.put('keepme', true, {'expires' :  (new Date().getTime()+24*3600*1000*7).toString(),
+                                                            'secure ': true});
                            }
                         }  
                     }
@@ -51,6 +64,16 @@
       $scope.loginwithGG = function(){
 
 
+      }
+
+      //log out
+      $scope.logout = function(){
+        
+        Data.post('logout', {logout: true}).then(function (result) {
+            $cookies.remove('id')
+            $cookies.remove('keepme')
+            $window.location.reload();
+        });   
       }
 
    });

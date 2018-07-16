@@ -23,7 +23,7 @@ mongoose.connect(database.url, { useMongoClient: true }, (err) => {
 });
 
 //using session
-var session = require("express-session")({
+const session = require("express-session")({
     secret: "secret",
     resave: true,
     saveUninitialized: true,

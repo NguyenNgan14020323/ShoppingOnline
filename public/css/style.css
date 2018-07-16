@@ -157,3 +157,15 @@ body {
   border: 1px solid #ddd;
 }
 /* end menu category */
+
+.styleAvatar{
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    background-color: cadetblue ;
+    padding: 5px 5px 0px 5px;
+    margin-top: -3px; 
+    margin-right: -5px; 
+    text-align: center; 
+    color:blanchedalmond;
+}

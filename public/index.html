@@ -5,8 +5,8 @@
 	<meta charset="UTF-8">
 	<base href="/">
 
-	<title>Shopping</title>
-	<link href="img/logo.png" rel="shortcut icon"  type="image/x-icon">
+	<title>Smart</title>
+	<link href="img/Smartphone-Logo.png" rel="shortcut icon"  type="image/x-icon">
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
@@ -43,13 +43,13 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand" href="#">
-				<img style="width: 130px;" src="img/logo.png">
+				<img style="width: 120px" src="img/smart_logo.png">
 			</a>   
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0" >
 					<li class="nav-item">
 						<form class="form-inline my-2 my-lg-0">
-							<input style="width: 500px;" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+							<input style="width: 500px;" class="form-control mr-sm-2" type="search" placeholder="Bạn tìm gì..." aria-label="Search">
 							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 						</form>
 					</li>
@@ -73,8 +73,8 @@
 									<div class="col-md-12">
 										<span><strong><b>Login via</b></strong></span>
 										<div class="social-buttons">
-											<a href="#" class="btn btn-fb" ng-click="LoginwithFb()"><i class="fa fa-facebook"></i> Facebook</a>
-											<a href="#" class="btn btn-danger" ng-click="LoginwithGG()"><i class="fa fa-google-plus"></i> Gmail</a>
+											<a href="" class="btn btn-fb" ng-click="LoginwithFb()"><i class="fa fa-facebook"></i> Facebook</a>
+											<a href="" class="btn btn-danger" ng-click="LoginwithGG()"><i class="fa fa-google-plus"></i> Gmail</a>
 										</div>
 										<span><strong><b>or</b></strong></span>
 
@@ -111,14 +111,13 @@
 							</li>
 						</ul>
 					</li>
-
 					<li ng-show="!showLogin">
 						<div class="dropdown">
-							<a href="" class="dropdown-toggle" data-toggle="dropdown"><b><span> {{username}}</span></b></a>
-							<div class="dropdown-menu" style="margin-left: -50px">
-							  <a class="dropdown-item" href="#">Link 1</a>
-							  <a class="dropdown-item" href="#">Link 2</a>
-							  <a class="dropdown-item" href="#">Link 3</a>
+							<a href="" data-toggle="dropdown"><div class="styleAvatar"">{{avatar}}</div></a>
+							<div class="dropdown-menu" style="margin-left: -160px">
+							  <a class="dropdown-item" href=""><span style="color: cadetblue">{{username}}</span></a>
+							  <a class="dropdown-item" href=""><i class="fa fa-user"></i> Quản lý tài khoản</a>
+							  <a class="dropdown-item" ng-click="logout()" href=""><i class="fa fa-sign-out"></i> Đăng xuất</a>
 							</div>
 						  </div>
 					</li>
@@ -133,12 +132,12 @@
 						<div class="dropdown1">
 							<a data-toggle="dropdown1" class="nav-link" href="#"><b>Thiết bị điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Điện thoại di động</a></li>
-								<li><a href="#">Máy tính bảng</a></li>
-								<li><a href="#">Laptop</a></li>
-								<li><a href="#">Máy tính để bàn</a></li>
-								<li><a href="#">Âm thanh</a></li>
-								<li><a href="#">Máy chơi game</a></li>
+								<li><a href="">Điện thoại di động</a></li>
+								<li><a href="">Máy tính bảng</a></li>
+								<li><a href="">Laptop</a></li>
+								<li><a href="">Máy tính để bàn</a></li>
+								<li><a href="">Âm thanh</a></li>
+								<li><a href="">Máy chơi game</a></li>
 							</ul>
 						</div>
 					</li>
@@ -146,26 +145,26 @@
 						<div class="dropdown1">
 							<a data-toggle="dropdown1" class="nav-link" href="#"><b>Phụ kiện điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Phụ kiện di động</a></li>
-								<li><a href="#">Phụ kiện máy tính</a></li>
-								<li><a href="#">Thiết bị mạng</a></li>
-								<li><a href="#">Linh kiện máy tính</a></li>
-								<li><a href="#">Thiết bị đeo</a></li>
-								<li><a href="#">Âm thanh</a></li>
+								<li><a href="">Phụ kiện di động</a></li>
+								<li><a href="">Phụ kiện máy tính</a></li>
+								<li><a href="">Thiết bị mạng</a></li>
+								<li><a href="">Linh kiện máy tính</a></li>
+								<li><a href="">Thiết bị đeo</a></li>
+								<li><a href="">Âm thanh</a></li>
 							</ul>
 						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><b>Thiết bị gia dụng </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+						<a class="nav-link" href=""><b>Thiết bị gia dụng </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><b>Sức Khỏe & Làm đẹp </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+						<a class="nav-link" href=""><b>Sức Khỏe & Làm đẹp </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><b>Thời trang nữ </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+						<a class="nav-link" href=""><b>Thời trang nữ </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><b>Thời trang nam </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+						<a class="nav-link" href=""><b>Thời trang nam </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 					</li>
 					<li>
 						<div class="dropdown mega-dropdown">
@@ -177,14 +176,14 @@
 									<li class="col-sm-3">
 										<ul>
 											<li class="dropdown-header">Men Collection</li>                           
-											<li><a href="#">Auto Carousel</a></li>
-											<li><a href="#">Carousel Control</a></li>
-											<li><a href="#">Left & Right Navigation</a></li>
-											<li><a href="#">Four Columns Grid</a></li>
+											<li><a href="">Auto Carousel</a></li>
+											<li><a href="">Carousel Control</a></li>
+											<li><a href="">Left & Right Navigation</a></li>
+											<li><a href="">Four Columns Grid</a></li>
 											<li class="divider"></li>
 											<li class="dropdown-header">Fonts</li>
-											<li><a href="#">Glyphicon</a></li>
-											<li><a href="#">Google Fonts</a></li>	
+											<li><a href="">Glyphicon</a></li>
+											<li><a href="">Google Fonts</a></li>	
 										</ul>
 									</li>
 									<li class="col-sm-3">

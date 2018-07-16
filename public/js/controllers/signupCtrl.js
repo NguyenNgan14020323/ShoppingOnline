@@ -12,7 +12,7 @@ app.directive('myName', function() {
                if (!nlength.test(value)) {
                     scope.nameerror = "Tên tối thiểu dài 6 kí tự và tối đa 30 kí tự."
                }else{
-                  if(value.match(nvalidate)[0] == null)
+                  if(value.match(nvalidate) == null)
                      scope.nameerror = "Tên chỉ chứa kí tự Alphabet."
                   else
                      scope.nameerror = ""
@@ -164,12 +164,11 @@ app.directive('myName', function() {
 
 
 
-	app.controller('signupCtrl', function($scope, $window, Data){
+	app.controller('signupCtrl', function($scope, $window,$cookies, Data){
 
       $scope.Register = function(){
 
       	if($scope.name == undefined || $scope.name==""){
-      		console.log($scope.name)
             if($scope.nameerror == undefined || $scope.nameerror == "")
                $scope.nameerror = "Tên bắt buộc.";
          }
@@ -208,10 +207,15 @@ app.directive('myName', function() {
                 password: $scope.password
             }
             Data.post('createUser', user).then(function (result) {
-                console.log('done');
                  if(result.status == 'error'){
                    
                  }else{
+                     //let cookie alive 7 days
+                     $cookies.put('id', result.id, {'expires': (new Date().getTime()+24*3600*1000*7).toString(),
+                     'secure ': true})
+                     $cookies.put('keepme', true, {'expires' :  (new Date().getTime()+24*3600*1000*7).toString(),
+                     'secure ': true});
+
                     var host = $window.location.host;
                     var landingUrl = "http://" + host + "/";
                     $window.location.href = landingUrl;
