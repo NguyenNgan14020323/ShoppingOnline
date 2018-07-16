@@ -30,8 +30,10 @@ const Router = express.Router();
 
 //Catalog
 Router.post('/createCatalog', catalogCtrl.createCatalogCtrl);
+Router.get('/getAllCatalog', catalogCtrl.getAllCatalogCtrl);
 
-//
+//Product
+Router.post('/createProduct', productCtrl.createProductCtrl);
 
 
 export default Router;

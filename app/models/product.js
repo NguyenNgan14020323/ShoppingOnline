@@ -8,38 +8,17 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Catalog',
     },
-    name: {
-        type: String,
-        required: true,
-    },
-    price: {
-        type: Number,
-        required: true,
-    },
-    content: {
-        type: String,
-        required: true,
-    },
-    discount: {
-        type: Number,
-        required: true,
-    },
-    image_link: {
-        type: String,
-        required: true,
-    },
-    image_list: {
-        type: String,
-        required: true,
-    },
-    view: {
-        type: Number,
-        required: true,
-    },
+    name: String,
+    price: Number,
+    content: String,
+    discount: Number, //lưu chiết khấu, giảm giá    
+    image_link: String,
+    image_list: String,
+    view: Number,
     create_at: Date,
     update_at: Date
 });
-productSchema.pre('save', (next) => {
+productSchema.pre('save', function(next){
     const cur = new Date().toISOString();
     this.updated_at = cur;
     if (!this.created_at) {
@@ -50,3 +29,11 @@ productSchema.pre('save', (next) => {
 
 const Product = mongoose.model('Product', productSchema);
 
+export const createProduct = req => {
+    const newProduct = new Product(req);
+    return newProduct.save((err, product) => {
+        if (err) return Error(err);
+
+        return product;
+    })
+}

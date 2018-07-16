@@ -54,25 +54,6 @@ app.use(express.static(__dirname + '/public'));
 app.use('/user', router);
 app.use('/api', router1);
 
-// app.get('', async (req, res)=>{
-// 	console.log('fsfsdfdsf')
-// 	if(res.session){
-
-// 		const data = await userModel.checkUserLogin({email: req.session.email, 
-// 			password: req.session.password});
-
-// 		 const dataRes = {
-//             id: data[0]._id,
-//             email: data[0].email,
-//             name: data[0].name,
-//             adress: data[0].adress,
-//         }
-
-//          res.render('/index.html');
-// 	}
-	
-// })
-
 // start app ==================================
 //startup our app at http://localhost:8080
 app.listen(port, (err) => {
