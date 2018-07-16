@@ -25,4 +25,12 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, Data){
             }
          }); 
     }
+
+    Data.get('getAllCatalog').then(function(data){
+        $rootScope.showSixCatalog = [];
+        for (let i = 0; i < 6; i++){
+            $scope.showSixCatalog[i] = data[i];
+        }
+    })
+
 });

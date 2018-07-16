@@ -4,17 +4,12 @@ const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
 
 const catalogSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
+    name: String,
     parent_id: {
         type: Schema.Types.ObjectId,
         ref: 'Catalog',
-    },
-    sort_order: {
-        type: Number
-    }
+    }, //id of parent catelog,because catalog has many level
+    sort_order: Number //vị trí sắp xếp(hiển thị)
 });
 
 const Catalog = mongoose.model('Catalog', catalogSchema);
@@ -27,3 +22,9 @@ export const createCatalog = (req) => {
         return catalog;
     })
 };
+
+export const getAllCatalog = () => Catalog.find({}, (err, listCatalog) => {
+    if (err) return Error(err);
+
+    return listCatalog;
+})

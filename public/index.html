@@ -39,10 +39,10 @@
 <body ng-app="ShopApp" ng-controller="mainCtrl">
 	<div class="header">
 		<nav class="navbar navbar-expand-lg navbar-light"  style="padding-left: 0px; padding-right: 0px;">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="">
 				<img style="width: 120px" src="img/smart_logo.png">
 			</a>   
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -54,7 +54,7 @@
 						</form>
 					</li>
 					<li class="nav-item" style="padding-left: 25px; padding-right: 25px" ng-controller="bracketCtrl">
-						<a class="nav-link" href="#" style="position: relative;">
+						<a class="nav-link" href="" style="position: relative;">
 							<img src="img/shoppingcart.png" style="width: 24px;">
 							<span class="badge" style="font-size: 14px; background-color: red; color: white; border-radius: 50%; position: absolute; top: 0px; right: 0;" >{{bracket}}</span>
 						</a>
@@ -113,7 +113,7 @@
 					</li>
 					<li ng-show="!showLogin">
 						<div class="dropdown">
-							<a href="" data-toggle="dropdown"><div class="styleAvatar"">{{avatar}}</div></a>
+							<a href="" data-toggle="dropdown"><div class="styleAvatar">{{avatar}}</div></a>
 							<div class="dropdown-menu" style="margin-left: -160px">
 							  <a class="dropdown-item" href=""><span style="color: cadetblue">{{username}}</span></a>
 							  <a class="dropdown-item" href=""><i class="fa fa-user"></i> Quản lý tài khoản</a>
@@ -127,48 +127,18 @@
 		</nav>
 		<nav class="navbar navbar-expand-lg navbar-light" style="padding-left: 0px; padding-right: 0px;">
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0" >
+					<li class="nav-item" ng-repeat="catalog in showSixCatalog">
 						<div class="dropdown1">
-							<a data-toggle="dropdown1" class="nav-link" href="#"><b>Thiết bị điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
-							<ul class="dropdown-menu">
-								<li><a href="">Điện thoại di động</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Laptop</a></li>
-								<li><a href="">Máy tính để bàn</a></li>
-								<li><a href="">Âm thanh</a></li>
-								<li><a href="">Máy chơi game</a></li>
+							<a data-toggle="dropdown1" class="nav-link" href=""><b>{{catalog.parentCatalog.name}} </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
+							<ul class="dropdown-menu" >
+								<li ng-repeat="childCatalog in catalog.childCatalog"><a href="">{{childCatalog.name}}</a></li>
 							</ul>
 						</div>
-					</li>
-					<li class="nav-item">
-						<div class="dropdown1">
-							<a data-toggle="dropdown1" class="nav-link" href="#"><b>Phụ kiện điện tử </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
-							<ul class="dropdown-menu">
-								<li><a href="">Phụ kiện di động</a></li>
-								<li><a href="">Phụ kiện máy tính</a></li>
-								<li><a href="">Thiết bị mạng</a></li>
-								<li><a href="">Linh kiện máy tính</a></li>
-								<li><a href="">Thiết bị đeo</a></li>
-								<li><a href="">Âm thanh</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href=""><b>Thiết bị gia dụng </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href=""><b>Sức Khỏe & Làm đẹp </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href=""><b>Thời trang nữ </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href=""><b>Thời trang nam </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 					</li>
 					<li>
 						<div class="dropdown mega-dropdown">
-							<a data-toggle="dropdown" class="nav-link" href="#">
+							<a data-toggle="dropdown" class="nav-link" href="">
 								<b>More </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px">
 							</a>
 							<ul class="dropdown-menu mega-dropdown-menu">
@@ -189,32 +159,32 @@
 									<li class="col-sm-3">
 										<ul>
 											<li class="dropdown-header">Features</li>
-											<li><a href="#">Auto Carousel</a></li>
-											<li><a href="#">Carousel Control</a></li>
-											<li><a href="#">Left & Right Navigation</a></li>
-											<li><a href="#">Four Columns Grid</a></li>
+											<li><a href="">Auto Carousel</a></li>
+											<li><a href="">Carousel Control</a></li>
+											<li><a href="">Left & Right Navigation</a></li>
+											<li><a href="">Four Columns Grid</a></li>
 											<li class="divider"></li>
 											<li class="dropdown-header">Fonts</li>
-											<li><a href="#">Glyphicon</a></li>
-											<li><a href="#">Google Fonts</a></li>
+											<li><a href="">Glyphicon</a></li>
+											<li><a href="">Google Fonts</a></li>
 										</ul>
 									</li>
 									<li class="col-sm-3">
 										<ul>
 											<li class="dropdown-header">Plus</li>
-											<li><a href="#">Navbar Inverse</a></li>
-											<li><a href="#">Pull Right Elements</a></li>
-											<li><a href="#">Coloured Headers</a></li>                            
-											<li><a href="#">Primary Buttons & Default</a></li>						
+											<li><a href="">Navbar Inverse</a></li>
+											<li><a href="">Pull Right Elements</a></li>
+											<li><a href="">Coloured Headers</a></li>                            
+											<li><a href="">Primary Buttons & Default</a></li>						
 										</ul>
 									</li>
 									<li class="col-sm-3">
 										<ul>
 											<li class="dropdown-header">Much more</li>
-											<li><a href="#">Easy to Customize</a></li>
-											<li><a href="#">Calls to action</a></li>
-											<li><a href="#">Custom Fonts</a></li>
-											<li><a href="#">Slide down on Hover</a></li>                         
+											<li><a href="">Easy to Customize</a></li>
+											<li><a href="">Calls to action</a></li>
+											<li><a href="">Custom Fonts</a></li>
+											<li><a href="">Slide down on Hover</a></li>                         
 										</ul>
 									</li>
 								</div>
