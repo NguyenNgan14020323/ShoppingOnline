@@ -3,30 +3,42 @@ var app = angular.module('ShopApp', ['ui.bootstrap', 'ui.router', 'ngCookies', '
 app.service('Data', ['$http', '$location', '$window',
     function ($http, $location, $window) {
 
-        var _SERVICEBASE = 'http://localhost:3000/user/';
+        const _SERVICEBASE1 = 'http://localhost:3000/api/';
+        const _SERVICEBASE = 'http://localhost:3000/user/';
 
         var obj = {};
 
-        obj.get = function (q) {
+        obj.get = function (q, flag) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
-            return $http.get(_SERVICEBASE + q).then(function (results) {
+            if(flag==1)
+                SERVICEBASE = _SERVICEBASE
+            else
+                SERVICEBASE = _SERVICEBASE1
+
+            return $http.get(SERVICEBASE + q).then(function (results) {
                 return results.data;
             });
         };
-        obj.post = function (q, object) {
+        obj.post = function (q, flag, object) {
             if(typeof $window.sessionStorage != undefined)
-                $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
-
-            return $http.post(_SERVICEBASE + q, object).then(function (results) {
+                $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token")
+            if(flag==1)
+                SERVICEBASE = _SERVICEBASE
+           else
+               SERVICEBASE = _SERVICEBASE1    
+            return $http.post(SERVICEBASE + q, object).then(function (results) {
                 return results.data;
             });
         };
-        obj.put = function (q, object) {
+        obj.put = function (q, flag, object) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
-
-            return $http.put(_SERVICEBASE + q, object).then(function (results) {
+            if(flag==1)
+                SERVICEBASE = _SERVICEBASE
+            else
+               SERVICEBASE = _SERVICEBASE1
+            return $http.put(SERVICEBASE + q, object).then(function (results) {
                 return results.data;
             });
         };
@@ -35,11 +47,14 @@ app.service('Data', ['$http', '$location', '$window',
                 return results.data;
             });
         }
-        obj.delete = function (q) {
+        obj.delete = function (q, flag) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
-
-            return $http.delete(_SERVICEBASE + q).then(function (results) {
+            if(flag==1)
+                SERVICEBASE = _SERVICEBASE
+           else
+               SERVICEBASE = _SERVICEBASE1
+            return $http.delete(SERVICEBASE + q).then(function (results) {
                 return results.data;
             });
         };

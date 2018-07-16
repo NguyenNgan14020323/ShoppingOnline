@@ -206,7 +206,7 @@ app.directive('myName', function() {
                 phone: $scope.phonenumber, 
                 password: $scope.password
             }
-            Data.post('createUser', user).then(function (result) {
+            Data.post('createUser', 1, user).then(function (result) {
                  if(result.status == 'error'){
                    
                  }else{
