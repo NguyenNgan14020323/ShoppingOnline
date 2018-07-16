@@ -6,7 +6,10 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import methodOverride from 'method-override';
 import database from './config/db';
-import router from './app/routes';
+import router from './app/router/routes';
+import router1 from './app/router/router1';
+import morgan from 'morgan';
+import jwt from 'jsonwebtoken';
 
 const app = express();
 
@@ -36,6 +39,9 @@ app.use(session);
 // parse application/json
 app.use(bodyParser.json());
 
+// show requests, responses from clients and server to comand line
+app.use(morgan('dev'))
+
 // parse application/vnd.api+json as json
 app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
 
@@ -45,7 +51,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img with be /img for users
 app.use(express.static(__dirname + '/public'));
 
-app.use('/api', router);
+app.use('/user', router);
+app.use('/api', router1);
 
 // app.get('', async (req, res)=>{
 // 	console.log('fsfsdfdsf')

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import CryptoJS from 'crypto-js';
 
 const { Schema } = mongoose;
 mongoose.Promise = global.Promise;
@@ -42,24 +43,26 @@ export const createUser = (req) => {
 
 export const checkUserLogin = req => User.find({ email: req.body.email})
     .then((user) => {
+
+        console.log(user)
         if (user.length < 1) {
             return false;
         }
-        if (req.body.password === user[0].password) {
+
+        if (req.body.password == user[0].password) {
             return user;
         }     
         return false;
     })
     .catch(err => Error(err));
 
-export const checkUserLoginbyId = req => User.find({ _id: req.body.id})
+export const checkUserLoginbyId = req => User.find({ _id: req})
     .then((user) => {
-       
         if (user.length < 1) {
             return false;
         }
 
-        if (req.body.id == user[0]._id) {
+        if (req.toString() == user[0]._id) {
             return user;
         }     
         return false;
