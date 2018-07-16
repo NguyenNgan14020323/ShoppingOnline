@@ -1,4 +1,4 @@
-app.controller('mainCtrl', function ($scope, $rootScope, $cookies, Data){
+app.controller('mainCtrl', function ($scope, $rootScope, $cookies,$window, Data){
     $rootScope.showLogin = true;
 
     if($cookies.get('keepme') != undefined){
@@ -18,6 +18,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, Data){
                     $scope.showLogin = false;
                     $rootScope.username = result.name; 
                     var temp = result.name;
+                    $window.sessionStorage.setItem("token", result.token);//global variable token
                     temp = temp.substr(0,1);
                     temp = temp.toUpperCase();
                     $rootScope.avatar = temp
