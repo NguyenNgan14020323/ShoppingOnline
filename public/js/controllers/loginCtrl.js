@@ -39,7 +39,7 @@
                            $scope.showLogin = false;
                            $rootScope.username = result.name;
                            var temp = result.name;
-                           temp = temp.substr(0,1);
+                           temp = temp.substr(0, 1);
                            temp = temp.toUpperCase();
                            $rootScope.avatar = temp
 
@@ -83,7 +83,7 @@
    });
 
    // directive validate email
-   app.directive('myEmail', ['$http', '$timeout', function($http, $timeout) {
+   app.directive('myEmail', ['$http', '$timeout', 'Data', function($http, $timeout, Data) {
       return {
          //restrict: 'A',
         // scope: true,
@@ -94,32 +94,20 @@
                var evalidate = /^(?:[a-zA-Z0-9-_])+(?:\.[a-zA-Z0-9-_]+)*@(?:[a-zA-Z0-9-_]+\.){1,2}[a-zA-Z0-9-_]+$/;  
                if(value.length < 1){
                   scope.emailerror = "Địa chỉ email bắt buộc.";
-
+                  
                }else{
                   if(!evalidate.test(value)){
                      scope.emailerror = "Địa chỉ email không đúng dịnh dạng.";
                   }else{
-                     scope.emailerror = ""
-                     // $timeout(function(){
-
-                     //    $http({
-                     //       method: 'POST',
-                     //       url: 'https://app-chat-nodejs.herokuapp.com/user/log',
-                     //       headers: {
-                     //          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                     //       },
-                     //       data: { email: value}
-                     //    }).then(function(response) {
-                     //       //First function handles success
-                     //    //   scope.content = response.data;
-                     //       scope.emailerror = "Địa chỉ email đã tồn tại.";
-                     //    }, function(response) {
-                     //       //Second function handles error
-                     //     //  scope.content = "Something went wrong";
-                     //       scope.emailerror = "Địa chỉ email đã tồn tại.";
-                     //    });
-
-                     // }, 1000);
+                     $timeout(function(){
+                        Data.post('checkUser', 1, { email: value }).then(function (result) {
+                           if(!result.error){
+                              scope.emailerror = result.message
+                           }else
+                              scope.emailerror = ""
+                        });
+                     }, 5000)
+                     
                   }
                }
                return value;//dùng trong scope ở controller
@@ -141,7 +129,7 @@
            //     var strongp = /(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[!@#$%^&~*?^]+)(?=.{15,})/
            //     var mediump = /(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[!@#$%^&~*?^]+)(?=.{10,})/
            //     var weakp = /(?=.*[a-z]+)(?=.*[0-9]+)(?=.{6,})/
-                  var plength = /(?=.{8,})/
+                  var plength = /(?=.{6,})/
                   var pvalidate = /(?=.*[a-z])(?=.*[0-9])/
 
                if (!plength.test(value)) {

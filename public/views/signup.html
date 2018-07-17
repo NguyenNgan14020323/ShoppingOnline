@@ -12,8 +12,9 @@
 				</div>
 
 				<div class="form-group">
-					<input type="email" name="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" ng-model="email" required my-email>
+					<input type="email" name="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" ng-model="email" required my-emailr>
 					<span style="color: blue;font-style: italic;">{{emailerror}}</span>
+					<span style="color: blue;font-style: italic;">{{notify}}</span>
 				</div>
 
 				<div class="form-group">
@@ -30,7 +31,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-6">
 						<div class="form-group">
-							<input type="password" name="password" class="form-control input-lg" placeholder="Password" tabindex="5" ng-model="password" required my-password>
+							<input type="password" name="password" class="form-control input-lg" placeholder="Password" tabindex="5" ng-model="password" required my-pass>
 							<span style="color: blue; font-style: italic;">{{passworderror}}</span>
 							<span style= "color: {{passCol}}; font-style: italic;" class="typepass">{{passwordtype}}</span>
 						</div>
@@ -39,6 +40,16 @@
 						<div class="form-group">
 							<input type="password" name="repassword" class="form-control input-lg" placeholder="Confirm Password" tabindex="6" ng-model="repassword" required my-repassword>
 							<span style="color: blue;font-style: italic;">{{repassworderror}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" ng-show="hiddensecuritycode">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="form-group">
+							<input type="text" name="authentication" class="form-control input-lg" placeholder="security code" ng-model="authentication" required my-authen style="background-color: orange;width: 120%;">
+							<span style="color: blue; font-style: italic;">{{authenticationerror}}</span>
+							<span style="color: yellow; font-style: italic;">{{authensuccess}}</span>
 						</div>
 					</div>
 				</div>

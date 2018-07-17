@@ -20,6 +20,7 @@ app.service('Data', ['$http', '$location', '$window',
                 return results.data;
             });
         };
+
         obj.post = function (q, flag, object) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token")
@@ -31,6 +32,7 @@ app.service('Data', ['$http', '$location', '$window',
                 return results.data;
             });
         };
+
         obj.put = function (q, flag, object) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
@@ -42,17 +44,19 @@ app.service('Data', ['$http', '$location', '$window',
                 return results.data;
             });
         };
+
         obj.patch = function(q, object){
             return $http.put(_SERVICEBASE + q, object).then(function (results) {
                 return results.data;
             });
-        }
+        };
+
         obj.delete = function (q, flag) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
             if(flag==1)
                 SERVICEBASE = _SERVICEBASE
-           else
+            else
                SERVICEBASE = _SERVICEBASE1
             return $http.delete(SERVICEBASE + q).then(function (results) {
                 return results.data;

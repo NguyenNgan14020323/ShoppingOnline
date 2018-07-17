@@ -23,6 +23,7 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
 				controller: 'signupCtrl',
 				templateUrl: 'views/signup.html'
 			})
+			
 		$locationProvider.hashPrefix('');
 	}
 ]);

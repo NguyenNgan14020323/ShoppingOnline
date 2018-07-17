@@ -8,7 +8,6 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies,$window, Data)
         }
 
     	Data.post('login', 1, user).then(function (result) {
-            console.log(result)
             if(result.status == 'error'){
                 alert(result.message)       
             }else{
@@ -23,21 +22,25 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies,$window, Data)
                     temp = temp.toUpperCase();
                     $rootScope.avatar = temp
                 }
+
+
+
             }
          }); 
     }
 
     Data.get('getAllCatalog', 0).then(function(data){
-        console.log("chay ham nay")
-        $rootScope.showSixCatalog = [];
-        $rootScope.showMore = [];
-        for (let i = 0; i < 6; i++){
-            $scope.showSixCatalog[i] = data[i];
-        }
-        let j = 0;
-        for (let i = 6; i < data.length; i++){
-            $rootScope.showMore[j++] = data[i];
-        }
+ 
+	        $rootScope.showSixCatalog = [];
+	        $rootScope.showMore = [];
+	        for (let i = 0; i < 6; i++){
+	            $scope.showSixCatalog[i] = data[i];
+	        }
+	        let j = 0;
+	        for (let i = 6; i < data.length; i++){
+	            $rootScope.showMore[j++] = data[i];
+	        }
+	   
     })
 
 });
