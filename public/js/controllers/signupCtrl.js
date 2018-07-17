@@ -26,7 +26,7 @@ app.directive('myName', function() {
    });
 
    //directive validate email
-   app.directive('myEmail', function() {
+   app.directive('myEmailr',['Data', '$timeout', function(Data, $timeout) {
     return {
 
         require: 'ngModel',
@@ -41,8 +41,25 @@ app.directive('myName', function() {
 
                 if (!evalidate.test(value))
                     scope.emailerror = "Địa chỉ email không đúng định dạng."
-                else
-                  scope.emailerror = ""
+                else{
+                     $timeout(function(){
+                        Data.post('checkUser', 1, { email: value }).then(function (result) {
+                           if(result.error){
+                              scope.emailerror = result.message
+                           }else{
+                              scope.emailerror = ""
+                              if(!scope.flagsendmail){
+                                 scope.flagsendmail = true;//sendmail one time
+                                 scope.hiddensecuritycode = true;
+                                 Data.post('sendauthenemail', 1, { email: value }).then(function (result) {
+                                    if(result)
+                                       scope.notify = result.message
+                                 });
+                              }
+                           }
+                        });
+                     }, 2000)  
+                }
 
                return value;//dùng trong scope ở controller
             }
@@ -50,7 +67,7 @@ app.directive('myName', function() {
             mCtrl.$parsers.push(myValidation);
       }
      };
-   });
+   }]);
 
     //directive validate adress
    app.directive('myAddress', function() {
@@ -62,9 +79,9 @@ app.directive('myName', function() {
 
                var addvalidate = /.{6,}/
                if(!addvalidate.test(value))
-               	  scope.addresserror = "Địa chỉ liên hệ không chính xác."
+               	scope.addresserror = "Địa chỉ liên hệ không chính xác."
                else
-               	  scope.addresserror = ""
+               	scope.addresserror = ""
 
                return value;//dùng trong scope ở controller
             }
@@ -85,12 +102,12 @@ app.directive('myName', function() {
                var phonevalidate = /(?:^(?:(?:(?:(?:\(\d{1,3}\)|d{1,3})(?:\d{1,2}(?:[.\/-])|\(\d{1,2}\)))|(?:\d{3}(?:[.\/-]))))\d{3}(?:[.\/-])\d{4}$)|(?:^\d{10,11}$)/
               /** 
                 (84)(8)730-5317//true   
-			    (84)8.730.5317//true
-				(84)91-395-2929//true
-				(84)(91)395-2929//true
-				84963216364//true
-				(84)96.321.6364//true
-				096.321.6364//true
+			      (84)8.730.5317//true
+				   (84)91-395-2929//true
+				   (84)(91)395-2929//true
+				   84963216364//true
+				   (84)96.321.6364//true
+				   096.321.6364//true
 			  **/
                if(!phonevalidate.test(value))
                	  scope.phonenumbererror = "Số điện thoại không chính xác."
@@ -106,7 +123,7 @@ app.directive('myName', function() {
    });
 
     //directive validate password
-   app.directive('myPassword', function() {
+   app.directive('myPass', function() {
       return {
         require: 'ngModel',
         link: function(scope, element, attr, mCtrl) {
@@ -115,7 +132,7 @@ app.directive('myName', function() {
 
                var strongp = /(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[!@#$%^&~*?^]+)(?=.{15,})/
                var mediump = /(?=.*[A-Z]+)(?=.*[a-z]+)(?=.*[0-9]+)(?=.*[!@#$%^&~*?^]+)(?=.{10,})/
-               var weakp = /(?=.*[a-z]+)(?=.*[0-9]+)(?=.{6,})/
+               var weakp = /(?=.{6,10})(?=.*[a-z]+)(?=.*[0-9]+)/
 
                if(!weakp.test(value)){
                	  scope.passworderror = "Mật khẩu có ít nhất một kí tự chữ, số và độ dài tối thiểu 6 kí tự."
@@ -147,7 +164,6 @@ app.directive('myName', function() {
       return {
         require: 'ngModel',
         link: function(scope, element, attr, mCtrl) {
-
             function myValidation(value) {
             	if(value != scope.password)
             		scope.repassworderror = "Mật khẩu xác nhận không trùng với mật khẩu đã nhập."
@@ -162,9 +178,36 @@ app.directive('myName', function() {
      };
    });
 
+   //directive validate email
+   app.directive('myAuthen',['Data', '$timeout', function(Data, $timeout) {
+    return {
+
+        require: 'ngModel',
+        link: function(scope, element, attr, mCtrl) {
+
+            function myValidation(value) {
+               scope.notify = ""
+               scope.authenticationerror = ""
+               Data.post('authenemail', 1, { authenemail: value }).then(function (result) {
+                  if(result.error == true){
+                     scope.authenticationerror = result.message
+                  }else
+                     scope.authensuccess = result.message
+               });
+
+               return value;//dùng trong scope ở controller
+            }
+
+            mCtrl.$parsers.push(myValidation);
+      }
+     };
+   }]);
 
 
 	app.controller('signupCtrl', function($scope, $rootScope, $window, $cookies, Data){
+
+      $scope.hiddensecuritycode = false;
+      $scope.flagsendmail = false;
 
       $scope.Register = function(){
 
@@ -193,11 +236,12 @@ app.directive('myName', function() {
                $scope.phonenumbererror = "Số điện thoại bắt buộc.";
          }
 
-
+         console.log("value " + $scope.authenticationerror)
       	if($scope.name != "" && $scope.email != "" && $scope.address != "" && $scope.phonenumber != "" 
       		 && $scope.password != "" && $scope.repassword != ""
              && $scope.nameerror == "" && $scope.emailerror == "" && $scope.passworderror == "" && $scope.addresserror == "" 
-             && $scope.passworderror == "" && $scope.repassworderror == ""){
+             && $scope.passworderror == "" && $scope.repassworderror == ""
+             && $scope.authenticationerror == ""){
  
             var user = {
                 name: $scope.name, 
@@ -212,7 +256,7 @@ app.directive('myName', function() {
                  }else{
                      //let cookie alive 7 days
                      $cookies.put('id', result.id, {'expires': (new Date().getTime()+24*3600*1000*7).toString(),
-                     'secure ': true})
+                     'secure ': true});
                      $cookies.put('keepme', true, {'expires' :  (new Date().getTime()+24*3600*1000*7).toString(),
                      'secure ': true});
                      $window.sessionStorage.setItem("token", result.token);

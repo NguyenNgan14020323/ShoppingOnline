@@ -10,6 +10,16 @@ const userSchema = new Schema({
     phone: String,
     address: String,
     password: String,
+    avatar: {
+        type: String,
+        required: false,
+        default: ""
+    },
+    api_type: {
+        type: String,
+        required: false,
+        default: ""
+    },
     created_at: Date,
     updated_at: Date
 });
@@ -64,5 +74,14 @@ export const checkUserLoginbyId = req => User.find({ _id: req})
             return user;
         }     
         return false;
+    })
+    .catch(err => Error(err));
+
+export const checkExistedAcc = req => User.find({ email: req.body.email})
+    .then((user) => {
+        if (user.length < 1 || user == "") {
+            return false;
+        }else 
+            return true;
     })
     .catch(err => Error(err));
