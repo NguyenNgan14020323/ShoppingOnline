@@ -132,7 +132,7 @@
 						<div class="dropdown1">
 							<a data-toggle="dropdown1" class="nav-link" href=""><b>{{catalog.parentCatalog.name}} </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu" >
-								<li ng-repeat="childCatalog in catalog.childCatalog"><a href="">{{childCatalog.name}}</a></li>
+								<li ng-repeat="childCatalog in catalog.childCatalog"><a href="" ng-click="showProduct({{childCatalog._id}})">{{childCatalog.name}}</a></li>
 							</ul>
 						</div>
 					</li>
@@ -143,48 +143,12 @@
 							</a>
 							<ul class="dropdown-menu mega-dropdown-menu">
 								<div class="row">
-									<li class="col-sm-3">
+									<li class="col-sm-3"  ng-repeat="category in showMore">
 										<ul>
-											<li class="dropdown-header">Men Collection</li>                           
-											<li><a href="">Auto Carousel</a></li>
-											<li><a href="">Carousel Control</a></li>
-											<li><a href="">Left & Right Navigation</a></li>
-											<li><a href="">Four Columns Grid</a></li>
-											<li class="divider"></li>
-											<li class="dropdown-header">Fonts</li>
-											<li><a href="">Glyphicon</a></li>
-											<li><a href="">Google Fonts</a></li>	
-										</ul>
-									</li>
-									<li class="col-sm-3">
-										<ul>
-											<li class="dropdown-header">Features</li>
-											<li><a href="">Auto Carousel</a></li>
-											<li><a href="">Carousel Control</a></li>
-											<li><a href="">Left & Right Navigation</a></li>
-											<li><a href="">Four Columns Grid</a></li>
-											<li class="divider"></li>
-											<li class="dropdown-header">Fonts</li>
-											<li><a href="">Glyphicon</a></li>
-											<li><a href="">Google Fonts</a></li>
-										</ul>
-									</li>
-									<li class="col-sm-3">
-										<ul>
-											<li class="dropdown-header">Plus</li>
-											<li><a href="">Navbar Inverse</a></li>
-											<li><a href="">Pull Right Elements</a></li>
-											<li><a href="">Coloured Headers</a></li>                            
-											<li><a href="">Primary Buttons & Default</a></li>						
-										</ul>
-									</li>
-									<li class="col-sm-3">
-										<ul>
-											<li class="dropdown-header">Much more</li>
-											<li><a href="">Easy to Customize</a></li>
-											<li><a href="">Calls to action</a></li>
-											<li><a href="">Custom Fonts</a></li>
-											<li><a href="">Slide down on Hover</a></li>                         
+											<li class="dropdown-header">{{category.parentCatalog.name}}</li>                           
+											<li ng-repeat="childCategory in category.childCatalog">
+												<a href="" ng-click="showProduct({{childCategory._id}})">{{childCategory.name}}</a>
+											</li>
 										</ul>
 									</li>
 								</div>
