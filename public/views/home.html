@@ -29,105 +29,21 @@
         </a>
 	</div>
     <div class="listProduct">
-				<div class="row">
-					<div class="col-3">
-						<div class="card" style="width: 18rem;">
-								<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-								<div class="card-body">
-									<h5 class="card-title">Dell Vostro 3468</h5>
-									<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-									<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-									<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-									<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket('id')">Thêm vào giỏ hàng</a>
-								</div>
-							</div>
+		<div class="row">
+			<div class="col-3" ng-repeat="product in listProduct">
+				<div class="card" style="width: 18rem;">
+					<div style="width: 60%;height: 60%;margin-left: 20%;">
+					 <img  style="width: auto;height: 12rem;" class="card-img-top img-thumbnail" src="{{product.image_link}}" alt="Card image cap">
 				   </div>
-					<div class="col-3">
-							<div class="card" style="width: 18rem;">
-									<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-									<div class="card-body">
-										<h5 class="card-title">Dell Vostro 3468</h5>
-										<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-										<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-										<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-										<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary">Thêm vào giỏ hàng</a>
-									</div>
-								</div>
-					</div>
-					<div class="col-3">
-							<div class="card" style="width: 18rem;">
-									<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-									<div class="card-body">
-										<h5 class="card-title">Dell Vostro 3468</h5>
-										<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-										<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-										<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-										<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary">Thêm vào giỏ hàng</a>
-									</div>
-								</div>
-					</div>
-					<div class="col-3">
-							<div class="card" style="width: 18rem;">
-									<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-									<div class="card-body">
-										<h5 class="card-title">Dell Vostro 3468</h5>
-										<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-										<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-										<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-										<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary">Thêm vào giỏ hàng</a>
-									</div>
-								</div>
+					<div class="card-body">
+						<h5 class="card-title">{{product.name}}</h5>
+						<!-- <p style="margin-bottom: 0.5rem" class="card-text">{{product.content}}</p> -->
+						<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">{{product.price}} đ</p>
+						<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >{{product.discountMoney}} đ</span> -{{product.discount}}%</p>
+						<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket('id')">Thêm vào giỏ hàng</a>
 					</div>
 				</div>
-				<div class="row" style="padding-top: 1.5rem">
-						<div class="col-3">
-								<div class="card" style="width: 18rem;">
-										<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-										<div class="card-body">
-											<h5 class="card-title">Dell Vostro 3468</h5>
-											<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-											<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-											<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-											<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary">Thêm vào giỏ hàng</a>
-										</div>
-									</div>
-						</div>
-						<div class="col-3">
-								<div class="card" style="width: 18rem;">
-										<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-										<div class="card-body">
-											<h5 class="card-title">Dell Vostro 3468</h5>
-											<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-											<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-											<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-											<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary">Thêm vào giỏ hàng</a>
-										</div>
-									</div>
-						</div>
-						<div class="col-3">
-								<div class="card" style="width: 18rem;">
-										<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-										<div class="card-body">
-											<h5 class="card-title">Dell Vostro 3468</h5>
-											<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-											<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-											<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-											<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary">Thêm vào giỏ hàng</a>
-										</div>
-									</div>
-						</div>
-						<div class="col-3">
-								<div class="card" style="width: 18rem;">
-										<img class="card-img-top" src="img/slider1.jpg" alt="Card image cap">
-										<div class="card-body">
-											<h5 class="card-title">Dell Vostro 3468</h5>
-											<p style="margin-bottom: 0.5rem" class="card-text">Some quick example text to build on the card title.</p>
-											<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">15.000.000 đ</p>
-											<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >200.000 đ</span> -47%</p>
-											<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary">Thêm vào giỏ hàng</a>
-										</div>
-									</div>
-						</div>
-					</div>
+			</div>
+		</div>
     </div>
 </div>

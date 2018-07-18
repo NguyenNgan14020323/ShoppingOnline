@@ -12,8 +12,8 @@ const MYHOST = constants.host
 Router.use(function(req, res, next) {
 
 	var token = req.body.token || req.query.token || req.headers['token'];//req.headers['token'] = req.headers.token
-	
-	if(req.headers.origin == MYHOST || req.headers.referer == MYHOST){//request from my host
+//	console.log(req.headers)
+//	if(req.headers.origin == MYHOST || req.headers.referer == MYHOST){//request from my host
 		if (token) {
 			jwt.verify(token, PRIVATE_KEY_TOKEN, function(err, decoded) {      
 			    if (err) {
@@ -33,12 +33,12 @@ Router.use(function(req, res, next) {
 			// });
 		}
 
-	}else{
-		 return res.status(403).send({
-			    success: false, 
-			    message: 'Not allow access host.' 
-		});
-	}
+//	}else{
+	// 	 return res.status(403).send({
+	// 		    success: false, 
+	// 		    message: 'Not allow access host.' 
+	// 	});
+	// }
 });
 
 //Catalog
@@ -47,6 +47,7 @@ Router.get('/getAllCatalog', catalogCtrl.getAllCatalogCtrl);
 
 //Product
 Router.post('/createProduct', productCtrl.createProductCtrl);
-
+Router.get('/getAllProduct', productCtrl.getAllProductCtrl);
+Router.get('/productCatalog/:catalog_id', productCtrl.getProductCatalogCtrl);
 
 export default Router;

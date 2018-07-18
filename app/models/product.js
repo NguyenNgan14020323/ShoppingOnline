@@ -15,8 +15,8 @@ const productSchema = new Schema({
     image_link: String,
     image_list: String,
     view: Number,
-    create_at: Date,
-    update_at: Date
+    created_at: Date,
+    updated_at: Date
 });
 productSchema.pre('save', function(next){
     const cur = new Date().toISOString();
@@ -37,3 +37,23 @@ export const createProduct = req => {
         return product;
     })
 }
+
+export const getAllProduct = () => Product.find()
+    .sort({"view":-1, "created_at": -1})//giảm dần
+    .then((products) => {
+        if (products < 0) {
+            return "not found"
+        }
+        return products;
+    })
+    .catch(err => Error(err));
+
+export const getProductCatalog = (id) => Product.find({catalog_id: id})
+    .sort .sort({"view":-1, "created_at": -1})//giảm dần
+    .then((products) => {
+        if (products < 0) {
+            return "not found"
+        }
+        return products;
+    })
+    .catch(err => Error(err));

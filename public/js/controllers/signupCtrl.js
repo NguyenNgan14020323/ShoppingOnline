@@ -34,26 +34,28 @@ app.directive('myName', function() {
 
             function myValidation(value) {
 
-              // var evalidate = /^[a-zA-Z0-9_]+(?:\.[a-zA-Z0-9_])*@[a-zA-Z0-9_]+(?:\.[a-zA-Z0-9_]+)*$/
-               var evalidate = /^(?:[a-zA-Z0-9-_])+(?:\.[a-zA-Z0-9-_]+)*@(?:[a-zA-Z0-9-_]+\.){1,2}[a-zA-Z0-9-_]+$/;	
+               var evalidate = /^[a-zA-Z0-9_]+(?:\.[a-zA-Z0-9_])*@[a-zA-Z0-9_]+(?:\.[a-zA-Z0-9_]+)*$/
+            //   var evalidate = /^(?:[a-zA-Z0-9-_])+(?:\.[a-zA-Z0-9-_]+)*@(?:[a-zA-Z0-9-_]+\.){1,2}[a-zA-Z0-9-_]+$/;	
                 if(value.length < 1)
-                   scope.emailerror = "Địa chỉ email bắt buộc.";
+                   scope.emailerror1 = "Địa chỉ email bắt buộc.";
 
                 if (!evalidate.test(value))
-                    scope.emailerror = "Địa chỉ email không đúng định dạng."
+                    scope.emailerror1 = "Địa chỉ email không đúng định dạng."
                 else{
+                    scope.emailerror1 = "";
                      $timeout(function(){
                         Data.post('checkUser', 1, { email: value }).then(function (result) {
                            if(result.error){
-                              scope.emailerror = result.message
+                              scope.emailerror1 = result.message
                            }else{
-                              scope.emailerror = ""
+                              scope.emailerror1 = ""
                               if(!scope.flagsendmail){
-                                 scope.flagsendmail = true;//sendmail one time
-                                 scope.hiddensecuritycode = true;
+                                 scope.flagsendmail = true;//sendmail one tim
                                  Data.post('sendauthenemail', 1, { email: value }).then(function (result) {
-                                    if(result)
+                                    if(result){
                                        scope.notify = result.message
+                                       scope.hiddensecuritycode = true;
+                                    }
                                  });
                               }
                            }
@@ -237,6 +239,7 @@ app.directive('myName', function() {
          }
 
          console.log("value " + $scope.authenticationerror)
+         $scope.authenticationerror = ""
       	if($scope.name != "" && $scope.email != "" && $scope.address != "" && $scope.phonenumber != "" 
       		 && $scope.password != "" && $scope.repassword != ""
              && $scope.nameerror == "" && $scope.emailerror == "" && $scope.passworderror == "" && $scope.addresserror == "" 
