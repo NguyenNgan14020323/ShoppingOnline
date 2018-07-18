@@ -11,6 +11,7 @@ export const createCatalogCtrl = async (req, res) => {
 
 export const getAllCatalogCtrl = async (req, res) => {
     try {
+
         const data = await catalogModel.getAllCatalog();
         var catalogs = [];
         let j = 0;

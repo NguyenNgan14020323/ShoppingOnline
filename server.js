@@ -10,6 +10,8 @@ import router from './app/router/routes';
 import router1 from './app/router/router1';
 import morgan from 'morgan';
 import jwt from 'jsonwebtoken';
+import csurf from 'csurf';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -39,6 +41,9 @@ app.use(session);
 // parse application/json
 app.use(bodyParser.json());
 
+//using cookies
+app.use(cookieParser())
+
 // show requests, responses from clients and server to comand line
 app.use(morgan('dev'))
 
@@ -53,6 +58,14 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/user', router);
 app.use('/api', router1);
+
+app.use(csurf({ cookie: true }))
+//create XSRF token 
+app.use(function (req, res, next) {
+  req.session._csrf =  req.csrfToken();
+  res.cookie('XSRF_TOKEN', req.session._csrf);
+  next();
+});
 
 // start app ==================================
 //startup our app at http://localhost:8080

@@ -65,9 +65,9 @@ export const createUserCtrl = async (req, res) => {
 export const checkUserLoginCtrl = async (req, res) => {
 
     try {
-
+    
         var data;
-        if(req.headers.host == MYHOST){//except all requests from my host
+        if(req.headers.origin == MYHOST || req.headers.referer == MYHOST){//except all requests from my host
 
             if(req.body.password != undefined){
                 req.body.password = CryptoJS.SHA256(req.body.password).toString();
