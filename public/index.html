@@ -28,6 +28,7 @@
 	<script src="js/module.js"></script>
 	<script src="js/controllers/homeCtrl.js"></script>
 	<script src="js/controllers/productCtrl.js"></script>
+	<script src="js/controllers/productCatalogCtrl.js"></script>
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/signupCtrl.js"></script>
 	<script src="js/controllers/mainCtrl.js"></script>
@@ -132,7 +133,7 @@
 						<div class="dropdown1">
 							<a data-toggle="dropdown1" class="nav-link" href=""><b>{{catalog.parentCatalog.name}} </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu" >
-								<li ng-repeat="childCatalog in catalog.childCatalog"><a href="" ng-click="showProduct({{childCatalog._id}})">{{childCatalog.name}}</a></li>
+								<li ng-repeat="childCatalog in catalog.childCatalog"><a ui-sref="productCatalog/{{childCatalog._id}}" href="">{{childCatalog.name}}</a></li>
 							</ul>
 						</div>
 					</li>
@@ -147,7 +148,7 @@
 										<ul>
 											<li class="dropdown-header">{{category.parentCatalog.name}}</li>                           
 											<li ng-repeat="childCategory in category.childCatalog">
-												<a href="" ng-click="showProduct({{childCategory._id}})">{{childCategory.name}}</a>
+												<a href="">{{childCategory.name}}</a>
 											</li>
 										</ul>
 									</li>

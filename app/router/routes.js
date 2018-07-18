@@ -20,7 +20,7 @@ Router.post('/createUser', userCtrl.createUserCtrl);
 Router.post('/login', userCtrl.checkUserLoginCtrl);
 Router.post('/logout', userCtrl.checkUserLogoutCtrl);
 Router.post('/checkUser', userCtrl.checkExistedAc);
-Router.post('/authenemail',  userCtrl.authenticateEmail)
-Router.post('/sendauthenemail',  userCtrl.sendAuthenticateEmail)
+Router.post('/authenemail',  userCtrl.authenticateEmail);
+Router.post('/sendauthenemail',  userCtrl.sendAuthenticateEmail);
 
 export default Router;

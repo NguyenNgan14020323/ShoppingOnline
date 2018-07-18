@@ -23,6 +23,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
 				controller: 'signupCtrl',
 				templateUrl: 'views/signup.html'
 			})
+			.state('productCatalog', {
+				url: '/productCatalog/:catalog_id',
+				controller: 'productCatalogCtrl',
+				templateUrl: 'views/productCatalog.html'
+			})
 			
 		$locationProvider.hashPrefix('');
 	}

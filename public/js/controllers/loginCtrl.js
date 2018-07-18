@@ -91,7 +91,8 @@
          link: function(scope, element, attr, mCtrl) {
          
             function myValidation(value) {
-               var evalidate = /^(?:[a-zA-Z0-9-_])+(?:\.[a-zA-Z0-9-_]+)*@(?:[a-zA-Z0-9-_]+\.){1,2}[a-zA-Z0-9-_]+$/;  
+
+               var evalidate = /^(?:[a-zA-Z0-9-_])+(?:\.[a-zA-Z0-9-_]+)*@(?:[a-zA-Z0-9-_]+\.){1,2}[a-zA-Z0-9-_]+$/;   
                if(value.length < 1){
                   scope.emailerror = "Địa chỉ email bắt buộc.";
                   
@@ -106,7 +107,7 @@
                            }else
                               scope.emailerror = ""
                         });
-                     }, 5000)
+                     }, 1000)
                      
                   }
                }
