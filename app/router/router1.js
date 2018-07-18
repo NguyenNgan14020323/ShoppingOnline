@@ -12,6 +12,7 @@ const MYHOST = constants.host
 Router.use(function(req, res, next) {
 
 	var token = req.body.token || req.query.token || req.headers['token'];//req.headers['token'] = req.headers.token
+	
 	if(req.headers.origin == MYHOST || req.headers.referer == MYHOST){//request from my host
 		if (token) {
 			jwt.verify(token, PRIVATE_KEY_TOKEN, function(err, decoded) {      

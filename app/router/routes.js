@@ -5,6 +5,7 @@ const Router = express.Router();
 
 //all 
 Router.use(function (req, res, next) {
+	
 	//res.setHeader('Access-Control-Allow-Origin', '*');//allow all of client response when request to server 
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 	res.setHeader('Access-Control-Allow-Headers', 'Content-type');
