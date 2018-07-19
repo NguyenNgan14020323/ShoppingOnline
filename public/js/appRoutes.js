@@ -13,10 +13,10 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
 				controller: 'homeCtrl',
 				templateUrl: 'views/home.html'
 			})
-			.state('product', {
-				url: '/product',
-				controller: 'productCtrl',
-				templateUrl: 'views/product.html'
+			.state('productDetail', {
+				url: '/productDetail/:product_id',
+				controller: 'productDetailCtrl',
+				templateUrl: 'views/productDetail.html'
 			})
 			.state('signup', {
 				url: '/signup',
@@ -27,6 +27,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
 				url: '/productCatalog/:catalog_id',
 				controller: 'productCatalogCtrl',
 				templateUrl: 'views/productCatalog.html'
+			})
+			.state('back', {
+				url: '/home',
+				controller: 'homeCtrl',
+				templateUrl: 'views/home.html'
 			})
 			
 		$locationProvider.hashPrefix('');

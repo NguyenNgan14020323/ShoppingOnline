@@ -48,12 +48,18 @@ export const getAllProduct = () => Product.find()
     })
     .catch(err => Error(err));
 
-export const getProductCatalog = (id) => Product.find({catalog_id: id})
+export const getProductCatalog = (catalog_id) => Product.find({catalog_id: catalog_id})
     .sort({"view":-1, "created_at": -1})//giảm dần
     .then((products) => {
-        if (products < 0) {
+        if (products.length < 0) {
             return "not found"
         }
         return products;
     })
     .catch(err => Error(err));
+
+export const getProductDetail = (id) => Product.find({_id: id}, (err, product) => {
+    if (err) return Error(err);
+
+    return product;
+})

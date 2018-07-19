@@ -1,0 +1,59 @@
+
+
+<div ng-controller="productDetailCtrl" class="productDetail" style="padding-left: 70px; padding-top: 50px; padding-right: 70px; background-color: #eff0f5;">
+    <div class="row" style="background-color: white; padding-top: 10px">
+        <div class="col-4">
+            <div class="card" style="border: none">
+                <div style="width: 100%;height: 100%;">
+                    <img  style="width: auto;height: 20rem; border: none; padding-left: 14%" class="card-img-middle img-thumbnail" src="{{productDetail.image_link}}" alt="Card image cap">
+                </div>
+                <hr>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm">
+                        One of 
+                        </div>
+                        <div class="col-sm">
+                        One of 
+                        </div>
+                        <div class="col-sm">
+                        One of 
+                        </div>
+                        <div class="col-sm">
+                            One of 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <h5 class="card-title" style="color: cornflowerblue; font-size: 150%;">{{productDetail.name}}</h5>
+            <div ng-repeat="content in productDetail.content">
+                <p style="margin-bottom: 0.5rem" class="card-text">{{content}}</p>
+            </div>
+            <hr>
+            <p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">Giá: {{productDetail.price}} đ</p>
+            <p style="font-size: 75%; color: darkgray">Giảm: <span style="text-decoration: line-through" >{{productDetail.discountMoney}} đ</span> -{{productDetail.discount}}%</p>
+            <hr>
+            <div class="row">
+                    <div class="col-3">
+                        <p style="color: cornflowerblue; font-size: 125%; margin-bottom: 1rem">Số lượng:</p>
+                    </div>
+                    <div class="col-">
+                        <button style="width: 30px; background-color: tan">-</button>
+                    </div>
+                    <div class="col-1">
+                        <p style="text-align: center; padding-left: 10px">5</p>
+                    </div>
+                    <div class="col-6">
+                        <button ng-click="addAmount()" style="width: 30; background-color: tan">+</button>
+                    </div>
+            </div>
+          
+            <a href="#" style="width: 50%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket(product.id)">Thêm vào giỏ hàng</a>
+        </div>
+        <div class="col-3">
+            sdsdg
+        </div>
+    </div>
+</div>

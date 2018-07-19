@@ -1,6 +1,6 @@
 
 
-app.controller('productCatalogCtrl', function ($scope, $stateParams, Data){
+app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams, Data){
 
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

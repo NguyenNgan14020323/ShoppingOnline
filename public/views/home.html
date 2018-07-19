@@ -18,6 +18,12 @@
             <div class="carousel-item">
                 <img src="img/slider3.jpg" alt="New York" width="1100" height="500">
             </div>
+            <div class="carousel-item">
+                    <img src="img/slider1.jpg" alt="New York" width="1100" height="500">
+                </div>
+                <div class="carousel-item">
+                        <img src="img/slider1.jpg" alt="New York" width="1100" height="500">
+                    </div>
         </div>
         
         <!-- Left and right controls -->
@@ -31,19 +37,22 @@
 
     <div class="listProduct">
 		<div class="row">
-			<div class="col-3" ng-repeat="product in listProduct">
-				<div class="card" style="width: 18rem;">
-					<div style="width: 60%;height: 60%;margin-left: 20%;">
-					 <img  style="width: auto;height: 12rem;" class="card-img-top img-thumbnail" src="{{product.image_link}}" alt="Card image cap">
-				   </div>
-					<div class="card-body">
-						<h5 class="card-title">{{product.name}}</h5>
-						<!-- <p style="margin-bottom: 0.5rem" class="card-text">{{product.content}}</p> -->
-						<p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">{{product.price}} đ</p>
-						<p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >{{product.discountMoney}} đ</span> -{{product.discount}}%</p>
-						<a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket(product.id)">Thêm vào giỏ hàng</a>
-					</div>
-				</div>
+			<div class="col-3" ng-repeat="product in listProduct" style="margin-top: 20px">
+                <a ui-sref="productDetail({product_id: product._id})" style="text-decoration: none">
+                    <div class="card" style="width: 18rem;padding-top: 10px">
+                        <div style="width: 60%;height: 60%;margin-left: 20%;">
+                         <img  style="width: auto;height: 12rem; border: none" class="card-img-top img-thumbnail" src="{{product.image_link}}" alt="Card image cap">
+                       </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.name}}</h5>
+                            <!-- <p style="margin-bottom: 0.5rem" class="card-text">{{product.content}}</p> -->
+                            <p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">{{product.price}} đ</p>
+                            <p style="font-size: 75%; color: darkgray"><span style="text-decoration: line-through" >{{product.discountMoney}} đ</span> -{{product.discount}}%</p>
+                            <a href="#" style="width: 100%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket(product.id)">Thêm vào giỏ hàng</a>
+                        </div>
+                    </div>
+                </a>
+                
 			</div>
 		</div>
     </div>

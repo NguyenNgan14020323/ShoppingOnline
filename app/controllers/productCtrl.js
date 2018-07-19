@@ -30,8 +30,6 @@ export const getAllProductCtrl = async (req, res) => {
 
 export const getProductCatalogCtrl = async (req, res) => {
     const id = req.params.catalog_id;
-    console.log("query ")
-    console.log(req.params)
     try {
         const data = await productModel.getProductCatalog(id);
         if (data == "not found") {
@@ -49,11 +47,9 @@ export const getProductCatalogCtrl = async (req, res) => {
 }
 
 export const getProductCatalogCtrl1 = async (req, res) => {
-    const id = req.query.catalog_id;
-    console.log("params ")
-    console.log(req.query)
+    const catalog_id = req.query.catalog_id;
     try {
-        const data = await productModel.getProductCatalog(id);
+        const data = await productModel.getProductCatalog(catalog_id);
         if (data == "not found") {
             res.status(404).json({
                 "product": data
@@ -63,6 +59,18 @@ export const getProductCatalogCtrl1 = async (req, res) => {
                 "product": data
             })
         }
+    } catch (error) {
+        throw Error(error);
+    }
+}
+
+export const getProductDetailCtrl = async (req, res) => {
+    const product_id = req.params.product_id;
+    try {
+        const data = await productModel.getProductDetail(product_id);
+        res.status(200).json({
+            "productDetail": data
+        })
     } catch (error) {
         throw Error(error);
     }

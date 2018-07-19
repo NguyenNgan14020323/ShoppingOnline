@@ -48,7 +48,8 @@ Router.get('/getAllCatalog', catalogCtrl.getAllCatalogCtrl);
 //Product
 Router.post('/createProduct', productCtrl.createProductCtrl);
 Router.get('/getAllProduct', productCtrl.getAllProductCtrl);
-Router.get('/productCatalog/:catalog_id', productCtrl.getProductCatalogCtrl);
-Router.get('/productCatalog', productCtrl.getProductCatalogCtrl1);
+Router.get('/productCatalog/:catalog_id', productCtrl.getProductCatalogCtrl);//get by parameters
+Router.get('/productCatalog', productCtrl.getProductCatalogCtrl1);//get by query string
+Router.get('/getproductDetail/:product_id', productCtrl.getProductDetailCtrl);
 
 export default Router;
