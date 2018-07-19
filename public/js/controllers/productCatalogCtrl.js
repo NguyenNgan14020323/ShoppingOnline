@@ -1,12 +1,24 @@
-app.controller('homeCtrl', function ($scope, Data){
+
+
+app.controller('productCatalogCtrl', function ($scope, $stateParams, Data){
+
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      }
-    Data.get('getAllProduct', 0, "").then(function (result) {
-        if(result.status == 'error'){
+    }
+
+    
+     // var config = {
+     //    params: {catalog_id: $stateParams.catalog_id}
+     // }
+
+     var path = 'productCatalog' + '/'+$stateParams.catalog_id
+     Data.get(path, 0, {}).then(function (result) {
+
+         // console.log(result)
+         if(result.status == 'error'){
             
-        }else{
-            if (result.status == 404) {
+         }else{
+             if (result.status == 404) {
 
             } else {
                 $scope.listProduct = result.product;

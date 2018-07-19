@@ -49,5 +49,6 @@ Router.get('/getAllCatalog', catalogCtrl.getAllCatalogCtrl);
 Router.post('/createProduct', productCtrl.createProductCtrl);
 Router.get('/getAllProduct', productCtrl.getAllProductCtrl);
 Router.get('/productCatalog/:catalog_id', productCtrl.getProductCatalogCtrl);
+Router.get('/productCatalog', productCtrl.getProductCatalogCtrl1);
 
 export default Router;

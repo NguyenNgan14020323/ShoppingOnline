@@ -8,7 +8,7 @@ app.service('Data', ['$http', '$location', '$window',
 
         var obj = {};
 
-        obj.get = function (q, flag) {
+        obj.get = function (q, flag, params) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
             if(flag==1)
@@ -16,7 +16,7 @@ app.service('Data', ['$http', '$location', '$window',
             else
                 SERVICEBASE = _SERVICEBASE1
 
-            return $http.get(SERVICEBASE + q).then(function (results) {
+            return $http.get(SERVICEBASE + q, params).then(function (results) {
                 return results.data;
             });
         };

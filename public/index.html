@@ -126,6 +126,7 @@
 				</ul>       
 			</div>
 		</nav>
+
 		<nav class="navbar navbar-expand-lg navbar-light" style="padding-left: 0px; padding-right: 0px;">
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0" >
@@ -133,7 +134,7 @@
 						<div class="dropdown1">
 							<a data-toggle="dropdown1" class="nav-link" href=""><b>{{catalog.parentCatalog.name}} </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu" >
-								<li ng-repeat="childCatalog in catalog.childCatalog"><a ui-sref="productCatalog/{{childCatalog._id}}" href="">{{childCatalog.name}}</a></li>
+								<li ng-repeat="childCatalog in catalog.childCatalog"><a ui-sref="productCatalog({catalog_id: childCatalog._id})" href="">{{childCatalog.name}}dd</a></li>
 							</ul>
 						</div>
 					</li>

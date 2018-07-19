@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 app.use(cookieParser())
 
 // show requests, responses from clients and server to comand line
-//  app.use(morgan('dev'))
+  app.use(morgan('dev'))
 
 // parse application/vnd.api+json as json
 app.use(bodyParser.json({ type: 'application/vnd.api+json'}));

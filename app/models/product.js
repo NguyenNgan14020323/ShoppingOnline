@@ -49,7 +49,7 @@ export const getAllProduct = () => Product.find()
     .catch(err => Error(err));
 
 export const getProductCatalog = (id) => Product.find({catalog_id: id})
-    .sort .sort({"view":-1, "created_at": -1})//giảm dần
+    .sort({"view":-1, "created_at": -1})//giảm dần
     .then((products) => {
         if (products < 0) {
             return "not found"

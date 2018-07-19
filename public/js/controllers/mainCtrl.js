@@ -23,13 +23,11 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies,$window, Data)
                     $rootScope.avatar = temp
                 }
 
-
-
             }
          }); 
     }
 
-    Data.get('getAllCatalog', 0).then(function(data){
+    Data.get('getAllCatalog', 0, {}).then(function(data){
  
 	        $rootScope.showSixCatalog = [];
 	        $rootScope.showMore = [];
