@@ -27,7 +27,7 @@
 	<!--ANGULAR CUSTOM -->
 	<script src="js/module.js"></script>
 	<script src="js/controllers/homeCtrl.js"></script>
-	<script src="js/controllers/productCtrl.js"></script>
+	<script src="js/controllers/productDetailCtrl.js"></script>
 	<script src="js/controllers/productCatalogCtrl.js"></script>
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/signupCtrl.js"></script>
@@ -43,7 +43,7 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="">
+			<a class="navbar-brand" ui-sref="back">
 				<img style="width: 120px" src="img/smart_logo.png">
 			</a>   
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -134,7 +134,7 @@
 						<div class="dropdown1">
 							<a data-toggle="dropdown1" class="nav-link" href=""><b>{{catalog.parentCatalog.name}} </b><img src="img/icon-arrow-down-blue@2x.png" style="width: 24px; padding-bottom: 5px"></a>
 							<ul class="dropdown-menu" >
-								<li ng-repeat="childCatalog in catalog.childCatalog"><a ui-sref="productCatalog({catalog_id: childCatalog._id})" href="">{{childCatalog.name}}dd</a></li>
+								<li ng-repeat="childCatalog in catalog.childCatalog"><a ui-sref="productCatalog({catalog_id: childCatalog._id})" href="">{{childCatalog.name}}</a></li>
 							</ul>
 						</div>
 					</li>
@@ -149,7 +149,7 @@
 										<ul>
 											<li class="dropdown-header">{{category.parentCatalog.name}}</li>                           
 											<li ng-repeat="childCategory in category.childCatalog">
-												<a href="">{{childCategory.name}}</a>
+												<a ui-sref="productCatalog({catalog_id: childCategory._id})" href="">{{childCategory.name}}</a>
 											</li>
 										</ul>
 									</li>
@@ -161,9 +161,11 @@
 			</div>
 		</nav>            
 	</div>
-	<a ui-sref="product">Hello</a>
 	<div class="content">
 		<ui-view></ui-view>
+	</div>
+	<div class="footer">
+
 	</div>
 	<script>
 </script>

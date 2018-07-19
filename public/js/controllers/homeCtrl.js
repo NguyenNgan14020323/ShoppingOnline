@@ -7,8 +7,6 @@ app.controller('homeCtrl', function ($scope, Data){
 
       
     Data.get('getAllProduct', 0, {}).then(function (result) {
-
-        console.log(result.status)
         if(result.status == 'error'){
             
         }else{
