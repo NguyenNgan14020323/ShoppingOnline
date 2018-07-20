@@ -37,7 +37,7 @@
 	<script src="js/app/app.js"></script>
 	
 </head>
-<body ng-app="ShopApp" ng-controller="mainCtrl">
+<body ng-app="ShopApp" ng-controller="mainCtrl as main">
 	<div class="header">
 		<nav class="navbar navbar-expand-lg navbar-light"  style="padding-left: 0px; padding-right: 0px;">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,16 +57,16 @@
 					<li class="nav-item" style="padding-left: 25px; padding-right: 25px" ng-controller="bracketCtrl">
 						<a class="nav-link" href="" style="position: relative;">
 							<img src="img/shoppingcart.png" style="width: 24px;">
-							<span class="badge" style="font-size: 14px; background-color: red; color: white; border-radius: 50%; position: absolute; top: 0px; right: 0;" >{{bracket}}</span>
+							<span class="badge" style="font-size: 14px; background-color: red; color: white; border-radius: 50%; position: absolute; top: 0px; right: 0;" >{{father.bracket}}</span>
 						</a>
 					</li>
 				</ul>
 
 				<ul class="navbar-nav my-2" style="margin-left: -x;" ng-controller="loginCtrl">
-					<li ng-show="showLogin"><a ui-sref="signup">    
+					<li ng-show="father.showLogin"><a ui-sref="signup">    
 						<span>Already have an account?</span>
 					</a></li>
-					<li class="dropdown" ng-show="showLogin">
+					<li class="dropdown" ng-show="father.showLogin">
 						<a href="" data-toggle="dropdown"><b> <span> Login</span></b></a>
 						<ul id="login-dp" class="dropdown-menu" style="margin-left: -250px;">
 							<li>
@@ -112,7 +112,7 @@
 							</li>
 						</ul>
 					</li>
-					<li ng-show="!showLogin">
+					<li ng-show="!father.showLogin">
 						<div class="dropdown">
 							<a href="" data-toggle="dropdown"><div class="styleAvatar">{{avatar}}</div></a>
 							<div class="dropdown-menu" style="margin-left: -160px">
