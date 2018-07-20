@@ -2,6 +2,14 @@
 
 app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams, Data, myServices){
 
+<<<<<<< HEAD
+=======
+    const numberWithCommas = (x) => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+	
+    
+>>>>>>> db34169ff439ec14288777af402da4fb21849b85
      // var config = {
      //    params: {catalog_id: $stateParams.catalog_id}
      // }
@@ -23,7 +31,11 @@ app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams,
                         $scope.listProduct[i].price = myServices.numberWithCommas($scope.listProduct[i].price - ($scope.listProduct[i].discount/100) * $scope.listProduct[i].price);
                     }
                 }
+				
             }
         }
-    });  
+    }); 
+
+	$scope.under_prices = ["Cancel","1.000.000", "3.000.000", "5.000.000", "10.000.000", "15.000.000", "20.000.000", "25.000.000", "30.000.000", "50.000.000", "100.000.000"];
+	$scope.over_prices = ["Cancel","1.000.000", "3.000.000", "5.000.000", "10.000.000", "15.000.000", "20.000.000", "25.000.000", "30.000.000", "50.000.000", "100.000.000"];
 });
