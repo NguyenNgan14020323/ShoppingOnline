@@ -2,7 +2,7 @@
    app.controller('loginCtrl', function($scope, $rootScope, $cookies, $window, Data){
       //login general
     $scope.logout = function(){
-        $rootScope.showLogin = true;
+        $scope.father.showLogin = true;
         var host = $window.location.host;
         var landingUrl = "http://" + host + "/";
         $window.location.href = landingUrl;
@@ -36,7 +36,7 @@
                         if (!result){
                             alert('login faild');
                         } else {
-                           $scope.showLogin = false;
+                           $scope.father.showLogin = false;
                            $rootScope.username = result.name;
                            var temp = result.name;
                            temp = temp.substr(0, 1);

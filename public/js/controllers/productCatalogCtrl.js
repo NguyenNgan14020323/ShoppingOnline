@@ -1,12 +1,15 @@
 
 
-app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams, Data){
+app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams, Data, myServices){
 
+<<<<<<< HEAD
+=======
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 	
     
+>>>>>>> db34169ff439ec14288777af402da4fb21849b85
      // var config = {
      //    params: {catalog_id: $stateParams.catalog_id}
      // }
@@ -24,8 +27,8 @@ app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams,
                 $scope.listProduct = result.product;
                 for (let i = 0; i < result.product.length; i++){
                     if ($scope.listProduct[i].discount != 0){
-                        $scope.listProduct[i].discountMoney = numberWithCommas(($scope.listProduct[i].discount/100) * $scope.listProduct[i].price);
-                        $scope.listProduct[i].price = numberWithCommas($scope.listProduct[i].price - ($scope.listProduct[i].discount/100) * $scope.listProduct[i].price);
+                        $scope.listProduct[i].discountMoney = myServices.numberWithCommas(($scope.listProduct[i].discount/100) * $scope.listProduct[i].price);
+                        $scope.listProduct[i].price = myServices.numberWithCommas($scope.listProduct[i].price - ($scope.listProduct[i].discount/100) * $scope.listProduct[i].price);
                     }
                 }
 				

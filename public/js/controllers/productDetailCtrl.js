@@ -1,9 +1,9 @@
-app.controller('productDetailCtrl', function ($scope, $stateParams, Data){
+app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Data, myServices){
     
-    const numberWithCommas = (x) => {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
     var path = 'getproductDetail' + '/'+ $stateParams.product_id;
+
+    $scope.amount = 1;
+
     Data.get(path, 0, {}).then(function (result) {
         if(result.status == 'error'){
            
@@ -12,10 +12,25 @@ app.controller('productDetailCtrl', function ($scope, $stateParams, Data){
 			
            } else {
                $scope.productDetail = result.productDetail[0];
-               $scope.productDetail.discountMoney = numberWithCommas(($scope.productDetail.discount/100) * $scope.productDetail.price);
-               $scope.productDetail.price = numberWithCommas($scope.productDetail.price - ($scope.productDetail.discount/100) * $scope.productDetail.price);
+               $scope.productDetail.discountMoney = myServices.numberWithCommas(($scope.productDetail.discount/100) * $scope.productDetail.price);
+               $scope.productDetail.price = myServices.numberWithCommas($scope.productDetail.price - ($scope.productDetail.discount/100) * $scope.productDetail.price);
                $scope.productDetail.content = $scope.productDetail.content.split(',');
            }
        }
-   });    
+   }); 
+
+   $scope.addAmount = ()=>{
+      $scope.amount++;
+   }
+
+   $scope.deAmount = ()=>{
+      if($scope.amount > 1) 
+         $scope.amount--;
+   }
+
+   $scope.addToBracket = id =>{
+      $scope.$parent.father.bracket = $scope.amount;
+
+   }
+
 });
