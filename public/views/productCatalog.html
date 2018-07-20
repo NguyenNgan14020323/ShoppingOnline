@@ -1,14 +1,40 @@
-<div ng-controller="productCatalogCtrl">
+<div ng-app="ShopApp"  ng-controller="productCatalogCtrl">
     <div class="listProduct">
         <div class="menuSearch">
             <div class="row">
-                <div class="col-1"><p>Giá: </p></div>
-                <div class="col-11  "><p>Chọn khoản giá: </p></div>
+                <div class="col-2">
+				
+				<form class="form-inline my-2 my-lg-0">
+					<p>Giá: </p>
+					<input style="width: 130px; margin-top: -14px; margin-left:10px;" class="form-control mr-sm-1" type="search" ng-model="searchPrice" placeholder="Tìm theo giá" aria-label="Search"> 
+				</form>
+				</div>
+                <div class="col-10"> 
+					
+					<form class="form-inline my-2 my-lg-0">
+						<p>Lớn hơn:  </p>
+						<select ng-model="overPrice" style=" margin-top: -14px" class="form-control mr-sm-1" ng-options="item for item in over_prices">
+						</select>
+						<p> đ </p>
+						
+						
+						<p style="margin-left: 40px">Nhỏ hơn: </p>
+						<select ng-model="underPrice" style=" margin-top: -14px" class="form-control mr-sm-1" ng-options="item for item in under_prices">
+						</select>
+						<p> đ </p>
+						
+						
+					</form>
+					<div> 
+						 <!-- hihi-->
+					</div>
+					
+				</div>
             </div>
            
         </div>
         <div class="row">
-            <div class="col-3" ng-repeat="product in listProduct" style="margin-top: 20px">
+            <div class="col-3" ng-repeat="product in listProduct | searchForPrice: searchPrice| searchOver: overPrice | searchUnder: underPrice " style="margin-top: 20px">
                 <a ui-sref="productDetail({product_id: product._id})" style="text-decoration: none">
                     <div class="card" style="width: 18rem; padding-top: 10px">
                         <div style="width: 60%;height: 60%;margin-left: 20%;">

@@ -8,8 +8,8 @@ app.controller('productDetailCtrl', function ($scope, $stateParams, Data){
         if(result.status == 'error'){
            
         }else{  
-            if (result.status == 404) {
-
+           if (result.status == 404) {
+			
            } else {
                $scope.productDetail = result.productDetail[0];
                $scope.productDetail.discountMoney = numberWithCommas(($scope.productDetail.discount/100) * $scope.productDetail.price);

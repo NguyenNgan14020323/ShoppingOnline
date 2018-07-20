@@ -1,4 +1,4 @@
-<div ng-controller="homeCtrl">
+<div ng-app="ShopApp" ng-controller="homeCtrl">
     <div id="demo" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ul class="carousel-indicators">
@@ -37,7 +37,7 @@
 
     <div class="listProduct">
 		<div class="row">
-			<div class="col-3" ng-repeat="product in listProduct" style="margin-top: 20px">
+			<div class="col-3" ng-repeat="product in listProduct | searchFor: searchString" style="margin-top: 20px">
                 <a ui-sref="productDetail({product_id: product._id})" style="text-decoration: none">
                     <div class="card" style="width: 18rem;padding-top: 10px">
                         <div style="width: 60%;height: 60%;margin-left: 20%;">
