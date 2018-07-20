@@ -1,15 +1,9 @@
 
 
 app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams, Data, myServices){
-
-<<<<<<< HEAD
-=======
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
-	
-    
->>>>>>> db34169ff439ec14288777af402da4fb21849b85
      // var config = {
      //    params: {catalog_id: $stateParams.catalog_id}
      // }
