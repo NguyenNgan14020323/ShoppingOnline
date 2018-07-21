@@ -12,19 +12,10 @@ const orderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product'
     },
-    qty: {
-        type: Number,
-        required: true
-    },
-    amount: {
-        type: Number,
-        required: true,
-    },
-    data: { type: String },
-    status: {
-        type: Number,
-        required: true
-    }
+    qty: Number,
+    amount: Number,
+    data: String,
+    status: Number
 });
 
 const Order = mongoose.model('Order', orderSchema);

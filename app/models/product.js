@@ -62,4 +62,5 @@ export const getProductDetail = (id) => Product.find({_id: id}, (err, product) =
     if (err) return Error(err);
 
     return product;
-})
+});
+

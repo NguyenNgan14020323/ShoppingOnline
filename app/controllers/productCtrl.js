@@ -77,3 +77,19 @@ export const getProductDetailCtrl = async (req, res) => {
         throw Error(error);
     }
 }
+
+export const getCart = async (req, res) => {
+    let listId = req.body.listId;
+    try {
+        let listProduct = [];
+        for (let i = 0; i < listId.length; i++){
+            const data = await productModel.getProductDetail(listId[i]);
+            listProduct[i] = data;
+        }
+        res.status(200).json({
+            listProduct,
+        })
+    } catch (error) {
+        throw Error(error);
+    }
+}
