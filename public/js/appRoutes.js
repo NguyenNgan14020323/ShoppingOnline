@@ -33,6 +33,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
 				controller: 'homeCtrl',
 				templateUrl: 'views/home.html'
 			})
+			.state('cart', {
+				url: '/cart',
+				controller: 'cartCtrl',
+				templateUrl: 'views/cart.html'
+			})
 			
 		$locationProvider.hashPrefix('');
 	}

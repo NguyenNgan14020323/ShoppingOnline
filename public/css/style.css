@@ -8,6 +8,15 @@
     padding-left: 70px;
     padding-right: 70px;
     background-color: #eff0f5;
+    min-height: calc(100vh);
+    padding-bottom: 50px;
+}
+.productDetail{
+    padding-left: 70px; 
+    padding-top: 20px; 
+    padding-right: 70px; 
+    background-color: #eff0f5;
+    min-height: calc(100vh);
     padding-bottom: 50px;
 }
 .footer {
@@ -186,4 +195,13 @@ body {
     margin-right: -5px; 
     text-align: center; 
     color:blanchedalmond;
+}
+
+.cart{
+    padding-left: 5rem;
+    padding-top: 1.5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
+    min-height: calc(100vh);
+    background-color: #eff0f5;
 }

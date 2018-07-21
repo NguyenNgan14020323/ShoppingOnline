@@ -52,4 +52,7 @@ Router.get('/productCatalog/:catalog_id', productCtrl.getProductCatalogCtrl);//g
 Router.get('/productCatalog', productCtrl.getProductCatalogCtrl1);//get by query string
 Router.get('/getproductDetail/:product_id', productCtrl.getProductDetailCtrl);
 
+//Cart
+Router.post('/cartProduct', productCtrl.getCart);
+
 export default Router;
