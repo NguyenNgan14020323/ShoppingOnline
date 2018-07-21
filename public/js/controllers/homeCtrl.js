@@ -1,5 +1,5 @@
 
-app.controller('homeCtrl', function ($scope, Data){
+app.controller('homeCtrl', function ($scope, Data, myServices){
 
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -23,4 +23,9 @@ app.controller('homeCtrl', function ($scope, Data){
             }
         }
     });  
+
+    $scope.addToBracket = id =>{
+        var t = myServices.addProductoBracket(id, 1, $scope.$parent.father.bracket, 0)
+        $scope.$parent.father.bracket = t
+    }
 });

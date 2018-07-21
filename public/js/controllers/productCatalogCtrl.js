@@ -1,9 +1,7 @@
 
 
 app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams, Data, myServices){
-    const numberWithCommas = (x) => {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
+   
      // var config = {
      //    params: {catalog_id: $stateParams.catalog_id}
      // }
@@ -29,6 +27,11 @@ app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams,
             }
         }
     }); 
+
+     $scope.addToBracket = id =>{
+        var t = myServices.addProductoBracket(id, 1, $scope.$parent.father.bracket, 0)
+        $scope.$parent.father.bracket = t
+    }
 
 	$scope.under_prices = ["Cancel","1.000.000", "3.000.000", "5.000.000", "10.000.000", "15.000.000", "20.000.000", "25.000.000", "30.000.000", "50.000.000", "100.000.000"];
 	$scope.over_prices = ["Cancel","1.000.000", "3.000.000", "5.000.000", "10.000.000", "15.000.000", "20.000.000", "25.000.000", "30.000.000", "50.000.000", "100.000.000"];

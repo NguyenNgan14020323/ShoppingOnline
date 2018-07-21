@@ -1,17 +1,26 @@
 app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data){
 
-    //check nummber
+    
+    var total = 0
+    //get all amount of products user register
+    if($cookies.getObject('pd_ws') != undefined){
+         var products = JSON.parse($cookies.getObject('pd_ws'))
+          console.log(products)
+         for(i = 0; i < products.length; i++)
+            total += products[i].amount
+    }
+
     $scope.father = {
-        bracket: t = $cookies.get('br_n') != undefined ? t: 0,
+        bracket: total,
         showLogin: true,
     }
 
     if($cookies.get('keepme') != undefined){
 
     	var user = {
-            id: $cookies.get('id')
-        }
-
+         id: $cookies.get('id')
+      }
+   
     	Data.post('login', 1, user).then(function (result) {
             if(result.status == 'error'){
                 alert(result.message)       
@@ -19,7 +28,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
                 if (!result){
                     alert('login faild');
                 } else {
-                    $scope.showLogin = false;
+                    $scope.father.showLogin = false;
                     $rootScope.username = result.name; 
                     var temp = result.name;
                     $window.sessionStorage.setItem("token", result.token);//global variable token
@@ -46,32 +55,95 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
 	   
     })
 
+
 });
 
 //create my service stored and shared data between controllers
 app.service("myServices", function($cookies, $window){
+
     var context = [];
 
     var addData = (key, value)=>{
-        context.push({key:value})
+      context.push( { key: key, 
+                      value : value } )
     }
 
     var getData = key =>{
-        return _.find(context, {
-            key: key
-        });
+       for(i = 0; i < context.length; i++){
+         if(key == context[i].key){
+            return context[i].value
+         }
+    }
+
+      return null
+    }
+
+    var setData = (key, value)=>{
+       f = false
+       for(i = 0; i < context.length; i++)
+         if(key == context[i].key){
+            f = true
+            context[i].value = value
+            break
+         }
+
+      if(!f){
+         addData(key, value)
+      }
     }
 
     var numberWithCommas = x => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    var addProductoBracket = (id, amount, bracket, type) => {
 
+        if($cookies.getObject('pd_ws') !== undefined)
+        {     
+         //check list in cookie
+            var products = JSON.parse($cookies.getObject('pd_ws')), flag = false
+
+            for(i = 0; i < products.length; i ++){
+               if(products[i].id == id){
+                  flag = true;
+                  if(type == 1){
+                     bracket -= products[i].amount;
+                     products[i].amount = amount;
+                  }else //type = 0, add more amount of product
+                     products[i].amount += amount;
+                     
+                  break;
+               }
+            }
+         
+            if(!flag)   products.push({id: id, amount: amount})
+            bracket += amount;
+            $cookies.putObject('pd_ws', JSON.stringify(products), 
+               {secure:false, expires:  new Date(new Date().getTime() + 24*3600*1000*20)} )
+         }else
+         {
+            var products = [{
+               id: id,
+               amount: amount
+            }]
+
+            $cookies.putObject('pd_ws', JSON.stringify(products), 
+               {secure: false, expires: new Date(new Date().getTime() + 24*3600*1000*20)})
+
+            bracket += amount;
+         }
+
+         return bracket
+
+        // setData("bracket", bracket)
+      }
 
     return {
         addData: addData,
         getData: getData,
-        numberWithCommas: numberWithCommas
+        setData: setData,
+        numberWithCommas: numberWithCommas,
+        addProductoBracket: addProductoBracket
     }
 
 })

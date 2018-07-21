@@ -54,7 +54,7 @@ export const createUserCtrl = async (req, res) => {
             req.session.uid = data._id
             res.send(dataRes);
         }else{
-              res.send(dataRes);
+            res.send(dataRes);
         }
         
     } catch (error) {
@@ -95,7 +95,6 @@ export const checkUserLoginCtrl = async (req, res) => {
                     name: data[0].name,
                     token: token
                 }
-
                 //initial sessions
                 // req.session.email = data[0].email
                 // req.session.password = data[0].password

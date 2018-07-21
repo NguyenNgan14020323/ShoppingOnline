@@ -40,17 +40,17 @@
                         <p style="color: cornflowerblue; font-size: 125%; margin-bottom: 1rem">Số lượng:</p>
                     </div>
                     <div class="col-">
-                        <button style="width: 30px; background-color: tan" ng-click="deAmount(product.id)">-</button>
+                        <button style="width: 30px; background-color: tan" ng-click="deAmount()">-</button>
                     </div>
                     <div class="col-1">
                         <p style="text-align: center; padding-left: 10px">{{amount}}</p>
                     </div>
                     <div class="col-6">
-                        <button ng-click="addAmount(product.id)" style="width: 30; background-color: tan">+</button>
+                        <button ng-click="addAmount()" style="width: 30; background-color: tan">+</button>
                     </div>
             </div>
           
-            <a href="#" style="width: 50%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket(product.id)">Thêm vào giỏ hàng</a>
+            <a href="#" style="width: 50%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket(productDetail._id)">Thêm vào giỏ hàng</a>
         </div>
         <div class="col-3">
             sdsdg
