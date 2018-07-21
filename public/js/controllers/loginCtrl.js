@@ -1,13 +1,7 @@
  // //controller
    app.controller('loginCtrl', function($scope, $rootScope, $cookies, $window, Data){
-      //login general
-    $scope.logout = function(){
-        $scope.father.showLogin = true;
-        var host = $window.location.host;
-        var landingUrl = "http://" + host + "/";
-        $window.location.href = landingUrl;
-        window.location.reload();
-    }
+
+    //login general
     
     $scope.Login = function(){
 
@@ -47,10 +41,10 @@
 
                            if($scope.keepme != undefined){
                               //let cookie alive 7 days
-                              $cookies.put('id', result.id, {'expires': (new Date().getTime()+24*3600*1000*7).toString(),
-                                                            'secure ': true})
-                              $cookies.put('keepme', true, {'expires' :  (new Date().getTime()+24*3600*1000*7).toString(),
-                                                            'secure ': true});
+                              $cookies.put('id', result.id, { expires: new Date(new Date().getTime() + 24*3600*1000*20),
+                                                             secure: false } )
+                              $cookies.put('keepme', true, { expires :  new Date(new Date().getTime() + 24*3600*1000*20),
+                                                             secure: false } );
 
                            }
                         }  
@@ -72,10 +66,14 @@
 
       //log out
       $scope.logout = function(){
-        
         Data.post('logout', 1, {logout: true}).then(function (result) {
             $cookies.remove('id')
-            $cookies.remove('keepme')
+            $cookies.remove('keepme');
+            $scope.father.showLogin = true;
+            // var host = $window.location.host,
+            // landingUrl = "http://" + host + "/";
+            // $window.location.href = landingUrl;
+       
             $window.location.reload();
         });   
       }

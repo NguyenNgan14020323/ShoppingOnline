@@ -11,6 +11,7 @@ export const createProductCtrl = async (req, res) => {
 
 export const getAllProductCtrl = async (req, res) => {
     try {
+
         const data = await productModel.getAllProduct();
         if (data == "not found") {
             res.status(404).json({
@@ -47,6 +48,7 @@ export const getProductCatalogCtrl = async (req, res) => {
 }
 
 export const getProductCatalogCtrl1 = async (req, res) => {
+    
     const catalog_id = req.query.catalog_id;
     try {
         const data = await productModel.getProductCatalog(catalog_id);
