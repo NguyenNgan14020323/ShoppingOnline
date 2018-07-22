@@ -38,6 +38,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
 				controller: 'cartCtrl',
 				templateUrl: 'views/cart.html'
 			})
+			.state('payment', {
+				url: '/payment',
+				controller: 'paymentCtrl',
+				templateUrl: 'views/payment.html'
+			})
 			
 		$locationProvider.hashPrefix('');
 	}

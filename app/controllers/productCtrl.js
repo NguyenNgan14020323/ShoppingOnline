@@ -10,8 +10,6 @@ export const createProductCtrl = async (req, res) => {
 }
 
 export const getAllProductCtrl = async (req, res) => {
-
-    console.log("ccccccccccccccccccccccccccccc")
     try {
 
         const data = await productModel.getAllProduct();

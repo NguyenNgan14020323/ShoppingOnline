@@ -13,7 +13,7 @@ const transactionSchema = new Schema({
         ref: 'User'
     },
     user_name: { type: String },
-    user_email: { type: String },
+    user_address: { type: String },
     user_phone: { type: String },
     amount: {
         type: Number,

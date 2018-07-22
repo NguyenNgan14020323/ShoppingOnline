@@ -21,17 +21,10 @@ const PRIVATE_KEY_TOKEN = constants.key_decode_token
 }
 
 export const createUserCtrl = async (req, res) => {
-
     req.body.password = CryptoJS.SHA256(req.body.password).toString();
-
     try {
-
         if(!await userModel.checkExistedAcc(req)){
-
             const data = await userModel.createUser(req.body);
-            
-            console.log(data)
-
              var hash = {
                 id: data._id,
                 name: data.name,
@@ -39,9 +32,7 @@ export const createUserCtrl = async (req, res) => {
                 addres: data.address,
                 phone: data.phone
             }
-                 
             var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME});
-
             const dataRes = {
                 id: CryptoJS.AES.encrypt(data._id.toString(), KEY_HASH).toString(),
                 name: data.name,
@@ -180,7 +171,6 @@ export const sendAuthenticateEmail = async(req, res)=>{
          (err, data) =>{
             if(err)  return err;
             else{
-               console.log(data)
                res.send({message: constants.success.A1001})
             }
         })
