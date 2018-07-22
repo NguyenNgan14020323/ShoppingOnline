@@ -40,8 +40,8 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Da
    }
 
    $scope.addToBracket = id =>{
-      var t = myServices.addProductoBracket(id, $scope.amount, $scope.$parent.father.bracket, 1)
-      $scope.$parent.father.bracket = t
+    var t = myServices.addProductoBracket(id, $scope.amount, $scope.$parent.father.bracket, 1)
+     $scope.$parent.father.bracket = t
    }
 
 });
