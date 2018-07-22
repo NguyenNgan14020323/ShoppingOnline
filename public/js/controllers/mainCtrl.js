@@ -5,7 +5,6 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
     //get all amount of products user register
     if($cookies.getObject('pd_ws') != undefined){
          var products = JSON.parse($cookies.getObject('pd_ws'))
-          console.log(products)
          for(i = 0; i < products.length; i++)
             total += products[i].amount
     }
@@ -62,6 +61,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
 app.service("myServices", function($cookies, $window){
 
     var context = [];
+    const EX_TIMES = new Date(new Date().getTime() + 24*3600*1000*20)
 
     var addData = (key, value)=>{
       context.push( { key: key, 
@@ -96,6 +96,10 @@ app.service("myServices", function($cookies, $window){
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    var changeStrToNum = x =>{
+       return x.toString().replace(/\D/g, "");
+    }
+
     var addProductoBracket = (id, amount, bracket, type) => {
 
         if($cookies.getObject('pd_ws') !== undefined)
@@ -115,23 +119,21 @@ app.service("myServices", function($cookies, $window){
                   break;
                }
             }
-         
-            if(!flag)   products.push({id: id, amount: amount})
-            bracket += amount;
-            $cookies.putObject('pd_ws', JSON.stringify(products), 
-               {secure:false, expires:  new Date(new Date().getTime() + 24*3600*1000*20)} )
+            //add new products
+            if(!flag)   products.push({id: id, amount: amount, ischoosed:true})
+   
          }else
          {
             var products = [{
                id: id,
-               amount: amount
+               amount: amount,
+               ischoosed: true//customer is choose products...
             }]
-
-            $cookies.putObject('pd_ws', JSON.stringify(products), 
-               {secure: false, expires: new Date(new Date().getTime() + 24*3600*1000*20)})
-
-            bracket += amount;
          }
+
+          bracket += amount;
+          $cookies.putObject('pd_ws', JSON.stringify(products), 
+               {secure:false, expires: EX_TIMES } )
 
          return bracket
 
@@ -143,7 +145,8 @@ app.service("myServices", function($cookies, $window){
         getData: getData,
         setData: setData,
         numberWithCommas: numberWithCommas,
-        addProductoBracket: addProductoBracket
+        addProductoBracket: addProductoBracket,
+        changeStrToNum: changeStrToNum
     }
 
 })

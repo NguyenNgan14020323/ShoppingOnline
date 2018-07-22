@@ -10,9 +10,12 @@ export const createProductCtrl = async (req, res) => {
 }
 
 export const getAllProductCtrl = async (req, res) => {
+
+    console.log("ccccccccccccccccccccccccccccc")
     try {
 
         const data = await productModel.getAllProduct();
+        
         if (data == "not found") {
             res.status(404).json({
                  status: 404,
@@ -79,15 +82,29 @@ export const getProductDetailCtrl = async (req, res) => {
 }
 
 export const getCart = async (req, res) => {
-    let listId = req.body.listId;
-    try {
-        let listProduct = [];
-        for (let i = 0; i < listId.length; i++){
-            const data = await productModel.getProductDetail(listId[i]);
-            listProduct[i] = data;
+
+    
+    let Cookie = req.headers.cookie.split("; "),
+        listId, i = 0 
+    for(; i < Cookie.length; i++){
+        if(Cookie[i].search(/^pd_ws=/) != -1){
+            listId = Cookie[i].split('pd_ws=')[1];
+            break;
         }
+    }
+    
+
+    try {
+        let Ids = JSON.parse(JSON.parse(decodeURIComponent(listId)))
+        let listProduct = [];
+         for (let i = 0; i < Ids.length; i++){
+            const data = await productModel.getProductDetail(Ids[i].id);
+            listProduct[i] = data[0];
+         }
+      
         res.status(200).json({
-            listProduct,
+            status: 200,
+            "listProduct": listProduct
         })
     } catch (error) {
         throw Error(error);

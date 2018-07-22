@@ -53,6 +53,6 @@ Router.get('/productCatalog', productCtrl.getProductCatalogCtrl1);//get by query
 Router.get('/getproductDetail/:product_id', productCtrl.getProductDetailCtrl);
 
 //Cart
-Router.post('/cartProduct', productCtrl.getCart);
+Router.get('/cartProduct', productCtrl.getCart);
 
 export default Router;
