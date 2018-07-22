@@ -52,7 +52,6 @@ app.controller("cartCtrl", function($scope, $cookies, Data, myServices){
 
 	        		var listcookies = JSON.parse(JSON.parse($cookies.get('pd_ws'))),
 	        		    count = 0, afterSale = 0;
-	        		console.log(listcookies)
 	            if(result.status == 200) {
 	               $scope.listProduct = result.listProduct;
 	           

@@ -14,7 +14,6 @@ app.controller('homeCtrl', function ($scope, Data, myServices){
 
             } else {
                 $scope.listProduct = result.product;
-                console.log($scope.listProduct)
                 for (let i = 0; i < result.product.length; i++){
                     if ($scope.listProduct[i].discount != 0){
                         $scope.listProduct[i].discountMoney = numberWithCommas(($scope.listProduct[i].discount/100) * $scope.listProduct[i].price);
