@@ -1,6 +1,5 @@
 app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data){
 
-    
     var total = 0
     //get all amount of products user register
     if($cookies.getObject('pd_ws') != undefined){
@@ -12,6 +11,33 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
     $scope.father = {
         bracket: total,
         showLogin: true,
+        cookieLg: new Date(new Date().getTime() + 24*3600*1000*20),
+        showXModal: true
+    }
+
+    console.log("Alway run main. " + $scope.father.showXModal)
+
+   //duy tri trang thai dang nhap neu con phien giao dich
+    var checkToken = $window.sessionStorage.getItem('token')
+    if( checkToken !== undefined && checkToken !== null){
+
+      Data.post('keepstate', 1, {token: checkToken}).then(function (result) {
+            if(result.status == 'error'){
+                alert(result.message)       
+            }else{
+                if (!result){
+      
+                } else {
+                    $scope.father.showLogin = false;
+                    $rootScope.username = result.name; 
+                    var temp = result.name;
+                    temp = temp.substr(0,1);
+                    temp = temp.toUpperCase();
+                    $rootScope.avatar = temp
+                }
+
+            }
+         });
     }
 
     if($cookies.get('keepme') != undefined){

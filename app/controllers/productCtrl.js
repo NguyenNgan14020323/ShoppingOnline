@@ -11,7 +11,7 @@ export const createProductCtrl = async (req, res) => {
 
 export const getAllProductCtrl = async (req, res) => {
     try {
-
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         const data = await productModel.getAllProduct();
         
         if (data == "not found") {
@@ -91,7 +91,6 @@ export const getCart = async (req, res) => {
         }
     }
     
-
     try {
         let Ids = JSON.parse(JSON.parse(decodeURIComponent(listId)))
         let listProduct = [];
@@ -103,6 +102,22 @@ export const getCart = async (req, res) => {
         res.status(200).json({
             status: 200,
             "listProduct": listProduct
+        })
+    } catch (error) {
+        throw Error(error);
+    }
+}
+
+
+export const buyProduct = async (req, res, next) => {
+
+    try {
+
+        const data = {};
+        
+        res.status(200).json({
+            status: 200,
+            "product": data
         })
     } catch (error) {
         throw Error(error);

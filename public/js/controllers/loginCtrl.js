@@ -1,8 +1,10 @@
  // //controller
-   app.controller('loginCtrl', function($scope, $rootScope, $cookies, $window, Data){
+   app.controller('loginCtrl', function($scope, $rootScope, $cookies, $state, $window, Data){
+
+
+   
 
     //login general
-    
     $scope.Login = function(){
 
          if($scope.email == undefined || $scope.email==""){
@@ -40,16 +42,70 @@
                            $window.sessionStorage.setItem("token", result.token);
 
                            if($scope.keepme != undefined){
-                              //let cookie alive 7 days
-                              $cookies.put('id', result.id, { expires: new Date(new Date().getTime() + 24*3600*1000*20),
+                              //let cookie alive 20 days
+                              $cookies.put('id', result.id, { expires:  $scope.father.cookieLg,
                                                              secure: false } )
-                              $cookies.put('keepme', true, { expires :  new Date(new Date().getTime() + 24*3600*1000*20),
+                              $cookies.put('keepme', true, { expires :  $scope.father.cookieLg,
                                                              secure: false } );
 
                            }
                         }  
                     }
                 });            
+         }
+      }
+
+      $scope.LoginWithModal = function(){
+
+         if($scope.email == undefined || $scope.email==""){
+            if($scope.emailerror == undefined || $scope.emailerror == "")
+               $scope.emailerror = "Địa chỉ email bắt buộc.";
+         }
+
+         if($scope.password == undefined || $scope.password == ""){
+            if($scope.passworderror == undefined || $scope.passworderror == "")
+               $scope.passworderror = "Mật khẩu bắt buộc."
+         }
+
+         if($scope.email != "" && $scope.password != "" 
+             && $scope.emailerror == "" && $scope.passworderror == ""){
+
+               var user = {
+                  email: $scope.email, 
+                  password: $scope.password
+               }
+
+               Data.post('login', 1, user).then(function (result) {
+                  if(result.status == 'error'){
+                     alert(result.message)
+                  }else{
+                     if (!result){
+                        alert('login faild');
+                     } else {
+                        $scope.father.showLogin = false;
+                        $rootScope.username = result.name;
+                        var temp = result.name;
+                        temp = temp.substr(0, 1);
+                        temp = temp.toUpperCase();
+                        $rootScope.avatar = temp
+
+                        $window.sessionStorage.setItem("token", result.token);
+
+                        if($scope.keepme != undefined){
+                           //let cookie alive 7 days
+                           $cookies.put('id', result.id, { expires: $scope.father.cookieLg,
+                                                            secure: false } )
+                           $cookies.put('keepme', true, { expires : $scope.father.cookieLg,
+                                                            secure: false } );
+
+                        }
+
+                        $('#exampleModalCenter').modal('hide');
+                        $state.go('payment', '')
+                     }  
+                  }
+                });            
+            
          }
       }
 
@@ -67,9 +123,11 @@
       //log out
       $scope.logout = function(){
         Data.post('logout', 1, {logout: true}).then(function (result) {
+            console.log("fsdfsdf")
             $cookies.remove('id')
             $cookies.remove('keepme');
             $scope.father.showLogin = true;
+            $window.sessionStorage.removeItem("token");//remove token, end session's user
             // var host = $window.location.host,
             // landingUrl = "http://" + host + "/";
             // $window.location.href = landingUrl;

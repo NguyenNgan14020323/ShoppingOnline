@@ -1,45 +1,33 @@
 import express from 'express';
 import * as catalogCtrl from'../controllers/catalogCtrl';
 import * as productCtrl from '../controllers/productCtrl';
+import verifyToken from '../../config/verifyToken';
 import constants from '../../config/constants';
-import CryptoJS from 'crypto-js';
-import jwt from 'jsonwebtoken';
 
 const Router = express.Router();
-const PRIVATE_KEY_TOKEN = constants.key_decode_token
-const MYHOST = constants.host
 
-Router.use(function(req, res, next) {
+Router.use(function(req, res, next)
+{
 
-	var token = req.body.token || req.query.token || req.headers['token'];//req.headers['token'] = req.headers.token
-//	console.log(req.headers)
-//	if(req.headers.origin == MYHOST || req.headers.referer == MYHOST){//request from my host
-		if (token) {
-			jwt.verify(token, PRIVATE_KEY_TOKEN, function(err, decoded) {      
-			    if (err) {
-			       // return res.json({ error: true, message: 'Failed to authenticate user.' }); 
-			        next()   
-			    } else {
-			        req.authenticate = decoded;  //da xac thuc thanh cong cho phep su dung
-			        							 // o tat ca request den api/.... 
-			        next();
-			    }
-			});
-		} else {
-			next();
-			// return res.send({ //res.status(403).send
-			//     success: false, 
-			//     message: 'No token provided.' 
-			// });
-		}
-
-//	}else{
-	// 	 return res.status(403).send({
-	// 		    success: false, 
-	// 		    message: 'Not allow access host.' 
-	// 	});
-	// }
-});
+	let Cookie = req.headers.cookie.split("; "),
+        _csrf_token, i = 0 
+    for(; i < Cookie.length; i++){
+        if(Cookie[i].search(/^XSRF_TOKEN=/) != -1){
+            _csrf_token = Cookie[i].split('XSRF_TOKEN=')[1];
+            break;
+        }
+    }
+  
+	if(_csrf_token)
+		next()
+	else{
+	    return res.status(404).send({
+		   success: false, 
+		   message: constants.error.L1007 
+		});
+    }
+		
+})
 
 //Catalog
 Router.post('/createCatalog', catalogCtrl.createCatalogCtrl);
@@ -54,5 +42,8 @@ Router.get('/getproductDetail/:product_id', productCtrl.getProductDetailCtrl);
 
 //Cart
 Router.get('/cartProduct', productCtrl.getCart);
+
+//buy product
+Router.post('/buyProduct', verifyToken, productCtrl.buyProduct);
 
 export default Router;

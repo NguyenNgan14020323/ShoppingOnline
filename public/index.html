@@ -64,18 +64,13 @@
 
 				<ul class="navbar-nav my-2" style="margin-left: -x;" ng-controller="loginCtrl">
 
-					
-						<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-							Modal
-					</button>
 					<!-- Modal -->
 					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLongTitle">Đăng nhập để thanh toán</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<h5 class="modal-title" id="exampleModalLongTitle">Chào mừng bạn! Hãy đăng nhập để tiếp tục</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-show="father.showXModal">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
@@ -88,7 +83,7 @@
 												<a href="" class="btn btn-danger" ng-click="LoginwithGG()"><i class="fa fa-google-plus"></i> Gmail</a>
 											</div>
 											<span><strong><b>or</b></strong></span>
-											<form class="form" role="form" accept-charset="UTF-8" id="login-nav" name="Loginform" novalidate>  
+											<form class="form" role="form" name="Loginform" novalidate>  
 												<div class="form-group">
 													<label class="sr-only" for="exampleInputEmail2">Email address</label>
 													<input type="email" class="form-control" name = "email" placeholder="Email address" ng-model="email" required my-email>
@@ -101,7 +96,7 @@
 													<div class="help-block text-right"><a href="">Forget the password ?</a></div>
 												</div>
 												<div class="form-group">
-													<button type="submit" class="btn btn-primary btn-block" ng-click="Login()">Sign in</button>
+													<button type="submit" class="btn btn-primary btn-block" ng-click="LoginWithModal()">Sign in</button>
 												</div>
 												<div class="checkbox">
 													<label>
@@ -224,9 +219,6 @@
 	</div>
 	<div class="footer">
 	</div>
-	<script type="text/javascript" src="js/app/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="js/app/popper.min.js"></script>
-	<script type="text/javascript" src="js/app/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/app/mdb.min.js"></script>
+	
 </body>
 </html>

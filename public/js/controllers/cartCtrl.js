@@ -1,5 +1,5 @@
 
-app.controller("cartCtrl", function($scope, $cookies, Data, myServices){
+app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 
 	$scope.checked = false;
 	$scope.total = 0;
@@ -182,22 +182,30 @@ app.controller("cartCtrl", function($scope, $cookies, Data, myServices){
 			alert("Bạn chưa mua sản phẩm nào. Vui lòng chọn mua sản phẩm.")
 		}else{
 
-			var infor = []
+			 var infor = []
 
-			for(let i = 0; i < $scope.listProduct.length; i++){
-				if($scope.listProduct[i].ischecked){
-					infor[i] = {
-						id: $scope.listProduct[i]._id,
-						amount: $scope.listProduct[i].amount,
-						price: $scope.listProduct[i].price,
-						discount: discountMoney
-					}
-				}
-			}
+			 for(let i = 0; i < $scope.listProduct.length; i++){
+			 	if($scope.listProduct[i].ischecked){
+			 		infor[i] = {
+			 			id: $scope.listProduct[i]._id,
+			 			amount: $scope.listProduct[i].amount,
+			 			price: $scope.listProduct[i].price,
+			 			discount: $scope.listProduct[i].discountMoney
+			 		}
+			 	}
+			 }
 
-			// Data.post('buyProduct', 0, {infor: infor}).then(function (result) {
-			// 	console.log(result)
-	  //     })
+			Data.post('buyProduct', 0, {infor: infor}).then(function(result) {
+			 	if(result.error){
+					 $('#exampleModalCenter').modal('show');
+			 	}else{
+			 		 $state.go('payment', '')
+			 	}
+	        })
+			
+			
+			
+
 		}
 	}
 
