@@ -30,7 +30,7 @@
                        alert(result.message)
                     }else{
                         if (!result){
-                            alert('login faild');
+                            alert('Đăng nhập không thành công.');
                         } else {
                            $scope.father.showLogin = false;
                            $rootScope.username = result.name;
@@ -80,7 +80,7 @@
                      alert(result.message)
                   }else{
                      if (!result){
-                        alert('login faild');
+                        alert('Đăng nhập không thành công.');
                      } else {
                         $scope.father.showLogin = false;
                         $rootScope.username = result.name;

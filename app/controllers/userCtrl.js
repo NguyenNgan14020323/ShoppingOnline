@@ -57,7 +57,7 @@ export const checkUserLoginCtrl = async (req, res) => {
 
     try {
     
-        var data;
+        var data, dataRes;
         if(req.headers.origin == MYHOST || req.headers.referer == MYHOST){//except all requests from my host
 
             if(req.body.password != undefined){
@@ -81,7 +81,7 @@ export const checkUserLoginCtrl = async (req, res) => {
                 
                 var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME});
 
-                const dataRes = {
+                dataRes = {
                     id: CryptoJS.AES.encrypt(data[0]._id.toString(), KEY_HASH).toString(),
                     name: data[0].name,
                     token: token
@@ -90,15 +90,15 @@ export const checkUserLoginCtrl = async (req, res) => {
                 // req.session.email = data[0].email
                 // req.session.password = data[0].password
                  req.session.uid = data[0]._id
-
-                res.send(dataRes);
             }else{
-                const dataRes = {
+                dataRes = {
                     status: "error",
                     message: constants.error.L1006
                 }
-                res.send(dataRes);
             }
+
+            console.log(dataRes)
+            res.send(dataRes);
         }
 
     } catch (error) {
