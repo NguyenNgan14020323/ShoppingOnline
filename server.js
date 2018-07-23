@@ -62,8 +62,7 @@ app.use('/api', router1);
 app.use(csurf({ cookie: true }))
 //create XSRF token 
 app.use(function (req, res, next) {
-  req.session._csrf =  req.csrfToken();
-  res.cookie('XSRF_TOKEN', req.session._csrf);
+  res.cookie('XSRF_TOKEN', req.csrfToken());
   next();
 });
 

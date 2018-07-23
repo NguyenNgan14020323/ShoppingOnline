@@ -1,7 +1,9 @@
 'use strict';
 
-app.config(['$stateProvider', '$urlRouterProvider','$locationProvider',
-	function($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvider',  
+	function($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) {
+	
+        $qProvider.errorOnUnhandledRejections(false);
 
 		// For unmatched routes
 		$urlRouterProvider.otherwise('');

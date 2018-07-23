@@ -106,6 +106,23 @@ export const checkUserLoginCtrl = async (req, res) => {
     }
 }
 
+//keep state login of user
+export const keepStateLogin = async (req, res) => {
+
+    try {
+        var data = req.authenticate
+       
+         const dataRes = {
+            id: CryptoJS.AES.encrypt(data.id.toString(), KEY_HASH).toString(),
+            name: data.name
+        }
+
+        res.send(dataRes);
+    } catch (error) {
+        throw Error(error);
+    }
+}
+
 export const checkUserLogoutCtrl = async (req, res) => {
 
     req.body.logout = req.body.logout;
