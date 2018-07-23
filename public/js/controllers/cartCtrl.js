@@ -32,13 +32,17 @@ app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 
 		}
 	
-		$scope.shipfee = parseInt(PERCENT*$scope.total)
+	   $scope.shipfee = parseInt(PERCENT*$scope.total)
       $scope.alltotal = numberWithCommas(($scope.shipfee + $scope.total));
       $scope.total = numberWithCommas($scope.total)
       $scope.shipfee = numberWithCommas($scope.shipfee)
 
-       $cookies.putObject('pd_ws', JSON.stringify(products), 
-                 {secure: false, expires: EX_TIMES})
+      if($scope.listProduct.length == 0)
+      	$cookies.remove('pd_ws')
+      else
+      	$cookies.putObject('pd_ws', JSON.stringify(products), 
+                      {secure: false, expires: EX_TIMES})
+      
 	}
 
 	//take cookies
@@ -203,9 +207,6 @@ app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 			 	}
 	        })
 			
-			
-			
-
 		}
 	}
 
