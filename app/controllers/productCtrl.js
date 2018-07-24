@@ -11,7 +11,7 @@ export const createProductCtrl = async (req, res) => {
 
 export const getAllProductCtrl = async (req, res) => {
     try {
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+       
         const data = await productModel.getAllProduct();
         
         if (data == "not found") {

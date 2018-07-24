@@ -70,6 +70,7 @@ export const checkUserLoginCtrl = async (req, res) => {
                 data = await userModel.checkUserLoginbyId(deid);
             }
 
+          //  console.log(data)
             if(typeof data != 'boolean'){
                 var hash = {
                     id: data[0]._id,
@@ -97,7 +98,7 @@ export const checkUserLoginCtrl = async (req, res) => {
                 }
             }
 
-            console.log(dataRes)
+         //   console.log(dataRes)
             res.send(dataRes);
         }
 
@@ -166,12 +167,9 @@ export const authenticateEmail = async(req, res) =>{
 
         if(req.session.emailcode != req.body.authenemail){
             dataRes.error = true;
-            dataRes.message = constants.error.L1001
-            res.send(dataRes)
-            
-        }else{
-            res.send(dataRes)
+            dataRes.message = constants.error.L1001  
         }
+        res.send(dataRes)
     }catch(error){
         throw Error(error)
     }
@@ -195,6 +193,35 @@ export const sendAuthenticateEmail = async(req, res)=>{
     }catch(error){
         throw Error(error)
     }
+}
+
+export const getUserInfo = async(req, res)=>{
+    //getUserinfor by post
+   try{
+
+      var dataRes = {
+         status: "error",
+         message: constants.error.L1006
+      }, 
+         data = req.authenticate
+      if(req.query.id == undefined || req.query.id == null){
+        
+         dataRes = {
+            id: CryptoJS.AES.encrypt(data.id.toString(), KEY_HASH).toString(),
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            address: data.addres
+         }
+      }else{//by get
+         dataRes = await userModel.checkUserLoginbyId(data.id);
+      }
+
+      res.json(dataRes)
+
+   }catch (error) {
+      throw Error(error);
+   }
 }
 
 // export const loginWithFacebook = async (req, res) =>{

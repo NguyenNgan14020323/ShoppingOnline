@@ -1,7 +1,7 @@
 var app = angular.module('ShopApp', ['ui.bootstrap', 'ui.router', 'ngCookies', 'ngRoute', 'angular-md5']);
 
-app.service('Data', ['$http', '$location', '$window',
-    function ($http, $location, $window) {
+app.service('Data', ['$http', '$location', '$window', '$cookies',
+    function ($http, $location, $window, $cookies) {
 
         var chooseUrl = flag=>{
         	if(flag == 1)
@@ -14,22 +14,24 @@ app.service('Data', ['$http', '$location', '$window',
         obj.get = function (q, flag, params) {
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
-        
+
             return $http.get(chooseUrl(flag) + q, params).then(function (results) {
                 return results.data;
             });
         };
 
-        obj.post = function (q, flag, object) {
+        obj.post = function (q, flag, object){
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token")
-             
+     
+            object._csrftoken = $cookies.get('XSRF_TOKEN')
             return $http.post(chooseUrl(flag) + q, object).then(function (results) {
                 return results.data;
             });
         };
 
         obj.put = function (q, flag, object) {
+        	object._csrftoken = $cookies.get('XSRF_TOKEN')
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
          
@@ -39,16 +41,18 @@ app.service('Data', ['$http', '$location', '$window',
         };
 
         obj.patch = function(q, object){
+        	object._csrftoken = $cookies.get('XSRF_TOKEN')
             return $http.put(_SERVICEBASE + q, object).then(function (results) {
                 return results.data;
             });
         };
 
-        obj.delete = function (q, flag) {
+        obj.delete = function (q, flag, object) {
+        	object._csrftoken = $cookies.get('XSRF_TOKEN')
             if(typeof $window.sessionStorage != undefined)
                 $http.defaults.headers.common['token'] =  $window.sessionStorage.getItem("token");
             
-            return $http.delete(chooseUrl(flag) + q).then(function (results) {
+            return $http.delete(chooseUrl(flag) + q, object).then(function (results) {
                 return results.data;
             });
         };
