@@ -9,7 +9,16 @@ const userSchema = new Schema({
     email: String,
     phone: String,
     address: String,
-    password: String,
+    salt:{
+        type: String,
+        required: false,
+        default: ""
+    },
+    password: {
+        type: String,
+        required: false,
+        default: ""
+    },
     avatar: {
         type: String,
         required: false,

@@ -9,16 +9,22 @@ const Router = express.Router();
 Router.use(function(req, res, next)
 {
 
-	let Cookie = req.headers.cookie.split("; "),
-        _csrf_token, i = 0 
+	var Cookie = req.headers.cookie.split("; "),
+        _csrf_token, i = 0, client_csrf
     for(; i < Cookie.length; i++){
         if(Cookie[i].search(/^XSRF_TOKEN=/) != -1){
             _csrf_token = Cookie[i].split('XSRF_TOKEN=')[1];
             break;
         }
     }
-  
-	if(_csrf_token)
+
+    if(req.method == "GET"){//not check with get
+		client_csrf = _csrf_token
+    }else
+    	client_csrf = req.body._csrftoken
+
+      console.log(client_csrf + "   " + _csrf_token)
+	if(_csrf_token !== undefined && _csrf_token == client_csrf)
 		next()
 	else{
 	    return res.status(404).send({
