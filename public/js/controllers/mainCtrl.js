@@ -119,7 +119,8 @@ app.service("myServices", function($cookies, $window){
     }
 
     var numberWithCommas = x => {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      //  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return x.toString().replace(/(\d)(?=(\d{3})+\b)/g, "$1.");
     }
 
     var changeStrToNum = x =>{

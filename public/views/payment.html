@@ -5,16 +5,16 @@
     <div class="steps-form-2">
         <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
             <div class="steps-step-2" ng-click="events.step1.event()">
-                <a href="" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Thông tin giao hàng" ><i class="fa fa-folder-open-o" aria-hidden="true"></i></a>
+                <a href="" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Thông tin giao hàng" ><i class="fa fa-folder-open-o" aria-hidden="true" ng-style="{'color': step1.color}"></i></a>
             </div>
             <div class="steps-step-2" ng-click="events.step2.event()">
-                <a href="" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Hình thức thanh toán" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Hình thức thanh toán" ><i class="fa fa-pencil" aria-hidden="true" ng-style="{'color': step2.color}"></i></a>
             </div>
             <div class="steps-step-2" ng-click="events.step3.event()">
-                <a href="" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Các điều khoản và điểu kiện"><i class="fa fa-photo" aria-hidden="true" ></i></a>
+                <a href="" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Các điều khoản và điểu kiện"><i class="fa fa-photo" aria-hidden="true" ng-style="{'color': step3.color}"></i></a>
             </div>
             <div class="steps-step-2" ng-click="events.step4.event()">
-                <a href="" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Finish"><i class="fa fa-check" aria-hidden="true"></i></a>
+                <a href="" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Finish"><i class="fa fa-check" aria-hidden="true" ng-style="{'color': step4.color}"></i></a>
             </div>
         </div>
     </div>
@@ -74,19 +74,20 @@
                     <form>
                         <div class="row">
                             <div class="col-3">
-                                <input type="radio" ng-model="payment.type" value="home">Thanh toán khi nhận hàng
+                                <input type="radio" ng-click="step2.isClick(true)"  name="gender">Thanh toán khi nhận hàng
                             </div>
                             <div class="col-9">
-                                <input type="radio" ng-model="payment.type" value="atm" >Thẻ tín dụng/ Thẻ ghi nợ
+                                <input type="radio" ng-click="step2.isClick(false)"  name="gender">Thẻ tín dụng/ Thẻ ghi nợ
                             </div>
                              <span style="color: red;font-style:italic;">{{step2.errorAll}}</span>
                         </div>
                     </form>
                     <hr>
 
-                    <div ng-switch="payment.type" style="min-height: calc(20vh);">
-                        <div ng-switch-when="home">Bạn có thể thanh toán bằng tiền mặt khi nhận hàng tại nhà</div>
-                        <div ng-switch-when= "atm">
+                    <div ng-switch="payment" style="min-height: calc(20vh);">
+                        <div ng-show="step2.paymentOnDelivery.ischoose">Bạn có thể thanh toán bằng tiền mặt khi nhận hàng tại nhà</div>
+
+                        <div ng-show="step2.paymentOnCredit.ischoose">
                             <div class="col-md-12">
                                 <div class="form-group md-form">
                                     <label for="yourNumberCard-2" data-error="wrong" data-success="right"><span style="color: red">*</span>Số thẻ</label>
@@ -128,13 +129,14 @@
                 <h3 class="font-weight-bold pl-0 my-4"><strong>Terms and conditions</strong></h3>
                 <div style="min-height: calc(20vh);">
                     <div class="form-check">
-                        <input type="checkbox" id="checkbox111" class="form-check-input">
-                        <label for="checkbox111" class="form-check-label">I agree to the terms and conditions</label>
+                        <input type="checkbox" id="checkbox111" class="form-check-input" ng-click="step3.elements.clickargee()">
+                        <label for="checkbox111" class="form-check-label" >I agree to the terms and conditions</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" id="checkbox112" class="form-check-input">
+                        <input type="checkbox" id="checkbox112" class="form-check-input" ng-checked="step3.elements.clicknewsl()">
                         <label for="checkbox112" class="form-check-label">I want to receive newsletter</label>
                     </div>
+                     <span style="color: red;font-style:italic;">{{step3.elements.errorAgree}}</span>
                 </div>
                 <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button" ng-click="events.step3.previous()">Previous</button>
                 <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button" ng-click="events.step3.next()">Next</button>

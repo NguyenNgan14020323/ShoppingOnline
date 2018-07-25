@@ -6,6 +6,7 @@ app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 	$scope.alltotal = 0;
 	$scope.shipfee = 0;
 	$scope.numofpd = 0;
+
 	const PERCENT = 0.005, EX_TIMES = new Date(new Date().getTime() + 24*3600*1000*20);
 
 	var updateInfo = ()=>{
@@ -91,6 +92,13 @@ app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 	            }
 	        }
     	});  
+	}
+
+	//show views
+	if($cookies.getObject('cview') != undefined){
+		//sort cookies
+
+
 	}
 
 	$scope.chooseAllPd = ()=>{
