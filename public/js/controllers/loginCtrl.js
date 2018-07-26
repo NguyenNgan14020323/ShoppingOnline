@@ -102,7 +102,7 @@
 
       //login with facebook
       $scope.LoginwithFb = function(){
-
+        
       }
 
        //login with google plus

@@ -24,7 +24,12 @@ const userSchema = new Schema({
         required: false,
         default: ""
     },
-    api_type: {
+    api_type: {//provider like facebook or google
+        type: String,
+        required: false,
+        default: ""
+    },
+    gender: {
         type: String,
         required: false,
         default: ""

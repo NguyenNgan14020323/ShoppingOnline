@@ -12,6 +12,7 @@ import morgan from 'morgan';
 import jwt from 'jsonwebtoken';
 import csurf from 'csurf';
 import cookieParser from 'cookie-parser';
+import passport from 'passport';
 
 const app = express();
 
@@ -34,6 +35,8 @@ const session = require("express-session")({
     saveUninitialized: true,
     cookie: { secure: false, maxAge: 48*3600*1000 }
 });//if secure:true session can not intinital ???
+
+app.use(passport.initialize());
 
 // Use express-session middleware for express
 app.use(session);
