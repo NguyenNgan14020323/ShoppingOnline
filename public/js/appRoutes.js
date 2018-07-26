@@ -1,7 +1,7 @@
 'use strict';
 
-app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvider',  
-	function($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) {
+app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvider', 'slickCarouselConfig',
+	function($stateProvider, $urlRouterProvider, $locationProvider, $qProvider, slickCarouselConfig) {
 	
         $qProvider.errorOnUnhandledRejections(false);
 
@@ -47,5 +47,8 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvid
 			})
 			
 		$locationProvider.hashPrefix('');
+
+	    slickCarouselConfig.dots = true;
+        slickCarouselConfig.autoplay = false;
 	}
 ]);

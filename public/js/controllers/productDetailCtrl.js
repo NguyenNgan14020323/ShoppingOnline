@@ -1,7 +1,7 @@
 app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Data, myServices){
     
     var path = 'getproductDetail' + '/'+ $stateParams.product_id;
-    const EX_TIMES = new Date(new Date().getTime() + 24*3600*1000*20), HOURS = 3600*6, MAX_PVIEW = 7
+    const EX_TIMES = new Date(new Date().getTime() + 24*3600*1000*20), HOURS = 3600*6, MAX_PVIEW = 8
     $scope.amount = 1;
 
     Data.get(path, 0, {}).then(function (result) {
@@ -30,19 +30,19 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Da
                }
 
                if(!is_in_cart){
-
-                  if(views.length > MAX_PVIEW){//so luong view moi san pham vuot qua MAX_PVIEW
-                     //post to database, delete cookies
-                     
-                     $cookies.remove('cview')
-                  }
-                  
                   //count number of view for users
                   var views, date_now = new Date().getTime(), temp = [], flag = false, i = 0;
 
                   if($cookies.getObject('cview') != undefined)
                   {
                     views = JSON.parse($cookies.getObject('cview'))
+
+                     if(views.length > MAX_PVIEW){//so luong view moi san pham vuot qua MAX_PVIEW
+                        //post to database, delete cookies
+
+                        $cookies.remove('cview')
+                     }
+
                     for(i; i < views.length; i++){
                         if(views[i].id == result.productDetail[0]._id){
                            //checktime
@@ -64,9 +64,21 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Da
                         time: new Date().getTime()
                      }]
                   }
+                   /**
+                    *
+                    *reference http://www.javascriptkit.com/javatutors/arraysort2.shtml
+                    *
+                    **/
+                  views.sort(function(a, b){
+                        var keya = a.viewed, keyb = b.viewed
+                        if(keya > keyb) //sort string ascending
+                            return 1
+                        else if(keya < keyb)
+                            return -1
+                        else return 0 //default return value (no sorting)
+                  })
 
-                  console.log(views)
-
+               //   console.log(views)
                   $cookies.putObject('cview', JSON.stringify(views), 
                         {secure:false, expires: EX_TIMES } )  
                }
@@ -100,5 +112,23 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Da
       }else
          $cookies.remove('cview')
    }
+
+
+
+
+
+   $('.lazy').slick({
+     lazyLoad: 'ondemand',
+     slidesToShow: 3,
+     slidesToScroll: 1
+   });
+
+
+
+
+
+
+
+
 
 });

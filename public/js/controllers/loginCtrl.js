@@ -1,9 +1,6 @@
  // //controller
    app.controller('loginCtrl', function($scope, $rootScope, $cookies, $state, $window, Data){
 
-
-   
-
     //login general
     $scope.Login = function(){
 
@@ -42,11 +39,8 @@
                            $window.sessionStorage.setItem("token", result.token);
 
                            if($scope.keepme != undefined){
-                              //let cookie alive 20 days
-                              $cookies.put('id', result.id, { expires:  $scope.father.cookieLg,
-                                                             secure: false } )
-                              $cookies.put('keepme', true, { expires :  $scope.father.cookieLg,
-                                                             secure: false } );
+                              $cookies.put('keepme', true, { 'expires': $scope.father.cookieLg,
+                                                             'secure': false } );
 
                            }
                         }  
@@ -92,12 +86,9 @@
                         $window.sessionStorage.setItem("token", result.token);
 
                         if($scope.keepme != undefined){
-                           //let cookie alive 7 days
-                           $cookies.put('id', result.id, { expires: $scope.father.cookieLg,
-                                                            secure: false } )
-                           $cookies.put('keepme', true, { expires : $scope.father.cookieLg,
-                                                            secure: false } );
-
+                           //let cookie alive 20 days
+                           $cookies.put('keepme', true, { 'expires':(new Date().getTime()+24*3600*1000*7),
+                                                          'secure': false } );
                         }
 
                         $('#exampleModalCenter').modal('hide');
@@ -123,7 +114,6 @@
       //log out
       $scope.logout = function(){
         Data.post('logout', 1, {logout: true}).then(function (result) {
-            console.log("fsdfsdf")
             $cookies.remove('id')
             $cookies.remove('keepme');
             $scope.father.showLogin = true;
