@@ -41,17 +41,13 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
     }
 
     if($cookies.get('keepme') != undefined){
-
-    	var user = {
-         id: $cookies.get('id')
-      }
    
-    	Data.post('login', 1, user).then(function (result) {
+    	Data.post('login', 1, {login: $cookies.get('keepme')}).then(function (result) {
             if(result.status == 'error'){
                 alert(result.message)       
             }else{
                 if (!result){
-                    alert('login faild');
+                    alert('Hết phiên làm việc. Vui lòng đăng nhập lại.');
                 } else {
                     $scope.father.showLogin = false;
                     $rootScope.username = result.name; 

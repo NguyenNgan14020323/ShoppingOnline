@@ -1,4 +1,10 @@
 import * as productModel from '../models/product';
+import CryptoJS from 'crypto-js';
+import constants from '../../config/constants';
+
+
+const KEY_HASH_COOKIE = constants.key_cookie_pview
+
 
 export const createProductCtrl = async (req, res) => {
     try {
@@ -68,12 +74,39 @@ export const getProductCatalogCtrl1 = async (req, res) => {
 }
 
 export const getProductDetailCtrl = async (req, res) => {
+
     const product_id = req.params.product_id;
     try {
+        //check isexist cookies
+        var cookiestore = req.cookies.pviews, temp = [], i = 0, flag = true
+        if(cookiestore !== undefined){
+             var bytes = CryptoJS.RC4.decrypt(cookiestore, KEY_HASH_COOKIE);
+             temp = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+             for(i; i < temp.length; i++){
+                  if(temp[i].id == product_id){
+                    flag = false
+                     break
+                  }
+             }
+        }else
+           flag = true
+        
+        if(flag){
+           temp[temp.length] = {id: product_id}
+          //save in db with view up to 1 for products id
+
+
+        }
+
+   //     console.log(temp)
+        res.cookie('pviews', CryptoJS.RC4.encrypt(JSON.stringify(temp), KEY_HASH_COOKIE).toString(), {httpOnly: true });
+
         const data = await productModel.getProductDetail(product_id);
         res.status(200).json({
             "productDetail": data
         })
+
     } catch (error) {
         throw Error(error);
     }

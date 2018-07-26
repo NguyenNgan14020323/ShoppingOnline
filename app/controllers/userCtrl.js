@@ -21,7 +21,9 @@ const PRIVATE_KEY_TOKEN = constants.key_decode_token
 }
 
 export const createUserCtrl = async (req, res) => {
+
     req.body.password = CryptoJS.SHA256(req.body.password).toString();
+    var dataRes = {}
     try {
         if(!await userModel.checkExistedAcc(req)){
             const data = await userModel.createUser(req.body);
@@ -32,21 +34,24 @@ export const createUserCtrl = async (req, res) => {
                 addres: data.address,
                 phone: data.phone
             }
-            var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME});
-            const dataRes = {
+            var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME}),
+                userid = CryptoJS.AES.encrypt(data[0]._id.toString(), KEY_HASH).toString();
+            dataRes = {
                 id: CryptoJS.AES.encrypt(data._id.toString(), KEY_HASH).toString(),
                 name: data.name,
                 token: token
             }
-
              //initial sessions
             // req.session.email = data.email
             // req.session.password = data.password
             req.session.uid = data._id
-            res.send(dataRes);
-        }else{
-            res.send(dataRes);
+
+            var COOKIE_LIVE_ID = 24*3600*1000*7 ;
+            res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: true });//create cookies
+            res.cookie('keepme', true, {maxAge: COOKIE_LIVE_ID});
         }
+
+        res.send(dataRes);
         
     } catch (error) {
         throw Error(error);
@@ -60,17 +65,20 @@ export const checkUserLoginCtrl = async (req, res) => {
         var data, dataRes;
         if(req.headers.origin == MYHOST || req.headers.referer == MYHOST){//except all requests from my host
 
-            if(req.body.password != undefined){
+            if(req.body.password != undefined){//login general
                 req.body.password = CryptoJS.SHA256(req.body.password).toString();
                 data = await userModel.checkUserLogin(req);
-            }else {
-
-                var bytes  = CryptoJS.AES.decrypt(req.body.id, KEY_HASH);
-                var deid = bytes.toString(CryptoJS.enc.Utf8);
-                data = await userModel.checkUserLoginbyId(deid);
+            }else {//login with cookie
+                if(req.cookies.id !== undefined){
+                    var bytes  = CryptoJS.AES.decrypt(req.cookies.id, KEY_HASH);
+                    var deid = bytes.toString(CryptoJS.enc.Utf8);
+                    data = await userModel.checkUserLoginbyId(deid);
+                }else{
+                    res.send({});
+                }
             }
 
-          //  console.log(data)
+            console.log(data)
             if(typeof data != 'boolean'){
                 var hash = {
                     id: data[0]._id,
@@ -80,10 +88,11 @@ export const checkUserLoginCtrl = async (req, res) => {
                     phone: data[0].phone
                 }
                 
-                var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME});
+                var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME}),
+                    userid = CryptoJS.AES.encrypt(data[0]._id.toString(), KEY_HASH).toString();
 
                 dataRes = {
-                    id: CryptoJS.AES.encrypt(data[0]._id.toString(), KEY_HASH).toString(),
+                    id: userid,
                     name: data[0].name,
                     token: token
                 }
@@ -91,6 +100,9 @@ export const checkUserLoginCtrl = async (req, res) => {
                 // req.session.email = data[0].email
                 // req.session.password = data[0].password
                  req.session.uid = data[0]._id
+                 var COOKIE_LIVE_ID =  24*3600*1000*7;
+                 res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: true });//create cookies
+                 res.cookie('keepme', true, {maxAge: COOKIE_LIVE_ID});
             }else{
                 dataRes = {
                     status: "error",

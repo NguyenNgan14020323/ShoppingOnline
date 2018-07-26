@@ -1,4 +1,4 @@
-var app = angular.module('ShopApp', ['ui.bootstrap', 'ui.router', 'ngCookies', 'ngRoute', 'angular-md5']);
+var app = angular.module('ShopApp', ['ui.bootstrap', 'ui.router', 'ngCookies', 'ngRoute', 'angular-md5', 'slickCarousel']);
 
 app.service('Data', ['$http', '$location', '$window', '$cookies',
     function ($http, $location, $window, $cookies) {

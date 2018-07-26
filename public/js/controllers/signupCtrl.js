@@ -6,8 +6,8 @@ app.directive('myName', function() {
 
             function myValidation(value) {
 
-                var nlength = /(?=.{6,30})/
-                var nvalidate = /^[A-Za-z0-9_ @]{6,30}$/
+               var nlength = /(?=.{6,30})/
+               var nvalidate = /^[A-Za-z0-9_ @]{6,30}$/
 
                if (!nlength.test(value)) {
                     scope.nameerror = "Tên tối thiểu dài 6 kí tự và tối đa 30 kí tự."
@@ -258,10 +258,8 @@ app.directive('myName', function() {
                    
                  }else{
                      //let cookie alive 7 days
-                     $cookies.put('id', result.id, {'expires': (new Date().getTime()+24*3600*1000*7).toString(),
-                     'secure ': true});
-                     $cookies.put('keepme', true, {'expires' :  (new Date().getTime()+24*3600*1000*7).toString(),
-                     'secure ': true});
+                     $cookies.put('keepme', true, {'expires':(new Date().getTime()+24*3600*1000*7).toString(),
+                     'secure': true});
                      $window.sessionStorage.setItem("token", result.token);
                      var host = $window.location.host;
                      var landingUrl = "http://" + host + "/";
