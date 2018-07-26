@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import constants from '../../config/constants';
 import sendmail from '../../config/sendmail';
 
-
 const KEY_HASH = constants.key_hash_pass
 const MYHOST = constants.host
 const TOKEN_TIME =constants.token_live_time
@@ -236,10 +235,24 @@ export const getUserInfo = async(req, res)=>{
    }
 }
 
-// export const loginWithFacebook = async (req, res) =>{
+export const loginWithFacebook = async(req, res)=>{
 
-// }
+   try{
+      console.log(req.user);
+      res.redirect('/');
+   }catch (error) {
+      throw Error(error);
+   }
 
-// export loginWithGoogle = async (req, res) =>{
-    
-// }
+}
+
+export const loginWithGoogle = async(req, res)=>{
+
+   try{
+      console.log(req.user);
+      res.redirect('/');
+   }catch (error) {
+      throw Error(error);
+   }
+
+}

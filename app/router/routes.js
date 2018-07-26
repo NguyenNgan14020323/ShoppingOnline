@@ -2,8 +2,57 @@ import express from 'express';
 import * as userCtrl from '../controllers/userCtrl';
 import verifyToken from '../../config/verifyToken';
 import constants from '../../config/constants';
+import passport from 'passport'
+import Facebook from 'passport-facebook'
+import Google from 'passport-google-oauth20'
+
+var FacebookStrategy = Facebook.Strategy,
+    GoogleStrategy = Google.Strategy
 
 const Router = express.Router();
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.use(new GoogleStrategy({
+    clientID: '172823239135-mp40vrhdbi5tblo33rd0vtn0k4dkpube.apps.googleusercontent.com',
+    clientSecret: 'Z4UPARdW1Dyy4LwjXVbJn2gt',
+    callbackURL: "http://localhost:3000/user/auth/google/callback"
+ //   callbackURL: "https://app-chat-phamlinh.herokuapp.com/user/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    if (profile) {
+        var user = profile;
+        return done(null, user);
+    }else {
+        return done(null, false);
+    }   
+  }
+));
+
+
+//using facebook to login
+//webpage https://developers.facebook.com/apps/1956919321249751/fb-login/
+passport.use(new FacebookStrategy({
+    clientID: '1956919321249751',
+    clientSecret: '384d97d8428140eb09a00c3bbce41f43',
+    callbackURL: "/user/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+   if (profile) {
+        user = profile;
+        return done(null, user);//se tra ve thong tin nguoi dung o router
+    }else {
+        return done(null, false);
+    }   
+  }
+));
+
 
 //all 
 Router.use(function (req, res, next) {
@@ -54,5 +103,16 @@ Router.post('/logout', userCtrl.checkUserLogoutCtrl);
 Router.post('/checkUser', userCtrl.checkExistedAc);
 Router.post('/authenemail',  userCtrl.authenticateEmail);
 Router.post('/sendauthenemail', userCtrl.sendAuthenticateEmail);
+
+Router.route('/auth/facebook').get(passport.authenticate('facebook',  { scope : 'email' }))
+
+Router.route('/auth/facebook/callback').get(
+	passport.authenticate('facebook', { failureRedirect: '/signup' }), userCtrl.loginWithFacebook)
+
+Router.route('/auth/google').get(passport.authenticate('google',{ scope: ['profile'] }));
+
+Router.route('/auth/google/callback').get( 
+    passport.authenticate('google', { failureRedirect: '/signup' }), userCtrl.loginWithGoogle)
+
 
 export default Router;
