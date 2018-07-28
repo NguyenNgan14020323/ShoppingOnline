@@ -5,8 +5,8 @@ app.controller('homeCtrl', function ($scope, Data, myServices){
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
       }
 
-      
     Data.get('getAllProduct', 0, {}).then(function (result) {
+
         if(result.status == 'error'){
             
         }else{

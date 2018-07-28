@@ -5,8 +5,8 @@ app.service('Data', ['$http', '$location', '$window', '$cookies',
 
         var chooseUrl = flag=>{
         	if(flag == 1)
-        		return 'http://localhost:3000/user/'
-        	return 'http://localhost:3000/api/'
+        		return 'http://localhost:8080/user/'
+        	return 'http://localhost:8080/api/'
         }
 
         var obj = {};

@@ -109,7 +109,6 @@ export const checkUserLoginCtrl = async (req, res) => {
                 }
             }
 
-         //   console.log(dataRes)
             res.send(dataRes);
         }
 
@@ -250,7 +249,6 @@ export const loginWithFacebook = async(req, res)=>{
         error : false,
         message: constants.error.L1008
       }
-      console.log(req.user);
       res.json(dataRes)
    }catch (error) {
       throw Error(error);
