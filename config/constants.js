@@ -4,7 +4,7 @@ const GLOBAL_VARRIABLE = {
 	key_decode_token : 'nguyennganhamhamdodo',
 	token_live_time:  3*3600*24,
 	key_cookie_pview: 'phamvanlinhwebbanhang',
-	host: "http://localhost:3000/",
+	host: "http://localhost:8080/",
 	lgAPI:{
 		fb: "facebook",
 		gg: "google"
@@ -17,7 +17,8 @@ const GLOBAL_VARRIABLE = {
 		L1005: "Mã reset password không chính xác.",
 		L1006: "Đăng nhập thất bại",
 		L1007: "Lỗi chứng thực Cookie.",
-		L1008: "Tài khoản đã được sử dụng."
+		L1008: "Tài khoản đã được sử dụng.",
+		L1009: "Giao dịch không thành công. Vấn đề bảo mật hoặc sản phẩm đã bán hết."
 	},
 	success: {
 		A1001: "Đã gửi mã xác thực mail thành công, vui lòng kiểm tra email.",

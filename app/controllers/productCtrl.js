@@ -94,12 +94,10 @@ export const getProductDetailCtrl = async (req, res) => {
         
         if(flag){
            temp[temp.length] = {id: product_id}
-          //save in db with view up to 1 for products id
-
-
+           const dataProduct = await productModel.getProductDetail(product_id);
+           const updateView = await productModel.updateView(product_id, dataProduct[0].view + 0.5);
         }
 
-   //     console.log(temp)
         res.cookie('pviews', CryptoJS.RC4.encrypt(JSON.stringify(temp), KEY_HASH_COOKIE).toString(), {httpOnly: true });
 
         const data = await productModel.getProductDetail(product_id);

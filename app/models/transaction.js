@@ -27,7 +27,7 @@ const transactionSchema = new Schema({
     updated_at: Date
 });
 
-userSchema.pre('save', (next) => {
+transactionSchema.pre('save', function(next){
     const cur = new Date().toISOString();
     this.updated_at = cur;
     if (!this.created_at) {
@@ -35,3 +35,14 @@ userSchema.pre('save', (next) => {
       next();
     }
 });
+
+const Transaction = mongoose.model('Transaction', transactionSchema);
+
+export const createTransaction = (req) => {
+    const newTransaction = new Transaction(req);
+    return newTransaction.save((err, transaction) => {
+        if (err) return Error(err);
+
+        return transaction
+    })
+}

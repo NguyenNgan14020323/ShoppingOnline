@@ -64,3 +64,10 @@ export const getProductDetail = (id) => Product.find({_id: id}, (err, product) =
     return product;
 });
 
+export const updateView = (product_id, view) => {
+    Product.findByIdAndUpdate({_id: product_id}, {view: view}, (err, product) => {
+        if (err) return Error(err);
+        console.log(product)
+        return product;
+    })
+}

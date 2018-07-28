@@ -456,9 +456,7 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 				if(!$scope.step4.finish()){
 					alert("Bạn chưa hoàn thành thủ tục mua hàng. Vui lòng quay lại các bước để tiếp tục.")
 				}else{
-					alert("Giao dịch thành công. Xin mời quý khách tiếp tục mua hàng.")
-				//	$state.go('home', '')
-
+					
 					var Infor = {
 						User:{
 							name: $scope.step1.name,
@@ -491,21 +489,40 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 					}
 
 					var listcookies = JSON.parse(JSON.parse($cookies.get('pd_ws'))),
-					    products = [], i
+					    products = [], i, notbuy = []
+
 					for(i = 0; i <  listcookies.length; i++){
 	               {
-	               	products[i] = {
-	               		id: listcookies[i].id,
-	               		amount: listcookies[i].amount
-	               	}
+	               	if(listcookies[i].ischoosed){//chon nhung san pham da tich la mua
+		               	products[products.length] = {
+		               		id: listcookies[i].id,
+		               		amount: listcookies[i].amount
+		               	}
+		               }else{
+		               	notbuy[notbuy.length] = listcookies[i]
+		               }
 	               }
 	            }
 	        		  
 	            Infor.Products = products
-	            //$cookies.remove('pd_ws')
 					console.log(Infor)
 
 					//posts to server
+					Data.post('createTransaction', 0, Infor).then(function(result){
+						if(result.error == true){
+							alert(result.message)
+						}else{
+							alert("Giao dịch thành công. Xin mời quý khách tiếp tục mua hàng.")
+
+							if(notbuy.length > 0)
+								$cookies.putObject('pd_ws', JSON.stringify(notbuy), 
+                           {secure: false, expires: new Date(new Date().getTime() + 24*3600*1000*20)})
+							else
+								$cookies.remove('pd_ws')
+
+					      $state.go('home', '')
+						}
+					})
 				}
 			},
 			previous:()=>{

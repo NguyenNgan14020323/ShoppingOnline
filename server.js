@@ -17,7 +17,7 @@ import passport from 'passport';
 const app = express();
 
 // set our port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // connect to our mongoDB database
 
