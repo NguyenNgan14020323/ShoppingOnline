@@ -53,6 +53,9 @@ Router.get('/getproductDetail/:product_id', productCtrl.getProductDetailCtrl);
 //Cart
 Router.get('/cartProduct', productCtrl.getCart);
 
+//Product view
+Router.get('/cviewproduct', productCtrl.getCustomViewPd);
+
 //buy product
 Router.post('/buyProduct', verifyToken, productCtrl.buyProduct);
 

@@ -57,6 +57,7 @@ passport.use(new FacebookStrategy({
 //all 
 Router.use(function (req, res, next) {
 	//res.setHeader('Access-Control-Allow-Origin', '*');//allow all of client response when request to server 
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 	res.setHeader('Access-Control-Allow-Headers', 'Content-type');
 	res.setHeader('Access-Control-Allow-Headers', 'X-Signature');
@@ -96,6 +97,7 @@ Router.use(function (req, res, next) {
 //User
 Router.post('/createUser', userCtrl.createUserCtrl);
 Router.post('/login', userCtrl.checkUserLoginCtrl);
+//Router.post('/loginAPI', userCtrl.LoginAPI);
 Router.post('/keepstate', verifyToken, userCtrl.keepStateLogin);
 Router.get('/getinfor', verifyToken, userCtrl.getUserInfo)
 Router.post('/getinfor', verifyToken, userCtrl.getUserInfo)

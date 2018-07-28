@@ -101,14 +101,29 @@
       }
 
       //login with facebook
+      // /user/auth/facebook
       $scope.LoginwithFb = function(){
-        
+         
+          // Data.post('loginAPI', 1, {key: "facebook"}).then(function (result) {
+          //      if(result.error == true){
+          //         alert(result.message)
+          //      }else{
+          //         console.log("Done")
+          //      }
+          // })
       }
 
        //login with google plus
-      $scope.loginwithGG = function(){
-
-
+       // /user/auth/google
+      $scope.LoginwithGG = function(){
+         
+         // Data.post('loginAPI', 1, {key: "google"}).then(function (result) {
+         //    if(result.error == true){
+         //       alert(result.message)
+         //    }else{
+         //       console.log("Done")
+         //    }
+         // })   
       }
 
       //log out

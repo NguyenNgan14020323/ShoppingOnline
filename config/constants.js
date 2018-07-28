@@ -5,6 +5,10 @@ const GLOBAL_VARRIABLE = {
 	token_live_time:  3*3600*24,
 	key_cookie_pview: 'phamvanlinhwebbanhang',
 	host: "http://localhost:3000/",
+	lgAPI:{
+		fb: "facebook",
+		gg: "google"
+	},
 	error: {
 		L1001: "Mã xác thực tài khoản không chính xác. Vui lòng thử lại.",
 		L1002: "Tài khoản không đúng.",
@@ -12,7 +16,8 @@ const GLOBAL_VARRIABLE = {
 		L1004: "Tài khoản không tồn tại.",
 		L1005: "Mã reset password không chính xác.",
 		L1006: "Đăng nhập thất bại",
-		L1007: "Lỗi chứng thực Cookie."
+		L1007: "Lỗi chứng thực Cookie.",
+		L1008: "Tài khoản đã được sử dụng."
 	},
 	success: {
 		A1001: "Đã gửi mã xác thực mail thành công, vui lòng kiểm tra email.",

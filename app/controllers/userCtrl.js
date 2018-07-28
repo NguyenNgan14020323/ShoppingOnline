@@ -235,11 +235,23 @@ export const getUserInfo = async(req, res)=>{
    }
 }
 
+// export const LoginAPI = async(req, res)=>{
+
+//   if(req.body.key == constants.lgAPI.fb)
+//     res.redirect('/user/auth/facebook')
+//   else
+//     res.redirect('/user/auth/google')
+// }
+
 export const loginWithFacebook = async(req, res)=>{
 
    try{
+      var dataRes = {
+        error : false,
+        message: constants.error.L1008
+      }
       console.log(req.user);
-      res.redirect('/');
+      res.json(dataRes)
    }catch (error) {
       throw Error(error);
    }
@@ -249,8 +261,12 @@ export const loginWithFacebook = async(req, res)=>{
 export const loginWithGoogle = async(req, res)=>{
 
    try{
+      var dataRes = {
+        error : false,
+        message: constants.error.L1008
+      }
       console.log(req.user);
-      res.redirect('/');
+      res.json(dataRes)
    }catch (error) {
       throw Error(error);
    }

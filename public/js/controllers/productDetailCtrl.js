@@ -11,7 +11,22 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Da
            if (result.status == 404) {
 			      
            } else {
-              
+               
+               //show top viewed products of this user
+               if($cookies.getObject('cview') != undefined)
+               {
+                  views = JSON.parse($cookies.getObject('cview'))
+
+                  Data.get('cviewproduct', 0, {}).then(function (result) {
+                     if(result.status == 'error'){
+                        alert("Xay ra loi.")
+                     }else{
+                           console.log(result)
+                     }  
+                  })
+               }
+
+
                $scope.productDetail = result.productDetail[0];
                $scope.productDetail.discountMoney = myServices.numberWithCommas(($scope.productDetail.discount/100) * $scope.productDetail.price);
                $scope.productDetail.price = myServices.numberWithCommas($scope.productDetail.price - ($scope.productDetail.discount/100) * $scope.productDetail.price);
