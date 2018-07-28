@@ -125,13 +125,37 @@ export const getCart = async (req, res) => {
     }
     
     try {
-        let Ids = JSON.parse(JSON.parse(decodeURIComponent(listId)))
-        let listProduct = [];
-         for (let i = 0; i < Ids.length; i++){
+        let Ids = JSON.parse(JSON.parse(decodeURIComponent(listId))),
+            listProduct = [], i;
+         for (i = 0; i < Ids.length; i++){
             const data = await productModel.getProductDetail(Ids[i].id);
             listProduct[i] = data[0];
          }
       
+        res.status(200).json({
+            status: 200,
+            "listProduct": listProduct
+        })
+    } catch (error) {
+        throw Error(error);
+    }
+}
+
+export const getCustomViewPd = async (req, res) => {
+    
+    try {
+        let Ids = JSON.parse(JSON.parse(req.cookies.cview)),
+            listProduct = [], i;
+         for (i = 0; i < Ids.length; i++){
+            const data = await productModel.getProductDetail(Ids[i].id);
+            listProduct[i] = {}
+            listProduct[i].data = data[0];
+            listProduct[i].infor = {
+                 viewed : Ids[i].viewed,
+                 time   : Ids[i].time
+            }
+         }
+            
         res.status(200).json({
             status: 200,
             "listProduct": listProduct
