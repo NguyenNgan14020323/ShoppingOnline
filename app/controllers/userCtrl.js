@@ -26,6 +26,7 @@ export const createUserCtrl = async (req, res) => {
     try {
         if(!await userModel.checkExistedAcc(req)){
             const data = await userModel.createUser(req.body);
+
              var hash = {
                 id: data._id,
                 name: data.name,
@@ -33,8 +34,9 @@ export const createUserCtrl = async (req, res) => {
                 addres: data.address,
                 phone: data.phone
             }
+
             var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME}),
-                userid = CryptoJS.AES.encrypt(data[0]._id.toString(), KEY_HASH).toString();
+                userid = CryptoJS.AES.encrypt(data._id.toString(), KEY_HASH).toString();
             dataRes = {
                 id: CryptoJS.AES.encrypt(data._id.toString(), KEY_HASH).toString(),
                 name: data.name,
@@ -48,6 +50,9 @@ export const createUserCtrl = async (req, res) => {
             var COOKIE_LIVE_ID = 24*3600*1000*7 ;
             res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: true });//create cookies
             res.cookie('keepme', true, {maxAge: COOKIE_LIVE_ID});
+        }else{
+            dataRes.error = true
+            dataRes.message = constants.error.L1003
         }
 
         res.send(dataRes);
@@ -250,6 +255,7 @@ export const loginWithFacebook = async(req, res)=>{
         message: constants.error.L1008
       }
       res.json(dataRes)
+
    }catch (error) {
       throw Error(error);
    }
@@ -259,12 +265,59 @@ export const loginWithFacebook = async(req, res)=>{
 export const loginWithGoogle = async(req, res)=>{
 
    try{
+
       var dataRes = {
         error : false,
         message: constants.error.L1008
+      }, data
+
+      req.body.email = req.user.emails[0].value
+     
+      //check email/id is existed
+      if(!await userModel.checkExistedAcc(req)){
+
+          var User = {
+            name: req.user.displayName,
+            email: req.user.emails[0].value,
+            avatar: req.user.photos[0].value,
+            api_type: req.user.provider,
+            phone: "",
+            address: "",
+            gender: req.user.gender
+          }
+
+         data = await userModel.createUser(User);
+          
+      }else{
+         data = await userModel.checkUserLoginbyEmail(req.body.email);
+         if(data.api_type != constants.lgAPI.gg)
+            res.json(dataRes)
+
       }
-      console.log(req.user);
-      res.json(dataRes)
+      
+      console.log(data)
+      var hash = {
+         id: data._id,
+         name: data.name,
+         email: data.email,
+         addres: data.address,
+         phone: data.phone,
+         avatar: data.avatar
+      }
+
+      var token = jwt.sign(hash, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME}),
+         userid = CryptoJS.AES.encrypt(data._id.toString(), KEY_HASH).toString();
+      dataRes = {
+         id: CryptoJS.AES.encrypt(data._id.toString(), KEY_HASH).toString(),
+         name: data.name,
+         token: token
+      }
+      req.session.uid = data._id
+
+      var COOKIE_LIVE_ID = 24*3600*1000*7 ;
+      res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: true });//create cookies
+      res.cookie('keepme', true, {maxAge: COOKIE_LIVE_ID});
+      res.redirect('/')
    }catch (error) {
       throw Error(error);
    }

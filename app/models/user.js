@@ -34,6 +34,11 @@ const userSchema = new Schema({
         required: false,
         default: ""
     },
+    role: {
+        type: String,
+        required: false,
+        default: "User"
+    },
     created_at: Date,
     updated_at: Date
 });
@@ -65,6 +70,7 @@ export const createUser = (req) => {
     });
 };
 
+//login in general
 export const checkUserLogin = req => User.find({ email: req.body.email})
     .then((user) => {
         if (user.length < 1 || user == "") {
@@ -86,6 +92,20 @@ export const checkUserLoginbyId = req => User.find({ _id: req})
 
         if (req.toString() == user[0]._id) {
             return user;
+        }     
+        return false;
+    })
+    .catch(err => Error(err));
+
+//when user login by api
+export const checkUserLoginbyEmail = email => User.find({ email: email})
+    .then((user) => {
+        if (user.length < 1) {
+            return false;
+        }
+
+        if (email.toString() == user[0].email) {
+            return user[0];
         }     
         return false;
     })

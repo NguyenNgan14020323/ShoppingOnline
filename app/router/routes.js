@@ -19,10 +19,11 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
+// page https://console.developers.google.com/apis/credentials?project=phamlinhcute-185422
 passport.use(new GoogleStrategy({
     clientID: '172823239135-mp40vrhdbi5tblo33rd0vtn0k4dkpube.apps.googleusercontent.com',
     clientSecret: 'Z4UPARdW1Dyy4LwjXVbJn2gt',
-    callbackURL: "http://localhost:3000/user/auth/google/callback"
+    callbackURL: "http://localhost:8080/user/auth/google/callback"
  //   callbackURL: "https://app-chat-phamlinh.herokuapp.com/user/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
@@ -111,7 +112,10 @@ Router.route('/auth/facebook').get(passport.authenticate('facebook',  { scope : 
 Router.route('/auth/facebook/callback').get(
 	passport.authenticate('facebook', { failureRedirect: '/signup' }), userCtrl.loginWithFacebook)
 
-Router.route('/auth/google').get(passport.authenticate('google',{ scope: ['profile'] }));
+Router.route('/auth/google').get(passport.authenticate('google',{ scope: [
+  'https://www.googleapis.com/auth/userinfo.profile',
+  'https://www.googleapis.com/auth/userinfo.email'
+  ] }));
 
 Router.route('/auth/google/callback').get( 
     passport.authenticate('google', { failureRedirect: '/signup' }), userCtrl.loginWithGoogle)

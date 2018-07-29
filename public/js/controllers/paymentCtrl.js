@@ -121,7 +121,7 @@ app.directive('paymentCreditexp',function() {
             		parseInt(date[0]) !== cDate.getDate() || parseInt(date[1]) !== cDate.getMonth()+1){
             		scope.step2.paymentOnCredit.errorExpires = "*) Ngày tháng không chính xác."
             	}else if(parseInt(date[2]) < 1975 || parseInt(date[2]) > dateN.getFullYear()+20){
-            		scope.step2.paymentOnCredit.errorExpires = "*) Năm không chính xác."
+            		scope.step2.paymentOnCredit.errorExpires = "*) Năm hết hạn không chính xác."
             	}else{
             		scope.step2.paymentOnCredit.errorExpires = ""
             	}
@@ -355,7 +355,7 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 	   },
 	   currStep: function(){
 	   	if(!this.elements.agree){
-	   		this.elements.errorAgree = "*) Nếu không đồng ý với các điều khoản của chúng tôi, "+
+	   		this.elements.errorAgree = "*) Tùy chọn này là bắt buộc. Nếu không đồng ý với các điều khoản của chúng tôi, "+
 	   		                          "vui lòng để lại phản hồi."
 	   		return false
 	   	}
@@ -467,7 +467,7 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 						renewsletter: false
 					}
 
-					if($scope.step2.paymentOnDelivery){
+					if($scope.step2.paymentOnDelivery.ischoose){
 						Infor.PaymentMethod = {
 							type: 0,
 							infor:{}
@@ -476,10 +476,10 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 						Infor.PaymentMethod = {
 							type: 1,
 							infor:{
-								numbercard: $scope.step2.number,
-								name: scope.step2.name,
-								expires: $scope.step2.expires,
-								cvv: $scope.step2.card_cerification_value
+								numbercard: $scope.step2.paymentOnCredit.number,
+								name: $scope.step2.paymentOnCredit.name,
+								expires: $scope.step2.paymentOnCredit.expires,
+								cvv: $scope.step2.paymentOnCredit.card_cerification_value
 							}
 						}
 					}
