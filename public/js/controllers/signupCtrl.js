@@ -33,7 +33,7 @@ app.directive('myName', function() {
         link: function(scope, element, attr, mCtrl) {
 
             function myValidation(value) {
-
+               scope.notify = ""
                var evalidate = /^[a-zA-Z0-9_]+(?:\.[a-zA-Z0-9_])*@[a-zA-Z0-9_]+(?:\.[a-zA-Z0-9_]+)*$/
             //   var evalidate = /^(?:[a-zA-Z0-9-_])+(?:\.[a-zA-Z0-9-_]+)*@(?:[a-zA-Z0-9-_]+\.){1,2}[a-zA-Z0-9-_]+$/;	
                 if(value.length < 1)
@@ -48,19 +48,11 @@ app.directive('myName', function() {
                            if(result.error){
                               scope.emailerror1 = result.message
                            }else{
+                              scope.flagsendmail = false
                               scope.emailerror1 = ""
-                              if(!scope.flagsendmail){
-                                 scope.flagsendmail = true;//sendmail one tim
-                                 Data.post('sendauthenemail', 1, { email: value }).then(function (result) {
-                                    if(result){
-                                       scope.notify = result.message
-                                       scope.hiddensecuritycode = true;
-                                    }
-                                 });
-                              }
                            }
                         });
-                     }, 2000)  
+                     }, 1000)  
                 }
 
                return value;//dùng trong scope ở controller
@@ -206,7 +198,7 @@ app.directive('myName', function() {
    }]);
 
 
-	app.controller('signupCtrl', function($scope, $rootScope, $window, $cookies, Data){
+	app.controller('signupCtrl', function($scope, $rootScope, $window, $cookies, Data, $timeout){
 
       $scope.hiddensecuritycode = false;
       $scope.flagsendmail = false;
@@ -238,13 +230,14 @@ app.directive('myName', function() {
                $scope.phonenumbererror = "Số điện thoại bắt buộc.";
          }
 
-         console.log("value " + $scope.authenticationerror)
          $scope.authenticationerror = ""
       	if($scope.name != "" && $scope.email != "" && $scope.address != "" && $scope.phonenumber != "" 
-      		 && $scope.password != "" && $scope.repassword != ""
-             && $scope.nameerror == "" && $scope.emailerror == "" && $scope.passworderror == "" && $scope.addresserror == "" 
-             && $scope.passworderror == "" && $scope.repassworderror == ""
-             && $scope.authenticationerror == ""){
+      		&& $scope.password != "" && $scope.repassword != ""
+            && $scope.nameerror == "" && $scope.emailerror1 == "" && $scope.passworderror == "" && $scope.addresserror == "" 
+            && $scope.passworderror == "" && $scope.repassworderror == ""
+            && $scope.authenticationerror == "" && ($scope.notify != "" || $scope.notify != undefined)){
+
+            console.log("dang ki")
  
             var user = {
                 name: $scope.name, 
@@ -266,7 +259,37 @@ app.directive('myName', function() {
                      $window.location.href = landingUrl;
                  }
             });
+         }else{
+            if(($scope.notify == "" || $scope.notify == undefined)&&$scope.emailerror1 == "")
+               alert("Đang tiến hành xác thực địa chỉ email. Vui lòng đợi.")
          }
+      }
+
+      var timer
+      $scope.SendAu = function(){
+
+         if($scope.emailerror1 == ""){
+            $scope.lengthtemp = $scope.email.length
+
+            if(timer)
+               $timeout.cancel(timer);
+
+            timer = $timeout(function() {
+               if($scope.lengthtemp == $scope.email.length && $scope.emailerror1 == ""){
+                  console.log("gui mail")
+                  if(!$scope.flagsendmail){
+                     $scope.flagsendmail = true;//sendmail one time
+                     Data.post('sendauthenemail', 1, { email: $scope.email }).then(function (result) {
+                        if(result){
+                           $scope.notify = result.message
+                           $scope.hiddensecuritycode = true;
+                        }
+                     });
+                  }
+               }
+
+                   }, 4500);
+            }
       }
 
 	});

@@ -17,7 +17,7 @@ const GLOBAL_VARRIABLE = {
 		L1005: "Mã reset password không chính xác.",
 		L1006: "Đăng nhập thất bại",
 		L1007: "Lỗi chứng thực Cookie.",
-		L1008: "Tài khoản đã được sử dụng.",
+		L1008: "Tài khoản đã được đăng kí và sử dụng.",
 		L1009: "Giao dịch không thành công. Vấn đề bảo mật hoặc sản phẩm đã bán hết."
 	},
 	success: {

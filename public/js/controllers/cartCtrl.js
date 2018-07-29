@@ -97,7 +97,7 @@ app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 	//show views
 	if($cookies.getObject('cview') != undefined){
 		//sort cookies
-
+	//	console.log($cookies.getObject('cview'))
 
 	}
 
