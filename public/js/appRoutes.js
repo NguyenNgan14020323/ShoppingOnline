@@ -45,10 +45,15 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvid
 				controller: 'paymentCtrl',
 				templateUrl: 'views/payment.html'
 			})
+			.state('search', {
+				url: '/searchProduct/:key',
+				controller: 'searchProductCtrl',
+				templateUrl: 'views/search.html'
+			})
 			
 		$locationProvider.hashPrefix('');
 
 	    slickCarouselConfig.dots = true;
-        slickCarouselConfig.autoplay = false;
+        slickCarouselConfig.autoplay = true;
 	}
 ]);

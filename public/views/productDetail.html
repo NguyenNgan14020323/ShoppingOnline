@@ -6,32 +6,43 @@
                     <img  style="width: auto;height: 20rem; border: none; padding-left: 14%" class="card-img-middle img-thumbnail" src="{{productDetail.image_link}}" alt="Card image cap">
                 </div>
                 <hr>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm">
-                        One of 
-                        </div>
-                        <div class="col-sm">
-                        One of 
-                        </div>
-                        <div class="col-sm">
-                        One of 
-                        </div>
-                        <div class="col-sm">
-                        One of 
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div style="margin-top: 20px">
+                è
             </div>
         </div>
-        <div class="col-5">
+        <div class="col-5"> 
             <h5 class="card-title" style="color: cornflowerblue; font-size: 150%;">{{productDetail.name}}</h5>
-            <div ng-repeat="content in productDetail.content">
-                <p style="margin-bottom: 0.5rem" class="card-text">{{content}}</p>
+            <div class="row" style="background-color:#fff4de ; margin: 2px">
+                <div class="col-3"><p style="font-size: 125%; padding-top: 10px; color: red">Quà tặng</p></div>
+                <div class="col-7" style="padding-top: 15px; font-family: cursive; color: gray">
+                    <p>+ 1 tai nghe bluetooth</p>
+                    <p>+ 1 sạc dự phòng</p>
+                    <p>+ Ấm siêu tốc Sunhouse</p>
+                </div>
             </div>
             <hr>
             <p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">Giá: {{productDetail.price}} đ</p>
             <p style="font-size: 75%; color: darkgray">Giảm: <span style="text-decoration: line-through" >{{productDetail.discountMoney}} đ</span> -{{productDetail.discount}}%</p>
+            <hr>
+                <p style="color: cornflowerblue; font-size: 125%; margin-bottom: 0px;">Nhóm màu:</p>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-9">
+                        <div ng-click="isWhite = true; isBlack=false; isGray=false; isYellow=false" style="background-color: white; cursor: pointer; float: left;border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;" ng-init="isWhite = true">
+                            <img ng-show="isWhite" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
+                        </div>
+                        <div ng-click="isBlack = true; isWhite= false; isGray=false; isYellow=false" ng-init="isBlack = false" style="background-color: black; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
+                              <img ng-show="isBlack" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
+                        </div>
+                        <div ng-click="isGray = true; isWhite=false; isBlack=false; isYellow=false" ng-init="isGray = false" style="background-color: #b1a398; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
+                              <img ng-show="isGray" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
+                        </div>
+                        <div ng-click="isGray = false; isWhite=false; isBlack=false; isYellow=true" ng-init="isYellow=false" style="background-color: yellow; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
+                              <img ng-show="isYellow" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
+                        </div>
+                    </div>
+                </div>
             <hr>
             <div class="row">
                     <div class="col-3">
@@ -50,16 +61,49 @@
           
             <a href="#" style="width: 50%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket(productDetail._id)">Thêm vào giỏ hàng</a>
         </div>
-        <div class="col-3">
-              <div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-                 <div><h3>1</h3></div>
-                 <div><h3>2</h3></div>
-                 <div><h3>3</h3></div>
-                 <div><h3>4</h3></div>
-                 <div><h3>5</h3></div>
-                 <div><h3>6</h3></div>
-               </div>
 
+       <!--  <div class="col-3">
+
+            <div class="one-time">
+                <div><h3>1</h3></div>
+                <div><h3>2</h3></div>
+                <div><h3>3</h3></div>
+                <div><h3>4</h3></div>
+                <div><h3>5</h3></div>
+                <div><h3>6</h3></div>
+            </div>
+        </div> -->
+<!-- 
+        <slick slides-to-show="3" slides-to-scroll="1">
+            <div ng-repeat="thing in awesomeThings"><h3>{{ thing }}</h3></div>
+        </slick> -->
+
+        <!-- <slick slides-to-show="4" slides-to-scroll="1">
+            <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]"><h3>{{ i*8 }}</h3></div>
+        </slick> -->
+
+        <div class="col-3">
+           <div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
+              <div class="multiple-items" ng-repeat= "image in productDetail.image_list">
+                  <img src="{{image}}" style="width: 60px; height: 60px">
+              </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-8" style="margin-top: 10px; padding: 30px; padding-bottom: 5rem; background-color: white;">
+            <h5 style="color: cornflowerblue; font-size: 175%; padding-bottom: 0.5rem">Thông số kỹ thuật</h5>
+            <div ng-repeat="content in productDetail.content">
+                <hr>
+                <p style="margin-bottom: 0.5rem;" class="card-text">{{content}}</p>
+            </div>
+        </div>
+        <div class="col-4" style="padding-right: 0px; padding-left: 10px">
+            <div style="margin-top: 10px;  padding: 30px; padding-bottom: 5rem; background-color: white;">
+                <h5 style="color: cornflowerblue; font-size: 175%; padding-bottom: 0.5rem">Các sản phẩm liên quan</h5>
+            </div>
+             
         </div>
     </div>
 </div>

@@ -12,7 +12,8 @@
     "angular-ui-router": "^1.0.18",
     "angular-md5": "^0.1.10",
     "jquery": "^3.3.1",
-    "angular-slick-carousel": "^3.1.7"
+    "angular-slick-carousel": "^3.1.7",
+    "angular-slick": "^0.2.1"
   },
   "authors": [
     "NguyenNgan14020323 <ngannt1710@gmail.com>"

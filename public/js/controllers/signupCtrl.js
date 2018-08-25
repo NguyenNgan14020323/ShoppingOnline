@@ -237,7 +237,6 @@ app.directive('myName', function() {
             && $scope.passworderror == "" && $scope.repassworderror == ""
             && $scope.authenticationerror == "" && ($scope.notify != "" || $scope.notify != undefined)){
 
-            console.log("dang ki")
  
             var user = {
                 name: $scope.name, 

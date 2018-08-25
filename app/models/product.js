@@ -9,6 +9,7 @@ const productSchema = new Schema({
         ref: 'Catalog',
     },
     name: String,
+    image_cover: String,
     price: Number,
     content: String,
     discount: Number, //lưu chiết khấu, giảm giá    
@@ -67,7 +68,21 @@ export const getProductDetail = (id) => Product.find({_id: id}, (err, product) =
 export const updateView = (product_id, view) => {
     Product.findByIdAndUpdate({_id: product_id}, {view: view}, (err, product) => {
         if (err) return Error(err);
-        console.log(product)
         return product;
     })
 }
+
+export const getProductView = () => Product.find()
+    .sort({"view" : -1})
+    .limit(10)
+    .then((products) => {
+        return products;
+    })
+    .catch(err => Error(err));
+
+
+export const searchProduct = (key) => Product.find({"name":  { $regex:  ".*" + key + ".*"}})
+    .then((products) => {
+        return products;
+    })
+    .catch(err => Error(err));

@@ -5,7 +5,18 @@ app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams,
      // var config = {
      //    params: {catalog_id: $stateParams.catalog_id}
      // }
+    $scope.setPage = function(pageNo){
+      $scope.currentPage = pageNo;
+    }
 
+    $scope.pageChanged = function() {
+      console.log('Page changed to: ' + $scope.currentPage);
+    }
+
+    $scope.setItemsPerPage = function(num){
+      $scope.itemsPerPage = num;
+      $scope.currentPage = 1;
+    }
      var path = 'productCatalog' + '/'+$stateParams.catalog_id
      Data.get(path, 0, {}).then(function (result) {
 
@@ -23,6 +34,11 @@ app.controller('productCatalogCtrl', function ($scope, $rootScope, $stateParams,
                         $scope.listProduct[i].price = myServices.numberWithCommas($scope.listProduct[i].price - ($scope.listProduct[i].discount/100) * $scope.listProduct[i].price);
                     }
                 }
+                $scope.viewby = 8;
+                $scope.totalItems = result.product.length;
+                $scope.currentPage = 1;
+                $scope.itemsPerPage = $scope.viewby;
+                $scope.maxSize = 8;
 				
             }
         }

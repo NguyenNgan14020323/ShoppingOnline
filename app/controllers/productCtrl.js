@@ -178,3 +178,26 @@ export const buyProduct = async (req, res, next) => {
         throw Error(error);
     }
 }
+
+export const getProductView = async(req, res) => {
+    try {
+        const data = await productModel.getProductView();
+        res.status(200).json(data);
+    } catch (error) {
+        throw Error(error);
+    }
+}
+
+export const searchProduct = async(req, res) => {
+    const key = req.params.key;
+    try {
+        const data = await productModel.searchProduct(key);
+
+        res.status(200).json({
+             status: 200,
+            "product": data
+        });
+    } catch (error) {
+        throw Error(error);
+    }
+} 

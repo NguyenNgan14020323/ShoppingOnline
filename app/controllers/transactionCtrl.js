@@ -39,9 +39,6 @@ export const createTransactionCtrl = async(req, res) => {
             price: parseInt(totalPriceProduct),
             feeShip:  parseInt(feeShip)
         }
-
-        console.log(ProductInfo)
-     	  
         //Chọn phương thức thanh toán là Thẻ tín dụng/ Thẻ ghi nợ
         if(req.body.PaymentMethod.type == 1){
             var getDate = req.body.PaymentMethod.infor.expires.split('/')
@@ -54,9 +51,6 @@ export const createTransactionCtrl = async(req, res) => {
             }
         }
 
-        console.log(creditInfo)
-     	console.log(req.body)
-
         var Transaction = {
         	status: req.body.PaymentMethod.type, 
         	user_id: req.authenticate.id,
@@ -66,7 +60,6 @@ export const createTransactionCtrl = async(req, res) => {
         	message: req.body.User.message,
         }
 
-        //  console.log(Transaction)
     } catch (error) {
         throw Error(error);
     }
