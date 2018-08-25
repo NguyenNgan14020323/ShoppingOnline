@@ -13,8 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="components/font-awesome/web-fonts-with-css/css/fontawesome.min.css">
 
-	<link rel="stylesheet" href="components/slick-carousel/slick/slick.css">
-    <link rel="stylesheet" href="components/slick-carousel/slick/slick-theme.css">
+	
 
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -27,10 +26,12 @@
 	<script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.min.js"></script>	
 	<script src="components/slick-carousel/slick/slick.js"></script>
     <script src="components/angular-slick-carousel/dist/angular-slick.min.js"></script>
-    
+
 	<script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
 	<script type="text/javascript" src="components/angular-md5/angular-md5.min.js"></script>
 	
+	<link rel="stylesheet" href="components/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="components/slick-carousel/slick/slick-theme.css">
 	<!--ANGULAR CUSTOM -->
 	<script src="js/module.js"></script>
 	<script src="js/controllers/homeCtrl.js"></script>
@@ -41,6 +42,7 @@
 	<script src="js/controllers/mainCtrl.js"></script>
 	<script src="js/controllers/cartCtrl.js"></script>
 	<script src="js/controllers/paymentCtrl.js"></script>
+	<script src="js/controllers/searchProductCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	
 </head>
@@ -51,14 +53,14 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand" ui-sref="back">
-				<img style="width: 120px" src="img/smart_logo.png">
+				<img style="width: 120px" src="img/smart_new_logo.jpg">
 			</a>   
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0" >
 					<li class="nav-item">
 						<form class="form-inline my-2 my-lg-0">
 							<input style="width: 500px;" class="form-control mr-sm-2" ng-model="searchString" type="search" placeholder="Bạn tìm gì..." aria-label="Search">
-							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+							<button class="btn btn-outline-success my-2 my-sm-0" ng-click="searchProduct()" type="submit">Search</button>
 						</form>
 					</li>
 					<li class="nav-item" style="padding-left: 25px; padding-right: 25px">
@@ -179,7 +181,10 @@
 							<a href="" data-toggle="dropdown"><div class="styleAvatar">{{avatar}}</div></a>
 							<div class="dropdown-menu" style="margin-left: -160px">
 							  <a class="dropdown-item" href=""><span style="color: cadetblue">{{username}}</span></a>
+							  <hr>
 							  <a class="dropdown-item" href=""><i class="fa fa-user"></i> Quản lý tài khoản</a>
+							  <a class="dropdown-item" href=""><i class="fa fa-fighter-jet"></i> Quản lý đơn hàng</a>
+							  <hr>
 							  <a class="dropdown-item" ng-click="logout()" href=""><i class="fa fa-sign-out"></i> Đăng xuất</a>
 							</div>
 						  </div>

@@ -9,7 +9,7 @@
     padding-right: 70px;
     background-color: #eff0f5;
     min-height: calc(100vh);
-    padding-bottom: 50px;
+    padding-bottom: 80px;
 }
 .payment{
     padding-top: 20px;
@@ -61,8 +61,13 @@
     z-index: 1;
     border-radius: 0px;
 }
+.carousel-item {
+    text-align: center;
+    background-color: #fff4de;
+}
+
 .carousel-inner img {
-    width: 100%;    
+    width: auto;   
     height: 320px;
 }
 .dropdown-menu li{
@@ -254,3 +259,27 @@ body {
 .steps-form-2 .steps-row-2 .steps-step-2 .btn-circle-2 .fa {
     font-size: 1.7rem; }
 /* end payment */
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    display: inline-block;
+    color: black;
+    float: left;
+    padding: 5px 12px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+
+}
+
+.pagination .active {
+    background-color: #f44336!important;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>

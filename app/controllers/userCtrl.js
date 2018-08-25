@@ -81,8 +81,6 @@ export const checkUserLoginCtrl = async (req, res) => {
                     res.send({});
                 }
             }
-
-            console.log(data)
             if(typeof data != 'boolean'){
                 var hash = {
                     id: data[0]._id,
@@ -295,7 +293,6 @@ export const loginWithGoogle = async(req, res)=>{
 
       }
       
-      console.log(data)
       var hash = {
          id: data._id,
          name: data.name,

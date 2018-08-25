@@ -1,4 +1,4 @@
-app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Data, myServices){
+app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, $timeout, Data, myServices){
     
     var path = 'getproductDetail' + '/'+ $stateParams.product_id;
     const EX_TIMES = new Date(new Date().getTime() + 24*3600*1000*20), HOURS = 3600*6, MAX_PVIEW = 8
@@ -21,13 +21,12 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Da
                      if(result.status == 'error'){
                         alert("Xay ra loi.")
                      }else{
-                           console.log(result)
+                        console.log(result)
                      }  
                   })
                }
-
-
                $scope.productDetail = result.productDetail[0];
+               $scope.productDetail.image_list = result.productDetail[0].image_list.split(',');
                $scope.productDetail.discountMoney = myServices.numberWithCommas(($scope.productDetail.discount/100) * $scope.productDetail.price);
                $scope.productDetail.price = myServices.numberWithCommas($scope.productDetail.price - ($scope.productDetail.discount/100) * $scope.productDetail.price);
                $scope.productDetail.content = $scope.productDetail.content.split(',');
@@ -127,23 +126,11 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, Da
       }else
          $cookies.remove('cview')
    }
+});
 
 
-
-
-
-   $('.lazy').slick({
-     lazyLoad: 'ondemand',
-     slidesToShow: 3,
-     slidesToScroll: 1
-   });
-
-
-
-
-
-
-
-
-
+$('.multiple-items').slick({
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 3
 });

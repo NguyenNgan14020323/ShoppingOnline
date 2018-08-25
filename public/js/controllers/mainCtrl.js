@@ -76,6 +76,12 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
 	   
     })
 
+    $scope.searchProduct = function() {
+        $rootScope.searchString = $scope.searchString;
+        var host = $window.location.host;
+        var landingUrl = "http://" + host + "#/searchProduct/" + $scope.searchString;
+        $window.location.href = landingUrl;
+    }
 
 });
 

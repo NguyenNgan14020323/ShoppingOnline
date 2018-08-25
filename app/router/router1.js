@@ -50,6 +50,8 @@ Router.get('/getAllProduct', productCtrl.getAllProductCtrl);
 Router.get('/productCatalog/:catalog_id', productCtrl.getProductCatalogCtrl);//get by parameters
 Router.get('/productCatalog', productCtrl.getProductCatalogCtrl1);//get by query string
 Router.get('/getproductDetail/:product_id', productCtrl.getProductDetailCtrl);
+Router.get('/getProductView', productCtrl.getProductView);
+Router.get('/searchProduct/:key', productCtrl.searchProduct);
 
 //Cart
 Router.get('/cartProduct', productCtrl.getCart);
