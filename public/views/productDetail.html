@@ -8,7 +8,11 @@
                 <hr>
             </div>
             <div style="margin-top: 20px">
-                è
+                <div ng-if="isfinishdownload">
+                    <slick slides-to-show=4 slides-to-scroll=1 init-onload=true data="awesomeThings" autoplay-speed=5000 autoplay="true" >
+                        <div ng-repeat="image in productDetail.image_list"><img ng-src = "{{ image }}" style="height:70px; border: 1px solid gray; width: 90%"></div>
+                    </slick>
+                </div>
             </div>
         </div>
         <div class="col-5"> 
@@ -25,71 +29,67 @@
             <p style="color: #f36e36; font-size: 125%; margin-bottom: 0px;">Giá: {{productDetail.price}} đ</p>
             <p style="font-size: 75%; color: darkgray">Giảm: <span style="text-decoration: line-through" >{{productDetail.discountMoney}} đ</span> -{{productDetail.discount}}%</p>
             <hr>
-                <p style="color: cornflowerblue; font-size: 125%; margin-bottom: 0px;">Nhóm màu:</p>
-                <div class="row">
-                    <div class="col-3"></div>
-                    <div class="col-9">
-                        <div ng-click="isWhite = true; isBlack=false; isGray=false; isYellow=false" style="background-color: white; cursor: pointer; float: left;border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;" ng-init="isWhite = true">
-                            <img ng-show="isWhite" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
-                        </div>
-                        <div ng-click="isBlack = true; isWhite= false; isGray=false; isYellow=false" ng-init="isBlack = false" style="background-color: black; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
-                              <img ng-show="isBlack" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
-                        </div>
-                        <div ng-click="isGray = true; isWhite=false; isBlack=false; isYellow=false" ng-init="isGray = false" style="background-color: #b1a398; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
-                              <img ng-show="isGray" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
-                        </div>
-                        <div ng-click="isGray = false; isWhite=false; isBlack=false; isYellow=true" ng-init="isYellow=false" style="background-color: yellow; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
-                              <img ng-show="isYellow" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
-                        </div>
+            <p style="color: cornflowerblue; font-size: 125%; margin-bottom: 0px;">Nhóm màu:</p>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-9">
+                    <div ng-click="isWhite = true; isBlack=false; isGray=false; isYellow=false" style="background-color: white; cursor: pointer; float: left;border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;" ng-init="isWhite = true">
+                        <img ng-show="isWhite" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
+                    </div>
+                    <div ng-click="isBlack = true; isWhite= false; isGray=false; isYellow=false" ng-init="isBlack = false" style="background-color: black; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
+                        <img ng-show="isBlack" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
+                    </div>
+                    <div ng-click="isGray = true; isWhite=false; isBlack=false; isYellow=false" ng-init="isGray = false" style="background-color: #b1a398; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
+                        <img ng-show="isGray" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
+                    </div>
+                    <div ng-click="isGray = false; isWhite=false; isBlack=false; isYellow=true" ng-init="isYellow=false" style="background-color: yellow; cursor: pointer; float: left; border: 1px solid gray; height: 30px; width: 30px; margin-right: 5px; position: relative;">
+                        <img ng-show="isYellow" src="./img/icon-check.png" style="position: absolute; width: 30px; left: 5px; bottom: 5px">
                     </div>
                 </div>
+            </div>
             <hr>
             <div class="row">
-                    <div class="col-3">
-                        <p style="color: cornflowerblue; font-size: 125%; margin-bottom: 1rem">Số lượng:</p>
-                    </div>
-                    <div class="col-1">
-                        <button style="width: 30px; background-color:#fafafa" ng-click="deAmount()">-</button>
-                    </div>
-                    <div class="col-1">
-                        <p style="text-align: center; padding-left: 10px">{{amount}}</p>
-                    </div>
-                    <div class="col-6">
-                        <button ng-click="addAmount()" style="width: 30; background-color: #eff0f5">+</button>
-                    </div>
+                <div class="col-3">
+                    <p style="color: cornflowerblue; font-size: 125%; margin-bottom: 1rem">Số lượng:</p>
+                </div>
+                <div class="col-1">
+                    <button style="width: 30px; background-color:#fafafa" ng-click="deAmount()">-</button>
+                </div>
+                <div class="col-1">
+                    <p style="text-align: center; padding-left: 10px">{{amount}}</p>
+                </div>
+                <div class="col-6">
+                    <button ng-click="addAmount()" style="width: 30; background-color: #eff0f5">+</button>
+                </div>
             </div>
-          
+
             <a href="#" style="width: 50%; background-color: #f36e36;" class="btn btn-primary" ng-click="addToBracket(productDetail._id)">Thêm vào giỏ hàng</a>
         </div>
 
-       <!--  <div class="col-3">
-
-            <div class="one-time">
-                <div><h3>1</h3></div>
-                <div><h3>2</h3></div>
-                <div><h3>3</h3></div>
-                <div><h3>4</h3></div>
-                <div><h3>5</h3></div>
-                <div><h3>6</h3></div>
-            </div>
-        </div> -->
-<!-- 
-        <slick slides-to-show="3" slides-to-scroll="1">
-            <div ng-repeat="thing in awesomeThings"><h3>{{ thing }}</h3></div>
-        </slick> -->
-
-        <!-- <slick slides-to-show="4" slides-to-scroll="1">
-            <div ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]"><h3>{{ i*8 }}</h3></div>
-        </slick> -->
-
         <div class="col-3">
-           <div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-              <div class="multiple-items" ng-repeat= "image in productDetail.image_list">
-                  <img src="{{image}}" style="width: 60px; height: 60px">
-              </div>
+            <div>
+                  <h5 style="color: red; font-size: 125%; padding-top: 0.25rem; padding-bottom: 0.5rem">Sản phẩm đã xem gần đây</h5>
             </div>
-        </div>
-       
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item" ng-class="{active:!$index}" ng-repeat="product in productDetail.topView">
+                        <a ui-sref="productDetail({product_id: product.data._id})" style="text-decoration: none"><img src="{{product.data.image_link}}" style="width: 100%" alt="Los Angeles"></a>
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+        </div> 
+
     </div>
     <div class="row">
         <div class="col-8" style="margin-top: 10px; padding: 30px; padding-bottom: 5rem; background-color: white;">
@@ -103,7 +103,7 @@
             <div style="margin-top: 10px;  padding: 30px; padding-bottom: 5rem; background-color: white;">
                 <h5 style="color: cornflowerblue; font-size: 175%; padding-bottom: 0.5rem">Các sản phẩm liên quan</h5>
             </div>
-             
+
         </div>
     </div>
 </div>
