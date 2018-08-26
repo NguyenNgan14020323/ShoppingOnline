@@ -4,6 +4,7 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, $t
     const EX_TIMES = new Date(new Date().getTime() + 24*3600*1000*20), HOURS = 3600*6, MAX_PVIEW = 8
     $scope.amount = 1;
 
+    $scope.isfinishdownload = false;
     Data.get(path, 0, {}).then(function (result) {
         if(result.status == 'error'){
            
@@ -11,9 +12,7 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, $t
            if (result.status == 404) {
 			      
            } else {
-               
-               //show top viewed products of this user
-               if($cookies.getObject('cview') != undefined)
+                if($cookies.getObject('cview') != undefined)
                {
                   views = JSON.parse($cookies.getObject('cview'))
 
@@ -21,7 +20,7 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, $t
                      if(result.status == 'error'){
                         alert("Xay ra loi.")
                      }else{
-                        console.log(result)
+                           $scope.productDetail.topView = result.listProduct;
                      }  
                   })
                }
@@ -30,6 +29,7 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, $t
                $scope.productDetail.discountMoney = myServices.numberWithCommas(($scope.productDetail.discount/100) * $scope.productDetail.price);
                $scope.productDetail.price = myServices.numberWithCommas($scope.productDetail.price - ($scope.productDetail.discount/100) * $scope.productDetail.price);
                $scope.productDetail.content = $scope.productDetail.content.split(',');
+               $scope.isfinishdownload = true;
 
                var is_in_cart = false
                if($cookies.getObject('pd_ws') != undefined){
@@ -126,11 +126,5 @@ app.controller('productDetailCtrl', function ($scope, $cookies, $stateParams, $t
       }else
          $cookies.remove('cview')
    }
-});
-
-
-$('.multiple-items').slick({
-  infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 3
+    
 });

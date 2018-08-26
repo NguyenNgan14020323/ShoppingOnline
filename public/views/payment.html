@@ -60,7 +60,7 @@
                             <label for="yourAddress-2" data-error="wrong" data-success="right">Message</label>
                             <textarea id="yourAddress-2" type="text" rows="2" class="md-textarea form-control"></textarea ng-model="step1.message">
                         </div>
-                        <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button" ng-click="events.step1.next()">Next</button>
+                        <button style="background-color: #20B2AA; width: 100px; color: white" class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button" ng-click="events.step1.next()">Next</button>
                 </div>
               
             </div>
@@ -74,12 +74,12 @@
                     <form>
                         <div class="row">
                             <div class="col-3">
-                                <input type="radio" ng-click="step2.isClick(true)"  name="gender">Thanh toán khi nhận hàng
+                                <input style="cursor: pointer;" type="radio" ng-click="step2.isClick(true)"  name="gender">Thanh toán khi nhận hàng
                             </div>
                             <div class="col-9">
-                                <input type="radio" ng-click="step2.isClick(false)"  name="gender">Thẻ tín dụng/ Thẻ ghi nợ
+                                <input style="cursor: pointer;" type="radio" ng-click="step2.isClick(false)"  name="gender">Thẻ tín dụng/ Thẻ ghi nợ
                             </div>
-                             <span style="color: red;font-style:italic;">{{step2.errorAll}}</span>
+                             <span style="color: red; font-style:italic;">{{step2.errorAll}}</span>
                         </div>
                     </form>
                     <hr>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button" ng-click="events.step2.previous()">Previous</button>
-                    <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button" ng-click="events.step2.next()">Next</button>
+                    <button style="background-color: #20B2AA; width: 100px; color: white" class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button" ng-click="events.step2.next()">Next</button>
                 </div>
               
             </div>
@@ -139,7 +139,7 @@
                      <span style="color: red;font-style:italic;">{{step3.elements.errorAgree}}</span>
                 </div>
                 <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button" ng-click="events.step3.previous()">Previous</button>
-                <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button" ng-click="events.step3.next()">Next</button>
+                <button style="background-color: #20B2AA; width: 100px; color: white" class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button" ng-click="events.step3.next()">Next</button>
             </div>
         </div>
     
@@ -149,7 +149,7 @@
                 <h3 class="font-weight-bold pl-0 my-4"><strong>Finish</strong></h3>
                 <h2 class="text-center font-weight-bold my-4">Payment completed!</h2>
                 <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button" ng-click="events.step4.previous()">Previous</button>
-                <button class="btn btn-success btn-rounded float-right" type="submit" ng-click="events.step4.finish()">Submit</button>
+                <button style="background-color: #20B2AA; width: 100px; color: white" class="btn btn-success btn-rounded float-right" type="submit" ng-click="events.step4.finish()">Submit</button>
             </div>
         </div>
 
