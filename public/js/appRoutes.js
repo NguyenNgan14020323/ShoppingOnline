@@ -50,6 +50,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvid
 				controller: 'searchProductCtrl',
 				templateUrl: 'views/search.html'
 			})
+			.state('profile', {
+				url: '/profile/:user_id',
+				controller: 'profileCtrl',
+				templateUrl: 'views/profile.html'
+			})
 			
 		$locationProvider.hashPrefix('');
 

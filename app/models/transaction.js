@@ -22,7 +22,6 @@ const transactionSchema = new Schema({
     payment: { type: String },
     payment_info: { type: String },
     message: { type: String },
-    security: { type: String },
     create_at: Date,
     updated_at: Date
 });
@@ -43,6 +42,12 @@ export const createTransaction = (req) => {
     return newTransaction.save((err, transaction) => {
         if (err) return Error(err);
 
-        return transaction
+        return transaction;
     })
 }
+
+export const getTransaction = (user_id) => Transaction.find({"user_id": user_id})
+    .then((transaction) => {
+        return transaction;
+    })
+    .catch(err => Error(err));

@@ -29,11 +29,13 @@
                         if (!result){
                             alert('Đăng nhập không thành công.');
                         } else {
+
                            $scope.father.showLogin = false;
                            $rootScope.username = result.name;
                            var temp = result.name;
                            temp = temp.substr(0, 1);
                            temp = temp.toUpperCase();
+                           $rootScope.userID = result.id;
                            $rootScope.avatar = temp
 
                            $window.sessionStorage.setItem("token", result.token);
@@ -81,7 +83,8 @@
                         var temp = result.name;
                         temp = temp.substr(0, 1);
                         temp = temp.toUpperCase();
-                        $rootScope.avatar = temp
+                        $rootScope.avatar = temp;
+                        $rootScope.userID = result.id;
 
                         $window.sessionStorage.setItem("token", result.token);
 

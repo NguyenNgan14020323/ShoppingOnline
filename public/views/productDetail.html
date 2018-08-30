@@ -10,7 +10,9 @@
             <div style="margin-top: 20px">
                 <div ng-if="isfinishdownload">
                     <slick slides-to-show=4 slides-to-scroll=1 init-onload=true data="awesomeThings" autoplay-speed=5000 autoplay="true" >
-                        <div ng-repeat="image in productDetail.image_list"><img ng-src = "{{ image }}" style="height:70px; border: 1px solid gray; width: 90%"></div>
+                        <div  class="card" style="margin: 5px; padding: 5px; text-align: center;" ng-repeat="image in productDetail.image_list">
+                            <img ng-src = "{{ image }}" style="height:60px; width: auto;">
+                        </div>
                     </slick>
                 </div>
             </div>
@@ -70,23 +72,10 @@
             <div>
                   <h5 style="color: red; font-size: 125%; padding-top: 0.25rem; padding-bottom: 0.5rem">Sản phẩm đã xem gần đây</h5>
             </div>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item" ng-class="{active:!$index}" ng-repeat="product in productDetail.topView">
-                        <a ui-sref="productDetail({product_id: product.data._id})" style="text-decoration: none"><img src="{{product.data.image_link}}" style="width: 100%" alt="Los Angeles"></a>
-                    </div>
+            <div  class="scrollbar" id="style-3" style="height: 470px; overflow: auto;">
+                <div class="card" ng-repeat="product in productDetail.topView" style="background-color: white; margin: 10px; padding: 10px; text-align: center;">
+                    <a ui-sref="productDetail({product_id: product.data._id})"  style="text-decoration: none"><img src="{{product.data.image_link}}" style="width: auto; height: 200px" alt="Los Angeles"></a>
                 </div>
-
-                <!-- Left and right controls -->
-                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
             </div>
         </div> 
 

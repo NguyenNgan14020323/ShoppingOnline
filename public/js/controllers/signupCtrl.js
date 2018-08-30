@@ -275,7 +275,6 @@ app.directive('myName', function() {
 
             timer = $timeout(function() {
                if($scope.lengthtemp == $scope.email.length && $scope.emailerror1 == ""){
-                  console.log("gui mail")
                   if(!$scope.flagsendmail){
                      $scope.flagsendmail = true;//sendmail one time
                      Data.post('sendauthenemail', 1, { email: $scope.email }).then(function (result) {

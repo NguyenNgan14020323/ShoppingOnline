@@ -15,7 +15,6 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
         showXModal: true
     }
 
-    console.log("Alway run main. " + $scope.father.showXModal)
 
    //duy tri trang thai dang nhap neu con phien giao dich
     var checkToken = $window.sessionStorage.getItem('token')
@@ -33,7 +32,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
                     var temp = result.name;
                     temp = temp.substr(0,1);
                     temp = temp.toUpperCase();
-                    $rootScope.avatar = temp
+                    $rootScope.avatar = temp;
                 }
 
             }
@@ -51,6 +50,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $cookies, $window, Data
                 } else {
                     $scope.father.showLogin = false;
                     $rootScope.username = result.name; 
+                    $rootScope.userID = result.id;
                     var temp = result.name;
                     $window.sessionStorage.setItem("token", result.token);//global variable token
                     temp = temp.substr(0,1);

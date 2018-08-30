@@ -1,5 +1,5 @@
 
-app.controller('homeCtrl', function ($scope, Data, myServices){
+app.controller('homeCtrl', function ($rootScope, $scope, Data, myServices, $cookies){
 
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -16,6 +16,12 @@ app.controller('homeCtrl', function ($scope, Data, myServices){
       $scope.itemsPerPage = num;
       $scope.currentPage = 1;
     }
+
+
+    if($cookies.get('id') !== undefined)
+        $rootScope.userID = $cookies.get('id');
+    else
+        $rootScope.userID = 404;
 
     Data.get('getAllProduct', 0, {}).then(function (result) {
 
