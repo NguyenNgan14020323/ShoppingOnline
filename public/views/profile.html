@@ -1,0 +1,86 @@
+<div ng-controller="profileCtrl" class="profile">
+      <div class="row">
+      	<div class="col-3" style="padding: 10px; ">
+            <div style="margin-right: 10px; padding-bottom: 30px; padding-top: 15px; padding-left: 10px; background-color: white;">
+              <h5 style="color: #1a9cb7; font-size: 125%; padding-top: 0.25rem; padding-bottom: 0.5rem">Xin chào, {{username}}</h5>
+              <hr>
+              <form>
+                 <input type="radio" ng-model="myVar" value="info"><span style="color: #757575; padding-left: 15px;">Thông tin cá nhân</span>
+                 <hr>
+                 <input type="radio"  ng-model="myVar" value="changeInfo"><span style="padding-top: 0.25rem; padding-bottom: 0.5rem;color: #757575; padding-left: 15px;">Chỉnh sửa thông tin cá nhân</span>
+                 <hr>
+                 <input type="radio" ng-model="myVar" value="changePass"><span style="color: #757575; padding-left: 15px;">Đổi mật khẩu</span>
+                 <hr>
+                 <input type="radio" ng-model="myVar" value="order"><span style="color: #757575; padding-left: 15px;">Đơn hàng của tôi</span>
+               </form>
+            </div>
+    
+        </div>
+        <div class="col-9" style="margin-top: 10px; padding: 30px; background-color: white;">
+            <div ng-switch= "myVar">
+                <div ng-switch-when= "info">
+                    <div class="row">
+                      <div class="col-4">
+                          <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Tên</h3>
+                          <div style="color: #212121; padding-top: 7px; font-size: 14px">Pham Linh</div>
+                          <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-top: 40px; margin-bottom: 10px">Số điện thoại</h3>
+                          <div style="color: #212121; padding-top: 7px; font-size: 14px">0963216364</div>
+                      </div>
+                      <div class="col-4">
+                          <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Địa chỉ email</h3>
+                          <div style="color: #212121; padding-top: 7px; font-size: 14px">phamvanlinh20111993@gmail.com</div>
+                      </div>
+                      <div class="col-4">
+                        <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Địa chỉ của bạn</h3>
+                        <div style="color: #212121; padding-top: 7px; font-size: 14px">Yên Khoái - Lộc Bình - Lạng Sơn</div>
+                      </div>
+                    </div>
+                </div>
+                 <div ng-switch-when= "changeInfo">
+                    <div class="row">
+                      <div class="col-4">
+                          <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Tên</h3>
+                          <input type="text" name="" style="width: 100%;color: #212121; padding: 10px; font-size: 14px" value="Phạm Linh">
+                      
+                          <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-top: 40px; margin-bottom: 10px">Số điện thoại</h3>
+                           <input type="text" name="" style="width: 100%;color: #212121; padding: 10px; font-size: 14px" value="0963216364">
+                      </div>
+                      <div class="col-4">
+                          <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Địa chỉ email</h3>
+                           <input type="text" name="" style="width: 100%;color: #212121; padding: 10px; font-size: 14px" value="phamvanlinh20111993@gmail.com">
+                      </div>
+                      <div class="col-4">
+                        <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Địa chỉ của bạn</h3>
+                        <input type="text" name="" style="width: 100%;color: #212121; padding: 10px; font-size: 14px" value="Yên Khoái - Lộc Bình - Lạng Sơn">
+                      </div>
+                    </div>
+                    <div class="row" style="padding-top: 40px; float: right; margin-right: 5px">
+                      <button type="button" class="btn btn-success" style="background-color: #f57224; width: 200px; height: 45px;">Lưu thay đổi</button>
+                    </div>
+                </div>
+                <div ng-switch-when= "changePass">
+                    <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Mật khẩu cũ</h3>
+                    <input type="text" name="" style="width: 40%;color: #212121; padding: 10px; font-size: 14px" placeholder="Mật khẩu cũ">
+                    <h3 style="padding-top: 20px;color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Mật khẩu mới</h3>
+                    <input type="text" name="" style="width: 40%;color: #212121; padding: 10px; font-size: 14px" placeholder="Mật khẩu mới">
+                    <h3 style="padding-top: 20px;color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Nhập lại mật khẩu</h3>
+                    <input type="text" name="" style="width: 40%;color: #212121; padding: 10px; font-size: 14px" placeholder="Nhập lại mật khẩu">
+                    <div class="row" style="padding-top: 40px; float: right; margin-right: 5px">
+                      <button type="button" class="btn btn-success" style="background-color: #f57224; width: 200px; height: 45px;">Lưu thay đổi</button>
+                    </div>
+                </div>
+                <div ng-switch-when= "order">
+                   <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Đơn hàng</h3>
+                   <hr>
+                    <div class="row" style="min-height: 70px">
+                        <div class="col-2"><img src=""></div>
+                        <div class="col-3"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">Điện thoại Samsung S9</h3></div>
+                        <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">Qty: 1</h3></div>
+                        <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">Đã giao hàng</h3></div>
+                        <div class="col-3"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">Đã giao ngày 30 thg 3 2018</h3></div>
+                    </div>
+                    <hr>
+                </div>
+        </div>
+    </div>
+</div>

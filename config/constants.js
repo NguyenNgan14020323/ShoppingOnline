@@ -18,7 +18,8 @@ const GLOBAL_VARRIABLE = {
 		L1006: "Đăng nhập thất bại",
 		L1007: "Lỗi chứng thực Cookie.",
 		L1008: "Tài khoản đã được đăng kí và sử dụng.",
-		L1009: "Giao dịch không thành công. Vấn đề bảo mật hoặc sản phẩm đã bán hết."
+		L1009: "Giao dịch không thành công. Vấn đề bảo mật hoặc sản phẩm đã bán hết.",
+		L1010: "Giao dịch không thành công. Tài khoản của bạn không đủ"
 	},
 	success: {
 		A1001: "Đã gửi mã xác thực mail thành công, vui lòng kiểm tra email.",

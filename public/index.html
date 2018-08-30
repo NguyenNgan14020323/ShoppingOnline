@@ -43,6 +43,7 @@
 	<script src="js/controllers/cartCtrl.js"></script>
 	<script src="js/controllers/paymentCtrl.js"></script>
 	<script src="js/controllers/searchProductCtrl.js"></script>
+	<script src="js/controllers/profileCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	
 </head>
@@ -182,7 +183,7 @@
 							<div class="dropdown-menu" style="margin-left: -160px">
 							  <a class="dropdown-item" href=""><span style="color: cadetblue">{{username}}</span></a>
 							  <hr>
-							  <a class="dropdown-item" href=""><i class="fa fa-user"></i> Quản lý tài khoản</a>
+							  <a class="dropdown-item" ui-sref="profile({user_id: userID})" href=""><i class="fa fa-user"></i> Quản lý tài khoản</a>
 							  <a class="dropdown-item" href=""><i class="fa fa-fighter-jet"></i> Quản lý đơn hàng</a>
 							  <hr>
 							  <a class="dropdown-item" ng-click="logout()" href=""><i class="fa fa-sign-out"></i> Đăng xuất</a>

@@ -54,14 +54,16 @@ app.directive('paymentCreditname',function() {
       link: function(scope, element, attr, mCtrl) {
       	function myValidation(value) {
 
-            var nlength = /(?=.{3,10})/
-            var nvalidate = /^[A-Za-z]{3,10}$/
+            var nlength = /(?=.{3,50})/
+       //     var nvalidate = /^[A-Za-z]{3,50}$/
+            //validate name
+            var nvalidate = /^(?:[A-Z][a-z]+\s){1,5}[A-Z][a-z]+$/
 
             if (!nlength.test(value)) {
-               scope.step2.paymentOnCredit.errorName = "*) Tên thẻ tối thiểu dài 3 và tối đa 10 kí tự."
+               scope.step2.paymentOnCredit.errorName = "*) Tên thẻ tối thiểu dài 3 và tối đa 50 kí tự."
             }else{
                if(value.match(nvalidate) == null)
-                  scope.step2.paymentOnCredit.errorName = "*) Tên thẻ chỉ chứa kí tự hoa - thường."
+                  scope.step2.paymentOnCredit.errorName = "*) Vui lòng nhập tên họ đầy đủ."
                else
                   scope.step2.paymentOnCredit.errorName = ""
             }
@@ -507,7 +509,7 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 						if(result.error == true){
 							alert(result.message)
 						}else{
-							alert("Giao dịch thành công. Xin mời quý khách tiếp tục mua hàng.")
+							alert(result.message)
 							if(notbuy.length > 0)
 								$cookies.putObject('pd_ws', JSON.stringify(notbuy), 
                            		{secure: false, expires: new Date(new Date().getTime() + 24*3600*1000*20)})
@@ -521,7 +523,7 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 			previous:()=>{
 				$scope.refreshcolor()
 				$scope.step3.color = "orange"
-            $scope.step3.show = true
+                $scope.step3.show = true
 				$scope.step4.show = false
 			}
 		}
