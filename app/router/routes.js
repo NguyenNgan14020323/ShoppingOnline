@@ -97,6 +97,7 @@ Router.use(function (req, res, next) {
 
 //User
 Router.post('/createUser', userCtrl.createUserCtrl);
+Router.post('updateUser', userCtrl.updateUserCtrl);
 Router.post('/login', userCtrl.checkUserLoginCtrl);
 //Router.post('/loginAPI', userCtrl.LoginAPI);
 Router.post('/keepstate', verifyToken, userCtrl.keepStateLogin);
