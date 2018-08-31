@@ -62,6 +62,19 @@ export const createUserCtrl = async (req, res) => {
     }
 }
 
+export const updateUserCtrl = async (req, res) => {
+    var id = req.params.user_id;
+    try {
+        const data = await userModel.updateUser(id, req.body);
+        res.status(200).json({
+          data,
+          status: 200
+        });
+    } catch (err){
+        return Error(err)
+    } 
+}
+
 export const checkUserLoginCtrl = async (req, res) => {
 
     try {
