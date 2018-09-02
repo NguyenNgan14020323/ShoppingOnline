@@ -171,7 +171,7 @@ export const getTransactionCtrl = async (req, res) => {
                         status: temp[j].status,
                         transaction_id: temp[j].transaction_id,
                         name: product[0].name, 
-                        image_cover: product[0].image_cover,
+                        image_cover: product[0].image_link,
                         price: product[0].price,
                         discount: product[0].discount 
                      }

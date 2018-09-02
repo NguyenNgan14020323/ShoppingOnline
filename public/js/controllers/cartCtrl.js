@@ -170,7 +170,7 @@ app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 
 		var r = confirm("Bạn có đồng ý loại bỏ sản phẩm này khỏi đơn hàng?")
 		if(r){
-
+			console.log($scope.listProduct)
 			for (let i = 0; i <  $scope.listProduct.length; i++){
 		   	if($scope.listProduct[i]._id == id){
 		   		$scope.listProduct[i].show = false//an gia tri
