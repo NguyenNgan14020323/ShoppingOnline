@@ -58,7 +58,7 @@ passport.use(new FacebookStrategy({
 //all 
 Router.use(function (req, res, next) {
 	//res.setHeader('Access-Control-Allow-Origin', '*');//allow all of client response when request to server 
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 	res.setHeader('Access-Control-Allow-Headers', 'Content-type');
 	res.setHeader('Access-Control-Allow-Headers', 'X-Signature');
@@ -69,25 +69,20 @@ Router.use(function (req, res, next) {
 
 	var Cookie = req.headers.cookie.split("; "),
         _csrf_token, i = 0, client_csrf
-     //way 1: reading cookie in req.headers
-    // for(; i < Cookie.length; i++){
-    //     if(Cookie[i].search(/^XSRF_TOKEN=/) != -1){
-    //         _csrf_token = Cookie[i].split('XSRF_TOKEN=')[1];
-    //         break;
-    //     }
-    // }
-
-    //way 2: reading cookie in req.cookies
+     
     _csrf_token = req.cookies.XSRF_TOKEN
- 	console.log(_csrf_token + "   " + client_csrf)
+ 	
     if(req.method == "GET"){//not check with get
 		client_csrf = _csrf_token
-    }else
+    }else{
     	client_csrf = req.body._csrftoken
+    }
 
-    if(_csrf_token === client_csrf)
+    console.log(_csrf_token + "   " + client_csrf)
+
+    if(_csrf_token === client_csrf){
 		next()
-	else{
+	 }else{
 	    return res.status(404).send({
 		   success: false, 
 		   message: constants.error.L1007 
@@ -97,7 +92,7 @@ Router.use(function (req, res, next) {
 
 //User
 Router.post('/createUser', userCtrl.createUserCtrl);
-Router.post('updateUser', userCtrl.updateUserCtrl);
+Router.post('/updateUser', verifyToken, userCtrl.updateUserCtrl);
 Router.post('/login', userCtrl.checkUserLoginCtrl);
 //Router.post('/loginAPI', userCtrl.LoginAPI);
 Router.post('/keepstate', verifyToken, userCtrl.keepStateLogin);
