@@ -513,9 +513,11 @@ app.controller('paymentCtrl', function ($scope, $window, $state, $cookies, Data)
 							if(notbuy.length > 0)
 								$cookies.putObject('pd_ws', JSON.stringify(notbuy), 
                            		{secure: false, expires: new Date(new Date().getTime() + 24*3600*1000*20)})
-							else
+							else{
 								$cookies.remove('pd_ws')
-					      		$state.go('home', '')
+					   		$scope.$parent.father.bracket = 0;//update bracket
+							}
+							$state.go('home', '')
 						}
 					})
 				}

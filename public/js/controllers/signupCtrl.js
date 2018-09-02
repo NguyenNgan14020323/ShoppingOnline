@@ -52,7 +52,7 @@ app.directive('myName', function() {
                               scope.emailerror1 = ""
                            }
                         });
-                     }, 1000)  
+                     }, 1000);  
                 }
 
                return value;//dùng trong scope ở controller
@@ -73,9 +73,9 @@ app.directive('myName', function() {
 
                var addvalidate = /.{6,}/
                if(!addvalidate.test(value))
-               	scope.addresserror = "Địa chỉ liên hệ không chính xác."
-               else
-               	scope.addresserror = ""
+               	 scope.addresserror = "Địa chỉ liên hệ không chính xác."
+               else 
+               	 scope.addresserror = ""
 
                return value;//dùng trong scope ở controller
             }

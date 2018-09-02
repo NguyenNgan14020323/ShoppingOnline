@@ -86,3 +86,12 @@ export const searchProduct = (key) => Product.find({"name":  { $regex:  ".*" + k
         return products;
     })
     .catch(err => Error(err));
+
+export const findProductById = (id) => Product.find({ _id: id})
+    .then((product) => {
+        if (product.length < 1) {
+            return false;
+        }
+        return product;
+    })
+    .catch(err => Error(err));

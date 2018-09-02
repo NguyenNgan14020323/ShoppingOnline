@@ -64,6 +64,6 @@ Router.post('/buyProduct', verifyToken, productCtrl.buyProduct);
 
 //Transaction
 Router.post('/createTransaction', verifyToken, transactionCtrl.createTransactionCtrl);
-Router.get('/getTransaction/:user_id', transactionCtrl.getTransactionCtrl);
+Router.get('/getTransaction', transactionCtrl.getTransactionCtrl);
 
 export default Router;

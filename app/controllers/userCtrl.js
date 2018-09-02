@@ -19,6 +19,29 @@ const PRIVATE_KEY_TOKEN = constants.key_decode_token
     return text;
 }
 
+const compareInfo = (olddata, newdata)=>{
+
+   var data = {}
+
+   if(olddata.email !== newdata.email){
+      data.email = newdata.email
+   }
+
+   if(olddata.name !== newdata.name){
+      data.name = newdata.name
+   }
+
+   if(olddata.phone !== newdata.phone){
+      data.phone = newdata.phone
+   }
+
+   if(olddata.address !== newdata.address){
+      data.address = newdata.address
+   }
+
+   return data
+}
+
 export const createUserCtrl = async (req, res) => {
 
     req.body.password = CryptoJS.SHA256(req.body.password).toString();
@@ -48,7 +71,7 @@ export const createUserCtrl = async (req, res) => {
             req.session.uid = data._id
 
             var COOKIE_LIVE_ID = 24*3600*1000*7 ;
-            res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: true });//create cookies
+            res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: false });//create cookies
             res.cookie('keepme', true, {maxAge: COOKIE_LIVE_ID});
         }else{
             dataRes.error = true
@@ -63,16 +86,79 @@ export const createUserCtrl = async (req, res) => {
 }
 
 export const updateUserCtrl = async (req, res) => {
-    var id = req.params.user_id;
-    try {
-        const data = await userModel.updateUser(id, req.body);
-        res.status(200).json({
-          data,
-          status: 200
-        });
-    } catch (err){
-        return Error(err)
-    } 
+
+     var dataRes = {
+         error: true,
+         errcode: 1007,
+         message: "Some error here. Please try again.",
+     }
+
+     try {
+
+      if(req.body.type !== undefined)
+      {
+         if(req.body.type == "information"){
+            if(req.body.infouser){
+               var olddata = await userModel.checkUserLoginbyEmail(req.authenticate.email),
+                   newinfo = compareInfo(olddata, req.body.infouser),
+                   data = await userModel.updateUser(olddata._id, newinfo); 
+
+                console.log(newinfo)
+
+               dataRes.error = false
+               
+               var getdata = await userModel.checkUserLoginbyId(olddata._id);
+
+               dataRes.data = {
+                  id: getdata[0]._id,
+                  name: getdata[0].name,
+                  email: getdata[0].email,
+                  address: getdata[0].address,
+                  phone: getdata[0].phone
+               }
+
+                var token = jwt.sign(dataRes.data, PRIVATE_KEY_TOKEN, {algorithm: 'HS256', expiresIn: TOKEN_TIME}),
+                    userid = CryptoJS.AES.encrypt(getdata[0]._id.toString(), KEY_HASH).toString();
+
+                dataRes.data.token = token
+                dataRes.data.id = userid
+            }
+         }else if(req.body.type != undefined && req.body.type == "password" 
+               && req.body.new !== undefined && req.body.old !== undefined){
+
+            const olddata = await userModel.checkUserLoginbyEmail(req.authenticate.email);
+            var passwordencode =  CryptoJS.SHA256(req.body.old).toString(),
+                newpassencode = CryptoJS.SHA256(req.body.new).toString()
+   
+            if(olddata.password == passwordencode){
+               if(newpassencode != olddata.password ){
+                  var getdata = await userModel.checkUserLoginbyId(olddata._id);
+                  const data = await userModel.updateUser(olddata._id, {password: newpassencode}); 
+                 
+                  dataRes.error = false
+                  dataRes.errcode = 1010
+                  olddata.password = newpassencode
+                  dataRes.message = "Cập nhật mật khẩu thành công."
+                 
+               }else{
+                  dataRes.errcode = 1008
+                  dataRes.message = "Mật khẩu mới bị trùng với mật khẩu cũ."
+               }
+            }else{
+               dataRes.errcode = 1008;
+               dataRes.message = "Mật khẩu cũ không chính xác. "
+            }
+         }
+      }
+   
+      res.status(200).json({
+         data: dataRes,
+         status: 200
+      });
+
+     } catch (error){
+         return Error(error)
+     } 
 }
 
 export const checkUserLoginCtrl = async (req, res) => {
@@ -87,9 +173,9 @@ export const checkUserLoginCtrl = async (req, res) => {
                 data = await userModel.checkUserLogin(req);
             }else {//login with cookie
                 if(req.cookies.id !== undefined){
-                    var bytes  = CryptoJS.AES.decrypt(req.cookies.id, KEY_HASH);
-                    var deid = bytes.toString(CryptoJS.enc.Utf8);
-                    data = await userModel.checkUserLoginbyId(deid);
+                  var bytes  = CryptoJS.AES.decrypt(req.cookies.id, KEY_HASH);
+                  var deid = bytes.toString(CryptoJS.enc.Utf8);
+                  data = await userModel.checkUserLoginbyId(deid);
                 }else{
                     res.send({});
                 }
@@ -116,7 +202,7 @@ export const checkUserLoginCtrl = async (req, res) => {
                 // req.session.password = data[0].password
                  req.session.uid = data[0]._id
                  var COOKIE_LIVE_ID =  24*3600*1000*7;
-                 res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: true });//create cookies
+                 res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: false });//create cookies
                  res.cookie('keepme', true, {maxAge: COOKIE_LIVE_ID});
             }else{
                 dataRes = {
@@ -229,9 +315,10 @@ export const getUserInfo = async(req, res)=>{
          status: "error",
          message: constants.error.L1006
       }, 
-         data = req.authenticate
+      data = req.authenticate
+    //  console.log(data)
       if(req.query.id == undefined || req.query.id == null){
-        
+         var userinfo;
          dataRes = {
             id: CryptoJS.AES.encrypt(data.id.toString(), KEY_HASH).toString(),
             name: data.name,
@@ -239,6 +326,7 @@ export const getUserInfo = async(req, res)=>{
             phone: data.phone,
             address: data.addres
          }
+
       }else{//by get
          dataRes = await userModel.checkUserLoginbyId(data.id);
       }
@@ -325,7 +413,7 @@ export const loginWithGoogle = async(req, res)=>{
       req.session.uid = data._id
 
       var COOKIE_LIVE_ID = 24*3600*1000*7 ;
-      res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: true });//create cookies
+      res.cookie('id', userid, {maxAge: COOKIE_LIVE_ID, httpOnly: false });//create cookies
       res.cookie('keepme', true, {maxAge: COOKIE_LIVE_ID});
       res.redirect('/')
    }catch (error) {

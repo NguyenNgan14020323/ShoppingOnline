@@ -1,9 +1,24 @@
 'use strict';
 
+
+ app.factory("AuthenticationService",['$location', '$cookies', function($location, $cookies) {
+    	return {
+	        permit: function(){
+	            if($cookies.get('id')){
+	            	return true;
+	            }else{
+	            	$location.path('/')
+	            	return false;
+	            }
+	        }
+    };
+ }]);
+
+
 app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvider', 'slickCarouselConfig',
 	function($stateProvider, $urlRouterProvider, $locationProvider, $qProvider, slickCarouselConfig) {
 	
-        $qProvider.errorOnUnhandledRejections(false);
+      $qProvider.errorOnUnhandledRejections(false);
 
 		// For unmatched routes
 		$urlRouterProvider.otherwise('');
@@ -43,7 +58,14 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvid
 			.state('payment', {
 				url: '/payment',
 				controller: 'paymentCtrl',
-				templateUrl: 'views/payment.html'
+				templateUrl: 'views/payment.html',
+				resolve: {
+			        "check" : function(AuthenticationService){   
+			            if(!AuthenticationService.permit()){ 
+			                alert("You don't have access here.Please login.");
+			            }
+	        		}
+    			}
 			})
 			.state('search', {
 				url: '/searchProduct/:key',
@@ -53,7 +75,14 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvid
 			.state('profile', {
 				url: '/profile/:user_id',
 				controller: 'profileCtrl',
-				templateUrl: 'views/profile.html'
+				templateUrl: 'views/profile.html',
+				resolve: {
+			        "check" : function(AuthenticationService){   
+			            if(!AuthenticationService.permit()){ 
+			                alert("You don't have access here.Please login.");
+			            }
+	        		}
+    			}
 			})
 			
 		$locationProvider.hashPrefix('');

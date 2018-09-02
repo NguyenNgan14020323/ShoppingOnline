@@ -105,20 +105,32 @@ app.controller("cartCtrl", function($scope, $cookies, $state, Data, myServices){
 		$scope.checked = !$scope.checked;
 
 		if($scope.checked){
-			for(let i = 0; i < $scope.listProduct.length; i++){
+			var length = 0;
+			if($scope.listProduct !== undefined){
+				length = $scope.listProduct.length
+			}
+
+			for(let i = 0; i < length; i++){
 				$scope.listProduct[i].ischecked = true//check all
 			}
 
-	      updateInfo()
+	       if(length > 0)
+	       	  updateInfo()
 		}else{
-			for(let i = 0; i < $scope.listProduct.length; i++){
+
+			var length = 0;
+			if($scope.listProduct !== undefined){
+				length = $scope.listProduct.length
+			} 
+
+			for(let i = 0; i < length; i++){
 				$scope.listProduct[i].ischecked = false//uncheck all
 			}
 
 			$scope.total = 0;
-		   $scope.shipfee = 0;
-	      $scope.numofpd = 0;
-	      $scope.alltotal = 0;
+		    $scope.shipfee = 0;
+	        $scope.numofpd = 0;
+	        $scope.alltotal = 0;
 		}
 	}
 
