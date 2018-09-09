@@ -84,6 +84,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvid
 	        		}
     			}
 			})
+			.state('orderManager', {
+				url: '/orderManager/:user_id',
+				controller: 'orderManagerCtrl',
+				templateUrl: 'views/orderManager.html'
+			})
 			
 		$locationProvider.hashPrefix('');
 

@@ -1,4 +1,3 @@
-
 app.directive('changeName', function() {
     return {
         require: 'ngModel',
@@ -204,32 +203,10 @@ app.controller('profileCtrl', function ($scope, $cookies, $stateParams, Data, my
 
 	$scope.myChoose = function(myVar){
 
-		if(myVar == "changeInfo"){
+		if(myVar == "changeInfo" || myVar =="changePass"){
 			$scope.olduserInfo = {...$scope.userInfo}
-		}else if(myVar == "changePass"){
-			
-		}else if(myVar == "order"){ //order
-         //boostrap angular
-          $('#myModal').modal({backdrop: 'static', keyboard: false})
-          $('#myModal').modal('show');
-			if($cookies.get('id') !== undefined){
-
-				Data.get('getTransaction', 0, {user_id: $cookies.get('id')}).then(function (result) {
-			      if(result.error){
-                  $('#myModal').modal('hide');
-			         alert(result.error)
-			      }else{
-                  $('#myModal').modal('hide');
-                  $scope.transaction = result.data
-                  for(let i = 0; i < result.data.length; i++){
-                     $scope.transaction[i].orderInfo.index = i+1;
-                  }
-			        	console.log($scope.transaction)
-			      }
-			   });
-   		}else{
+		} else{
    			alert("Sometime wrong. Please login again.")
-   		}
    	}
 	}
 
@@ -251,7 +228,6 @@ app.controller('profileCtrl', function ($scope, $cookies, $stateParams, Data, my
 			      alert(result.data.message)
 			   }else{
                alert("Cập nhật thông tin thành công.")
-               console.log(result.data.data)
                $scope.userInfo.name = result.data.data.name
                $scope.userInfo.email = result.data.data.email
                $scope.userInfo.phone = result.data.data.phone
@@ -293,9 +269,8 @@ app.controller('profileCtrl', function ($scope, $cookies, $stateParams, Data, my
 			});
 		}
 	}
-
+ 
    $scope.enterOldPass = function(){
       $scope.editoldpassworderror = ""
    }
-
 })
