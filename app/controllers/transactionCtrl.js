@@ -169,7 +169,9 @@ export const getTransactionCtrl = async (req, res) => {
                      dataOrder[index].products[j] = {
                         qty: temp[j].qty,
                         status: temp[j].status,
+                        updated_at: temp[j].updated_at,
                         transaction_id: temp[j].transaction_id,
+                        order_id: temp[j].id,
                         name: product[0].name, 
                         image_cover: product[0].image_link,
                         price: product[0].price,
@@ -193,6 +195,19 @@ export const getTransactionCtrl = async (req, res) => {
         }
 
     } catch (error) {
+        throw Error(error);
+    }
+}
+
+export const deleteOrderCtrl = async(req, res) => {
+    try {
+        orderModel.deleteOrder(req.body.order_id, function(err, data){
+            res.status(200).json({
+                data
+            })
+        });
+        
+    } catch(error) {
         throw Error(error);
     }
 }

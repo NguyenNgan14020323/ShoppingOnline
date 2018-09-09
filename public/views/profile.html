@@ -2,11 +2,11 @@
          <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-body">
-              <p>Loading......</p>
+    
+            <div class="modal-body" style="padding: 0; text-align: center; padding-top: 15rem">
+              <img ng-src="../img/loading.gif" style="width: 40px">
             </div>
-          </div>
+
         </div>
       </div>
 
@@ -22,7 +22,6 @@
                  <hr>
                  <input type="radio" ng-model="myVar" value="changePass" ng-click = "myChoose('changePass')"><span style="color: #757575; padding-left: 15px;">Đổi mật khẩu</span>
                  <hr>
-                 <input type="radio" ng-model="myVar" value="order" ng-click = "myChoose('order')"><span style="color: #757575; padding-left: 15px;">Đơn hàng của tôi</span>
                </form>
             </div>
     
@@ -94,30 +93,6 @@
 
                     <div class="row" style="padding-top: 40px; float: right; margin-right: 5px">
                       <button type="button" class="btn btn-success" style="background-color: #f57224; width: 200px; height: 45px;" ng-click="updatePassword()">Lưu thay đổi</button>
-                    </div>
-                </div>
-
-                <div ng-switch-when= "order">
-                   <h3 style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Danh sách đơn hàng</h3>
-                   <hr>
-                    <div ng-repeat="data in transaction">
-
-                       <div class="row" style="min-height: 70px">
-                          <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px;font-weight: bold;">Đơn hàng {{data.orderInfo.index}}</h3></div>
-                          <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{data.orderInfo.status}}</h3></div>
-                          <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{data.orderInfo.payment_info}}</h3></div>
-                          <div class="col-3"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{data.orderInfo.payment}}</h3></div>
-                          <div class="col-3"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{data.orderInfo.updated_at}}</h3></div>
-                       </div>
-
-                        <div class="row" style="min-height: 70px" ng-repeat="product in data.products">
-                            <div class="col-2"><img src="{{product.image_cover}}" style="height:40px;width:40px;"></div>
-                            <div class="col-3"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{product.name}}</h3></div>
-                            <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">Qty: {{product.qty}}</h3></div>
-                            <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{product.price}} </h3></div>
-                            <div class="col-3"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{product.discount}}%</h3></div>
-                        </div>
-                      <hr>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,37 @@
+<div ng-controller="orderManagerCtrl" class="profile">
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-body" style="padding: 0; text-align: center; padding-top: 15rem">
+          <img ng-src="../img/loading.gif" style="width: 40px">
+        </div>
+
+    </div>
+  </div>
+  <div>
+  	<h5 style="color: #1a9cb7; font-weight: 400; margin-bottom: 10px">Danh sách đơn hàng</h5>
+   <hr>
+    <div ng-repeat="data in transaction" style="background-color: white; padding: 20px">
+
+       <div class="row" style="min-height: 70px">
+          <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px;font-weight: bold;">Đơn hàng {{data.orderInfo.index}}</h3></div>
+          <div class="col-8" style="color: #424242; font-size: 12px; font-weight: 400; margin-bottom: 10px">Đặt ngày: {{data.orderInfo.updated_at | date:"dd/MM/yyyy hh:mm"}}</div>
+          
+       </div>
+
+        <div class="row" style="min-height: 70px" ng-repeat="product in data.products">
+            <div class="col-2"><img src="{{product.image_cover}}" style="height:50px;width:50px;"></div>
+            <div class="col-4"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">{{product.name}}</h3></div>
+            <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">Qty: {{product.qty}}</h3></div>
+            <div class="col-2"><h3 style="color: #424242; font-size: 14px; font-weight: 400; margin-bottom: 10px">
+                <span ng-if="product.status == 0">Đang xử lý</span>
+                <span ng-if="product.status == 1">Đang giao hàng</span>
+                <span ng-if="product.status == 2">Đã giao ngày {{product.updated_at | date:"dd/MM/yyyy"}}</span>
+                <span ng-if= "product.status == 3">Đã hủy đơn {{product.updated_at | date:"dd/MM/yyyy"}}</span>
+            </h3></div>
+             <div class="col-2" style="float: right;" ng-if= "product.status == 0 || product.status == 1"><h3 style="cursor: pointer; color: #1a9cb7; font-size: 14px; font-weight: 200; margin-bottom: 10px;font-weight: bold;"><a confirmed-click= "{{product.order_id}}" ng-confirm-click = "Bạn có muốn hủy đơn này này không?">Hủy đơn hàng</a></h3></div>
+        </div>
+      <hr>
+    </div>
+  </div>
+</div>

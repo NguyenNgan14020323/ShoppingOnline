@@ -122,7 +122,6 @@ export const checkExistedAcc = req => User.find({ email: req.body.email})
 
 
 export const updateUser = (id, req) => {
-    console.log(req)
      User.findByIdAndUpdate(id, {$set: req}, {new: true}, (err, user) => {
         if (err) 
             return Error(err);

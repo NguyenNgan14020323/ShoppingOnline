@@ -14,7 +14,7 @@ const orderSchema = new Schema({
     },
     qty: Number,
     status: Number,
-    create_at: Date,
+    created_at: Date,
     updated_at: Date,
 });
 
@@ -39,7 +39,19 @@ export const createOrder = (req) => {
 }
 
 export const getOrder = (transaction_id) => Order.find({"transaction_id": transaction_id})
+    .sort({updated_at: -1})
     .then((order) => {
         return order;
     })
     .catch(err => Error(err));
+
+
+export const deleteOrder = (order_id, callback) => {
+     Order.findByIdAndUpdate(order_id, {status: 3, updated_at: Date.now()}, {new: true}, (err, order) => {
+        if (err) 
+            callback(err, null)
+        else {
+            return   callback(null, true);
+        }
+    })
+}

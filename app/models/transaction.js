@@ -22,7 +22,7 @@ const transactionSchema = new Schema({
     payment: { type: String },
     payment_info: { type: String },
     message: { type: String },
-    create_at: Date,
+    created_at: Date,
     updated_at: Date
 });
 
@@ -47,6 +47,7 @@ export const createTransaction = (req) => {
 }
 
 export const getTransaction = (user_id) => Transaction.find({"user_id": user_id})
+    .sort({updated_at: -1})
     .then((transaction) => {
         return transaction;
     })
