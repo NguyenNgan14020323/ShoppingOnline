@@ -1,17 +1,18 @@
 app.controller('orderManagerCtrl', function ($scope, $cookies, $stateParams, Data, myServices, $state, $window, $interval){ 
-	$('#myModal').modal({backdrop: 'static', keyboard: false})
-  	$('#myModal').modal('show');
+	// $('#modalOrder').modal({backdrop: 'static', keyboard: false})
+ //  	$('#modalOrder').modal('show');
 	if($cookies.get('id') !== undefined){
 		Data.get('getTransaction', 0, {user_id: $cookies.get('id')}).then(function (result) {
 		    if(result.error){
-	        	$('#myModal').modal('hide');
+	        //	$('#modalOrder').modal('hide');
 		         alert(result.error)
 		    }else{
-	          	$('#myModal').modal('hide');
+			//	$('#modalOrder').modal('hide');
 	          	$scope.transaction = result.data
 	          	for(let i = 0; i < result.data.length; i++){
 	            	$scope.transaction[i].orderInfo.index = i+1;
 	        	}
+
 	    	}
 		});
 	}
