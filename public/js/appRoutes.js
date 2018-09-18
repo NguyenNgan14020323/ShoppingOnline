@@ -25,21 +25,25 @@ app.config(['$stateProvider', '$urlRouterProvider','$locationProvider','$qProvid
 
 		// Application routes
 		$stateProvider
+			//Home page
 			.state('home', {
 				url: '',
 				controller: 'homeCtrl',
 				templateUrl: 'views/home.html'
 			})
+			//Show detail of product
 			.state('productDetail', {
 				url: '/productDetail/:product_id',
 				controller: 'productDetailCtrl',
 				templateUrl: 'views/productDetail.html'
 			})
+			//Signup
 			.state('signup', {
 				url: '/signup',
 				controller: 'signupCtrl',
 				templateUrl: 'views/signup.html'
 			})
+			//List all catalog
 			.state('productCatalog', {
 				url: '/productCatalog/:catalog_id',
 				controller: 'productCatalogCtrl',
