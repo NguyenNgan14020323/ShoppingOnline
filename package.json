@@ -23,7 +23,7 @@
     "morgan": "^1.9.0",
     "nodemailer": "^4.6.7",
     "nodemailer-smtp-transport": "^2.7.4",
-    "nodemon": "^1.17.5",
+    "nodemon": "^2.0.17",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0"
